@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="DARAMISPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <non-jta-data-source>java:/daramis</non-jta-data-source>
+    <class>dao.Aif</class>
+    <class>dao.App</class>
+    <class>dao.Asset</class>
+    <class>dao.Division</class>
+    <class>dao.Dv</class>
+    <class>dao.Fundcluster</class>
+    <class>dao.Generalinventory</class>
+    <class>dao.Ics</class>
+    <class>dao.Iirup</class>
+    <class>dao.Par</class>
+    <class>dao.Personalinfo</class>
+    <class>dao.Ppelc</class>
+    <class>dao.Ppmp</class>
+    <class>dao.Pr</class>
+    <class>dao.Ptr</class>
+    <class>dao.Rfi</class>
+    <class>dao.Ris</class>
+    <class>dao.Rppe</class>
+    <class>dao.Specificnumber</class>
+    <class>dao.Stockcard</class>
+    <class>dao.User</class>
+    <class>dao.Usertier</class>
+    <class>dao.Wfp</class>
+    <class>dao.Wmr</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/daramis?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="p@ssword"/>
+    </properties>
+  </persistence-unit>
+</persistence>
