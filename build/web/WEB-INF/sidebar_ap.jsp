@@ -47,7 +47,8 @@
                           <span>Forms</span>
                       </a>
                       <ul class="sub">
-                          <li><a href="forms.jsp">Approve Forms</a></li>
+                          <li><a href="verify_forms.jsp">Verify Forms</a></li>
+                          <li><a href="approve_forms.jsp">Approve Forms</a></li>
                           <!--<li><a href="V Forms"></a></li>
                           <li><a  href="wfp.jsp">WFP</a></li>
                           <li><a  href="ppmp.jsp">PPMP</a></li>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ap_dashboard
-    Created on : 02 13, 18, 5:26:41 PM
+    Document   : mgt_homepage
+    Created on : 02 13, 18, 2:33:15 PM
     Author     : BavarianHotdog
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -8,7 +8,7 @@
 <html lang="en">
   <head>
       <jsp:include page="WEB-INF/header.jsp" />       
-            <title>DAR-AMIS | Admin Dashboard</title>
+            <title>DAR-AMIS | Management Dashboard</title>
   </head>
 
   <body>
@@ -69,7 +69,7 @@
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
-        <jsp:include page="WEB-INF/sidebar_ap.jsp" />
+        <jsp:include page="WEB-INF/sidebar_mgt.jsp" />
       <!--sidebar end-->
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
@@ -80,7 +80,7 @@
               <section class="content-header">
                     <h1>
                         Welcome!
-                        <small>Admin Assistant</small>
+                        <small>Management</small>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>

@@ -69,7 +69,7 @@
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
-        <jsp:include page="WEB-INF/sidebar_dir.jsp" />
+        <jsp:include page="WEB-INF/sidebar_ap.jsp" />
       <!--sidebar end-->
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
@@ -173,7 +173,7 @@
                               <thead>
                               <tr>
                                   <th><i class="fa fa-bullhorn"></i> Company</th>
-                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition</th>
+                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i> Description</th>
                                   <th><i class="fa fa-bookmark"></i> Profit</th>
                                   <th><i class=" fa fa-edit"></i> Status</th>
                                   <th></th>

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : forms
+    Document   : approve_forms
     Created on : 02 13, 18, 6:04:28 PM
     Author     : BavarianHotdog
 --%>
@@ -80,7 +80,7 @@
               <section class="content-header">
                     <h1>
                         Department of Agrarian Reform 
-                        <small>- Forms</small>
+                        <small>- Approve Forms</small>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
