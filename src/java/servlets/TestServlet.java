@@ -93,12 +93,62 @@ public class TestServlet extends BaseServlet {
                 out.println("Users found. Listing: \n");
                 
                 for(Employee user: users){
+                    out.println("ID: " + user.getIdEmployee());
                     out.println("Username: " + user.getUsername());
                     out.println("Password: " + user.getPassword());
                     out.println("");
                 }
             }
+        //update db entry
+        Employee updateUser = users.get(users.size() - 1);
+        
+        updateUser.setUsername("kjdomi");
+        
+        employeeFacade.edit(updateUser);
+        
+        out.println("Testing entry update");
+        out.println();
+        if(users.isEmpty()){
+              out.println("No data in server. A DB error might have occured. Check server connection.");
+          }else{
+              out.println("Users found. Listing: \n");
+
+              for(Employee user: users){
+                  out.println("ID: " + user.getIdEmployee());
+                  out.println("Username: " + user.getUsername());
+                  out.println("Password: " + user.getPassword());
+                  out.println("");
+              }
         }
+        
+        //delete entry from database
+        employeeFacade.remove(e);
+        
+        //retrieve new data
+        //params in findByQuery: name of NamedQuery (look in respective dao 
+        //java file, class of object to cast to list, search parameter, 
+        //parameter value [can be any type of object depending on query] )
+        users = new ArrayList<Employee>(employeeFacade.findAll());
+        
+        out.println("Testing entry delete");
+          out.println();
+          if(users.isEmpty()){
+                out.println("No data in server. A DB error might have occured. Check server connection.");
+            }else{
+                out.println("Users found. Listing: \n");
+                
+                for(Employee user: users){
+                    out.println("ID: " + user.getIdEmployee());
+                    out.println("Username: " + user.getUsername());
+                    out.println("Password: " + user.getPassword());
+                    out.println("");
+                }
+            }
+        
+        }
+        
+        
+        
         
     }
 }

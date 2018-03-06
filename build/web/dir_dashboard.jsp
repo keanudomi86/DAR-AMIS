@@ -1,14 +1,15 @@
 <%-- 
-    Document   : ap_dashboard
-    Created on : 02 13, 18, 5:26:41 PM
+    Document   : dir_dashboard
+    Created on : 03 7, 18, 3:59:25 AM
     Author     : BavarianHotdog
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
       <jsp:include page="WEB-INF/header.jsp" />       
-            <title>DAR-AMIS | Admin Dashboard</title>
+            <title>DAR-AMIS | Director Dashboard</title>
   </head>
 
   <body>
@@ -80,89 +81,14 @@
               <section class="content-header">
                     <h1>
                         Welcome!
-                        <small>Admin Assistant</small>
+                        <small>Director</small>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
                   <!--main content start-->
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Basic Table Examples</h3>
+          	<h3><i class="fa fa-bullhorn"></i> Announcements</h3>
 				<div class="row">
-				
-	                  <div class="col-md-12">
-	                  	  <div class="content-panel">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Basic Table</h4>
-	                  	  	  <hr>
-		                      <table class="table">
-		                          <thead>
-		                          <tr>
-		                              <th>#</th>
-		                              <th>First Name</th>
-		                              <th>Last Name</th>
-		                              <th>Username</th>
-		                          </tr>
-		                          </thead>
-		                          <tbody>
-		                          <tr>
-		                              <td>1</td>
-		                              <td>Mark</td>
-		                              <td>Otto</td>
-		                              <td>@mdo</td>
-		                          </tr>
-		                          <tr>
-		                              <td>2</td>
-		                              <td>Jacob</td>
-		                              <td>Thornton</td>
-		                              <td>@fat</td>
-		                          </tr>
-		                          <tr>
-		                              <td>3</td>
-		                              <td>Larry</td>
-		                              <td>the Bird</td>
-		                              <td>@twitter</td>
-		                          </tr>
-		                          </tbody>
-		                      </table>
-	                  	  </div><! --/content-panel -->
-	                  </div><!-- /col-md-12 -->
-                  
-	                  <div class="col-md-12 mt">
-	                  	<div class="content-panel">
-	                          <table class="table table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Hover Table</h4>
-	                  	  	  <hr>
-	                              <thead>
-	                              <tr>
-	                                  <th>#</th>
-	                                  <th>First Name</th>
-	                                  <th>Last Name</th>
-	                                  <th>Username</th>
-	                              </tr>
-	                              </thead>
-	                              <tbody>
-	                              <tr>
-	                                  <td>1</td>
-	                                  <td>Mark</td>
-	                                  <td>Otto</td>
-	                                  <td>@mdo</td>
-	                              </tr>
-	                              <tr>
-	                                  <td>2</td>
-	                                  <td>Jacob</td>
-	                                  <td>Thornton</td>
-	                                  <td>@fat</td>
-	                              </tr>
-	                              <tr>
-	                                  <td>3</td>
-	                                  <td>Simon</td>
-	                                  <td>Mosa</td>
-	                                  <td>@twitter</td>
-	                              </tr>
-	                              </tbody>
-	                          </table>
-	                  	  </div><! --/content-panel -->
-	                  </div><!-- /col-md-12 -->
-				</div><!-- row -->
 
               <div class="row mt">
                   <div class="col-md-12">
@@ -191,37 +117,6 @@
                                       <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
                                   </td>
                               </tr>
-                              <tr>
-                                  <td>
-                                      <a href="basic_table.html#">
-                                          Dashgum co
-                                      </a>
-                                  </td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>17900.00$ </td>
-                                  <td><span class="label label-warning label-mini">Due</span></td>
-                                  <td>
-                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <a href="basic_table.html#">
-                                          Another Co
-                                      </a>
-                                  </td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>14400.00$ </td>
-                                  <td><span class="label label-success label-mini">Paid</span></td>
-                                  <td>
-                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
                                   <td>
                                       <a href="basic_table.html#">
                                           Dashgum ext
@@ -249,6 +144,7 @@
                               </tr>
                               </tbody>
                           </table>
+                      </div>
                       </div><!-- /content-panel -->
                   </div><!-- /col-md-12 -->
               </div><!-- /row -->
