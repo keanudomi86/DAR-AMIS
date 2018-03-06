@@ -73,7 +73,7 @@
                       <ul class="sub">
                           <li><a  href="forms.jsp">View Filled Forms</a></li>
                           <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
+                          <li><a  href="responsive_table.jsp">Responsive Table</a></li>
                           <li><a  href="par.jsp">DV</a></li>
                           <li><a  href="par.jsp">WMR</a></li>
                           <li><a  href="par.jsp">RPPE</a></li>

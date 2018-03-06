@@ -5,9 +5,8 @@
  */
 package controller;
 
-import dao.EMFListener;
 import dao.Ppmp;
-import java.util.List;
+import database.EMFListener;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,17 +18,14 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class PpmpFacade extends AbstractFacade<Ppmp> {
 
-    @PersistenceContext(unitName = "DAR-AMISPU")
+    @PersistenceContext(unitName = "DARAMISPU")
     private EntityManager em;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-
-    public PpmpFacade() {
-        super(Ppmp.class);
-    }
+    
     @Override
     public void closeEntityManager() {
         em.close();
@@ -39,10 +35,9 @@ public class PpmpFacade extends AbstractFacade<Ppmp> {
     public void setEntityManager() {
         em = EMFListener.createEntityManager();
     }
-    
-    @Override
-    public List<Ppmp> findByQuery(String q, Class<Ppmp> resultClass, String parameter, Object value){
-        return super.findByQuery(q, resultClass, parameter, value);
+
+    public PpmpFacade() {
+        super(Ppmp.class);
     }
     
 }

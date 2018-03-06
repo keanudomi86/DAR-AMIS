@@ -19,9 +19,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,58 +30,32 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author BavarianHotdog
  */
 @Entity
+@Table(catalog = "daramis", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"id_asset"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Asset.findAll", query = "SELECT a FROM Asset a")
     , @NamedQuery(name = "Asset.findByIdAsset", query = "SELECT a FROM Asset a WHERE a.idAsset = :idAsset")
-    , @NamedQuery(name = "Asset.findByPropertyNum", query = "SELECT a FROM Asset a WHERE a.propertyNum = :propertyNum")
-    , @NamedQuery(name = "Asset.findByAssetName", query = "SELECT a FROM Asset a WHERE a.assetName = :assetName")
-    , @NamedQuery(name = "Asset.findByAssetDesc", query = "SELECT a FROM Asset a WHERE a.assetDesc = :assetDesc")
-    , @NamedQuery(name = "Asset.findByUnitMeasurement", query = "SELECT a FROM Asset a WHERE a.unitMeasurement = :unitMeasurement")
-    , @NamedQuery(name = "Asset.findByIdSpecificNumber", query = "SELECT a FROM Asset a WHERE a.idSpecificNumber = :idSpecificNumber")})
+    , @NamedQuery(name = "Asset.findByQuantity", query = "SELECT a FROM Asset a WHERE a.quantity = :quantity")
+    , @NamedQuery(name = "Asset.findByIdPo", query = "SELECT a FROM Asset a WHERE a.idPo = :idPo")})
 public class Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_Asset")
+    @Column(name = "id_asset", nullable = false)
     private Integer idAsset;
+    private Integer quantity;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "property_num")
-    private int propertyNum;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "asset_name")
-    private String assetName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "asset_desc")
-    private String assetDesc;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "unit_measurement")
-    private String unitMeasurement;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_SpecificNumber")
-    private int idSpecificNumber;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "asset")
-    private Specificnumber specificnumber;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAsset")
-    private List<Generalinventory> generalinventoryList;
-    @JoinColumn(name = "id_Asset", referencedColumnName = "idpurchase_req", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Pr pr;
-    @JoinColumn(name = "id_FundCluster", referencedColumnName = "id_FundCluster")
+    @Column(name = "id_po", nullable = false)
+    private int idPo;
+    @JoinColumn(name = "id_apc", referencedColumnName = "id_apc", nullable = false)
     @ManyToOne(optional = false)
-    private Fundcluster idFundCluster;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "assetId")
-    private List<Stockcard> stockcardList;
+    private Apc idApc;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAsset")
+    private List<Po> poList;
 
     public Asset() {
     }
@@ -90,13 +64,9 @@ public class Asset implements Serializable {
         this.idAsset = idAsset;
     }
 
-    public Asset(Integer idAsset, int propertyNum, String assetName, String assetDesc, String unitMeasurement, int idSpecificNumber) {
+    public Asset(Integer idAsset, int idPo) {
         this.idAsset = idAsset;
-        this.propertyNum = propertyNum;
-        this.assetName = assetName;
-        this.assetDesc = assetDesc;
-        this.unitMeasurement = unitMeasurement;
-        this.idSpecificNumber = idSpecificNumber;
+        this.idPo = idPo;
     }
 
     public Integer getIdAsset() {
@@ -107,86 +77,37 @@ public class Asset implements Serializable {
         this.idAsset = idAsset;
     }
 
-    public int getPropertyNum() {
-        return propertyNum;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setPropertyNum(int propertyNum) {
-        this.propertyNum = propertyNum;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public String getAssetName() {
-        return assetName;
+    public int getIdPo() {
+        return idPo;
     }
 
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
+    public void setIdPo(int idPo) {
+        this.idPo = idPo;
     }
 
-    public String getAssetDesc() {
-        return assetDesc;
+    public Apc getIdApc() {
+        return idApc;
     }
 
-    public void setAssetDesc(String assetDesc) {
-        this.assetDesc = assetDesc;
-    }
-
-    public String getUnitMeasurement() {
-        return unitMeasurement;
-    }
-
-    public void setUnitMeasurement(String unitMeasurement) {
-        this.unitMeasurement = unitMeasurement;
-    }
-
-    public int getIdSpecificNumber() {
-        return idSpecificNumber;
-    }
-
-    public void setIdSpecificNumber(int idSpecificNumber) {
-        this.idSpecificNumber = idSpecificNumber;
-    }
-
-    public Specificnumber getSpecificnumber() {
-        return specificnumber;
-    }
-
-    public void setSpecificnumber(Specificnumber specificnumber) {
-        this.specificnumber = specificnumber;
+    public void setIdApc(Apc idApc) {
+        this.idApc = idApc;
     }
 
     @XmlTransient
-    public List<Generalinventory> getGeneralinventoryList() {
-        return generalinventoryList;
+    public List<Po> getPoList() {
+        return poList;
     }
 
-    public void setGeneralinventoryList(List<Generalinventory> generalinventoryList) {
-        this.generalinventoryList = generalinventoryList;
-    }
-
-    public Pr getPr() {
-        return pr;
-    }
-
-    public void setPr(Pr pr) {
-        this.pr = pr;
-    }
-
-    public Fundcluster getIdFundCluster() {
-        return idFundCluster;
-    }
-
-    public void setIdFundCluster(Fundcluster idFundCluster) {
-        this.idFundCluster = idFundCluster;
-    }
-
-    @XmlTransient
-    public List<Stockcard> getStockcardList() {
-        return stockcardList;
-    }
-
-    public void setStockcardList(List<Stockcard> stockcardList) {
-        this.stockcardList = stockcardList;
+    public void setPoList(List<Po> poList) {
+        this.poList = poList;
     }
 
     @Override

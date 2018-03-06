@@ -5,10 +5,8 @@
  */
 package controller;
 
-import dao.EMFListener;
 import dao.Wfp;
-import dao.Wmr;
-import java.util.List;
+import database.EMFListener;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,16 +18,12 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class WfpFacade extends AbstractFacade<Wfp> {
 
-    @PersistenceContext(unitName = "DAR-AMISPU")
+    @PersistenceContext(unitName = "DARAMISPU")
     private EntityManager em;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public WfpFacade() {
-        super(Wfp.class);
     }
     
     @Override
@@ -41,10 +35,9 @@ public class WfpFacade extends AbstractFacade<Wfp> {
     public void setEntityManager() {
         em = EMFListener.createEntityManager();
     }
-    
-    @Override
-    public List<Wfp> findByQuery(String q, Class<Wfp> resultClass, String parameter, Object value){
-        return super.findByQuery(q, resultClass, parameter, value);
+
+    public WfpFacade() {
+        super(Wfp.class);
     }
     
 }

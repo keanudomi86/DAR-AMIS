@@ -6,7 +6,6 @@
 package dao;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -15,13 +14,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,179 +30,80 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author BavarianHotdog
  */
 @Entity
+@Table(catalog = "daramis", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"id_par"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Par.findAll", query = "SELECT p FROM Par p")
-    , @NamedQuery(name = "Par.findByIdPAR", query = "SELECT p FROM Par p WHERE p.idPAR = :idPAR")
-    , @NamedQuery(name = "Par.findByIdFundCluster", query = "SELECT p FROM Par p WHERE p.idFundCluster = :idFundCluster")
-    , @NamedQuery(name = "Par.findByParNum", query = "SELECT p FROM Par p WHERE p.parNum = :parNum")
-    , @NamedQuery(name = "Par.findByQuantity", query = "SELECT p FROM Par p WHERE p.quantity = :quantity")
-    , @NamedQuery(name = "Par.findByUnit", query = "SELECT p FROM Par p WHERE p.unit = :unit")
-    , @NamedQuery(name = "Par.findByDescription", query = "SELECT p FROM Par p WHERE p.description = :description")
-    , @NamedQuery(name = "Par.findByPropNumber", query = "SELECT p FROM Par p WHERE p.propNumber = :propNumber")
-    , @NamedQuery(name = "Par.findByDateAcquired", query = "SELECT p FROM Par p WHERE p.dateAcquired = :dateAcquired")
-    , @NamedQuery(name = "Par.findByAmount", query = "SELECT p FROM Par p WHERE p.amount = :amount")
-    , @NamedQuery(name = "Par.findByUpAsset", query = "SELECT p FROM Par p WHERE p.upAsset = :upAsset")})
+    , @NamedQuery(name = "Par.findByIdPar", query = "SELECT p FROM Par p WHERE p.idPar = :idPar")
+    , @NamedQuery(name = "Par.findByIdPc", query = "SELECT p FROM Par p WHERE p.idPc = :idPc")})
 public class Par implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_PAR")
-    private Integer idPAR;
+    @Column(name = "id_par", nullable = false)
+    private Integer idPar;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_FundCluster")
-    private int idFundCluster;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "par_num")
-    private String parNum;
-    @Basic(optional = false)
-    @NotNull
-    private int quantity;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    private String unit;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    private String description;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "prop_number")
-    private int propNumber;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date_acquired")
-    @Temporal(TemporalType.DATE)
-    private Date dateAcquired;
-    @Basic(optional = false)
-    @NotNull
-    private float amount;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "up_asset")
-    private int upAsset;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "upAsset2")
-    private List<Generalinventory> generalinventoryList;
+    @Column(name = "id_pc", nullable = false)
+    private int idPc;
+    @JoinColumn(name = "id_par", referencedColumnName = "idpar_details", nullable = false, insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private ParDetails parDetails;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPar")
+    private List<Pc> pcList;
 
     public Par() {
     }
 
-    public Par(Integer idPAR) {
-        this.idPAR = idPAR;
+    public Par(Integer idPar) {
+        this.idPar = idPar;
     }
 
-    public Par(Integer idPAR, int idFundCluster, String parNum, int quantity, String unit, String description, int propNumber, Date dateAcquired, float amount, int upAsset) {
-        this.idPAR = idPAR;
-        this.idFundCluster = idFundCluster;
-        this.parNum = parNum;
-        this.quantity = quantity;
-        this.unit = unit;
-        this.description = description;
-        this.propNumber = propNumber;
-        this.dateAcquired = dateAcquired;
-        this.amount = amount;
-        this.upAsset = upAsset;
+    public Par(Integer idPar, int idPc) {
+        this.idPar = idPar;
+        this.idPc = idPc;
     }
 
-    public Integer getIdPAR() {
-        return idPAR;
+    public Integer getIdPar() {
+        return idPar;
     }
 
-    public void setIdPAR(Integer idPAR) {
-        this.idPAR = idPAR;
+    public void setIdPar(Integer idPar) {
+        this.idPar = idPar;
     }
 
-    public int getIdFundCluster() {
-        return idFundCluster;
+    public int getIdPc() {
+        return idPc;
     }
 
-    public void setIdFundCluster(int idFundCluster) {
-        this.idFundCluster = idFundCluster;
+    public void setIdPc(int idPc) {
+        this.idPc = idPc;
     }
 
-    public String getParNum() {
-        return parNum;
+    public ParDetails getParDetails() {
+        return parDetails;
     }
 
-    public void setParNum(String parNum) {
-        this.parNum = parNum;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getPropNumber() {
-        return propNumber;
-    }
-
-    public void setPropNumber(int propNumber) {
-        this.propNumber = propNumber;
-    }
-
-    public Date getDateAcquired() {
-        return dateAcquired;
-    }
-
-    public void setDateAcquired(Date dateAcquired) {
-        this.dateAcquired = dateAcquired;
-    }
-
-    public float getAmount() {
-        return amount;
-    }
-
-    public void setAmount(float amount) {
-        this.amount = amount;
-    }
-
-    public int getUpAsset() {
-        return upAsset;
-    }
-
-    public void setUpAsset(int upAsset) {
-        this.upAsset = upAsset;
+    public void setParDetails(ParDetails parDetails) {
+        this.parDetails = parDetails;
     }
 
     @XmlTransient
-    public List<Generalinventory> getGeneralinventoryList() {
-        return generalinventoryList;
+    public List<Pc> getPcList() {
+        return pcList;
     }
 
-    public void setGeneralinventoryList(List<Generalinventory> generalinventoryList) {
-        this.generalinventoryList = generalinventoryList;
+    public void setPcList(List<Pc> pcList) {
+        this.pcList = pcList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPAR != null ? idPAR.hashCode() : 0);
+        hash += (idPar != null ? idPar.hashCode() : 0);
         return hash;
     }
 
@@ -213,7 +114,7 @@ public class Par implements Serializable {
             return false;
         }
         Par other = (Par) object;
-        if ((this.idPAR == null && other.idPAR != null) || (this.idPAR != null && !this.idPAR.equals(other.idPAR))) {
+        if ((this.idPar == null && other.idPar != null) || (this.idPar != null && !this.idPar.equals(other.idPar))) {
             return false;
         }
         return true;
@@ -221,7 +122,7 @@ public class Par implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.Par[ idPAR=" + idPAR + " ]";
+        return "dao.Par[ idPar=" + idPar + " ]";
     }
     
 }

@@ -16,7 +16,7 @@
               <h2 class="text-center text-bold">Asset Management Information System</h2>
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="mgt_dashboard.jsp">
+		      <form class="form-login" action="ap_dashboard.jsp">
 		        <h2 class="form-login-heading">Log In to Start your Session</h2>
 		        <div class="login-wrap">
 		            <input type="text" class="form-control" placeholder="User ID" autofocus>
@@ -28,7 +28,7 @@
 		
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block" href="mgt_dashboard.jsp" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+		            <button class="btn btn-theme btn-block" href="ap_dashboard.jsp" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 		            <hr>
 		            <div class="registration">
 		                Don't have an account yet?<br/>

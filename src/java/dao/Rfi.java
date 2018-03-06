@@ -6,131 +6,82 @@
 package dao;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author BavarianHotdog
  */
 @Entity
+@Table(catalog = "daramis", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"id_rfi"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rfi.findAll", query = "SELECT r FROM Rfi r")
-    , @NamedQuery(name = "Rfi.findByIdRFI", query = "SELECT r FROM Rfi r WHERE r.idRFI = :idRFI")
-    , @NamedQuery(name = "Rfi.findByRepair", query = "SELECT r FROM Rfi r WHERE r.repair = :repair")
-    , @NamedQuery(name = "Rfi.findByRepairDesc", query = "SELECT r FROM Rfi r WHERE r.repairDesc = :repairDesc")
-    , @NamedQuery(name = "Rfi.findByDeliveries", query = "SELECT r FROM Rfi r WHERE r.deliveries = :deliveries")
-    , @NamedQuery(name = "Rfi.findByUpAsset", query = "SELECT r FROM Rfi r WHERE r.upAsset = :upAsset")})
+    , @NamedQuery(name = "Rfi.findByIdRfi", query = "SELECT r FROM Rfi r WHERE r.idRfi = :idRfi")})
 public class Rfi implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_RFI")
-    private Integer idRFI;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    private String repair;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    @Column(name = "repair_desc")
-    private String repairDesc;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    private String deliveries;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "up_asset")
-    private int upAsset;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "upAsset5")
-    private List<Generalinventory> generalinventoryList;
+    @Column(name = "id_rfi", nullable = false)
+    private Integer idRfi;
+    @JoinColumn(name = "id_po", referencedColumnName = "id_po", nullable = false)
+    @ManyToOne(optional = false)
+    private Po idPo;
+    @JoinColumn(name = "id_rfi", referencedColumnName = "idrfi_details", nullable = false, insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private RfiFk rfiFk;
 
     public Rfi() {
     }
 
-    public Rfi(Integer idRFI) {
-        this.idRFI = idRFI;
+    public Rfi(Integer idRfi) {
+        this.idRfi = idRfi;
     }
 
-    public Rfi(Integer idRFI, String repair, String repairDesc, String deliveries, int upAsset) {
-        this.idRFI = idRFI;
-        this.repair = repair;
-        this.repairDesc = repairDesc;
-        this.deliveries = deliveries;
-        this.upAsset = upAsset;
+    public Integer getIdRfi() {
+        return idRfi;
     }
 
-    public Integer getIdRFI() {
-        return idRFI;
+    public void setIdRfi(Integer idRfi) {
+        this.idRfi = idRfi;
     }
 
-    public void setIdRFI(Integer idRFI) {
-        this.idRFI = idRFI;
+    public Po getIdPo() {
+        return idPo;
     }
 
-    public String getRepair() {
-        return repair;
+    public void setIdPo(Po idPo) {
+        this.idPo = idPo;
     }
 
-    public void setRepair(String repair) {
-        this.repair = repair;
+    public RfiFk getRfiFk() {
+        return rfiFk;
     }
 
-    public String getRepairDesc() {
-        return repairDesc;
-    }
-
-    public void setRepairDesc(String repairDesc) {
-        this.repairDesc = repairDesc;
-    }
-
-    public String getDeliveries() {
-        return deliveries;
-    }
-
-    public void setDeliveries(String deliveries) {
-        this.deliveries = deliveries;
-    }
-
-    public int getUpAsset() {
-        return upAsset;
-    }
-
-    public void setUpAsset(int upAsset) {
-        this.upAsset = upAsset;
-    }
-
-    @XmlTransient
-    public List<Generalinventory> getGeneralinventoryList() {
-        return generalinventoryList;
-    }
-
-    public void setGeneralinventoryList(List<Generalinventory> generalinventoryList) {
-        this.generalinventoryList = generalinventoryList;
+    public void setRfiFk(RfiFk rfiFk) {
+        this.rfiFk = rfiFk;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idRFI != null ? idRFI.hashCode() : 0);
+        hash += (idRfi != null ? idRfi.hashCode() : 0);
         return hash;
     }
 
@@ -141,7 +92,7 @@ public class Rfi implements Serializable {
             return false;
         }
         Rfi other = (Rfi) object;
-        if ((this.idRFI == null && other.idRFI != null) || (this.idRFI != null && !this.idRFI.equals(other.idRFI))) {
+        if ((this.idRfi == null && other.idRfi != null) || (this.idRfi != null && !this.idRfi.equals(other.idRfi))) {
             return false;
         }
         return true;
@@ -149,7 +100,7 @@ public class Rfi implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.Rfi[ idRFI=" + idRFI + " ]";
+        return "dao.Rfi[ idRfi=" + idRfi + " ]";
     }
     
 }

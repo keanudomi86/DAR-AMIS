@@ -5,12 +5,20 @@
  */
 package servlets;
 
-import controller.UserFacade;
-import dao.EMFListener;
-import dao.User;
+
+import controller.EmployeeFacade;
+import dao.Employee;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -31,48 +39,67 @@ public class TestServlet extends BaseServlet {
     
     //instantiate connection to db that will handle data manipulation for users table
     @EJB
-    //private final UserFacade userFacade = new UserFacade();
+    private final EmployeeFacade employeeFacade = new EmployeeFacade();
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //create new user
-        User u = new User();
+        Employee e = new Employee();
         
         //add some details
-        u.setUsername("newuser");
-        u.setPassword("password");
+        e.setUsername("newuser");
+        e.setPassword("password");
+        e.setAddress("123 Fake Street");
+        e.setCivilStatus("Widowed");
+        e.setDivision("Admin");
         
-       EntityManagerFactory emf = Persistence.createEntityManagerFactory("DARAMISPU");
-       System.out.println(emf.createEntityManager());
-        //add new user to database
-        //userFacade.create(u);
+        //for date input
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date dob;
+        try {
+            dob = sdf.parse("1964-11-10");
+        } catch (ParseException ex) {
+            dob = Date.from(Instant.now());
+        }
+        
+        e.setDob(dob.toString());
+        
+        
+        e.setEmail("eeeee@email.com");
+        e.setEmployeeStatus("Regular");
+        e.setFirstName("Test");
+        e.setMiddleInitial("T");
+        e.setLastName("Tester");
+        e.setGender("Male");
+        e.setMobileNum(94357391);
+        e.setPosition("Admin Assistant");
+        
+       employeeFacade.create(e);
         
         //retrieve new data
         //params in findByQuery: name of NamedQuery (look in respective dao 
         //java file, class of object to cast to list, search parameter, 
         //parameter value [can be any type of object depending on query] )
-        //ArrayList<User> users = (ArrayList<User>) userFacade.findByQuery("User.findByUsername", User.class, "username", "newuser");
+        ArrayList<Employee> users = new ArrayList<Employee>(employeeFacade.findAll());
         
         //output if there is any data found
         //set response to type 'text/plain'
         try(PrintWriter out = response.getWriter()){
-            out.println("Servlet to test Java Persistence connection and data access");
-            out.println();
-       /*     if(users.isEmpty()){
+          out.println("Servlet to test Java Persistence connection and data access");
+          out.println();
+          if(users.isEmpty()){
                 out.println("No data in server. A DB error might have occured. Check server connection.");
             }else{
                 out.println("Users found. Listing: \n");
                 
-                for(User user: users){
+                for(Employee user: users){
                     out.println("Username: " + user.getUsername());
                     out.println("Password: " + user.getPassword());
                     out.println("");
                 }
-            }*/
+            }
         }
         
     }
-
-    
-
 }
+

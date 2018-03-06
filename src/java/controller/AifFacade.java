@@ -6,8 +6,7 @@
 package controller;
 
 import dao.Aif;
-import dao.EMFListener;
-import java.util.List;
+import database.EMFListener;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,16 +18,12 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class AifFacade extends AbstractFacade<Aif> {
 
-    @PersistenceContext(unitName = "DAR-AMISPU")
+    @PersistenceContext(unitName = "DARAMISPU")
     private EntityManager em;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public AifFacade() {
-        super(Aif.class);
     }
     @Override
     public void closeEntityManager() {
@@ -39,9 +34,9 @@ public class AifFacade extends AbstractFacade<Aif> {
     public void setEntityManager() {
         em = EMFListener.createEntityManager();
     }
-    
-    @Override
-    public List<Aif> findByQuery(String q, Class<Aif> resultClass, String parameter, Object value){
-        return super.findByQuery(q, resultClass, parameter, value);
+
+    public AifFacade() {
+        super(Aif.class);
     }
+    
 }

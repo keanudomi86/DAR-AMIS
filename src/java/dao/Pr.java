@@ -6,7 +6,6 @@
 package dao;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,11 +19,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,271 +30,160 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author BavarianHotdog
  */
 @Entity
+@Table(catalog = "daramis", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"id_pr"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pr.findAll", query = "SELECT p FROM Pr p")
-    , @NamedQuery(name = "Pr.findByIdpurchaseReq", query = "SELECT p FROM Pr p WHERE p.idpurchaseReq = :idpurchaseReq")
-    , @NamedQuery(name = "Pr.findByIdFundCluster", query = "SELECT p FROM Pr p WHERE p.idFundCluster = :idFundCluster")
-    , @NamedQuery(name = "Pr.findByOffice", query = "SELECT p FROM Pr p WHERE p.office = :office")
-    , @NamedQuery(name = "Pr.findByResponsibilityCentercode", query = "SELECT p FROM Pr p WHERE p.responsibilityCentercode = :responsibilityCentercode")
-    , @NamedQuery(name = "Pr.findByDate", query = "SELECT p FROM Pr p WHERE p.date = :date")
-    , @NamedQuery(name = "Pr.findByStockPropnum", query = "SELECT p FROM Pr p WHERE p.stockPropnum = :stockPropnum")
-    , @NamedQuery(name = "Pr.findByUnit", query = "SELECT p FROM Pr p WHERE p.unit = :unit")
-    , @NamedQuery(name = "Pr.findByItemDescription", query = "SELECT p FROM Pr p WHERE p.itemDescription = :itemDescription")
-    , @NamedQuery(name = "Pr.findByQuantity", query = "SELECT p FROM Pr p WHERE p.quantity = :quantity")
-    , @NamedQuery(name = "Pr.findByUnitCost", query = "SELECT p FROM Pr p WHERE p.unitCost = :unitCost")
-    , @NamedQuery(name = "Pr.findByTotalCost", query = "SELECT p FROM Pr p WHERE p.totalCost = :totalCost")
-    , @NamedQuery(name = "Pr.findByPrPurpose", query = "SELECT p FROM Pr p WHERE p.prPurpose = :prPurpose")
-    , @NamedQuery(name = "Pr.findByRequestedBy", query = "SELECT p FROM Pr p WHERE p.requestedBy = :requestedBy")
-    , @NamedQuery(name = "Pr.findByApprovedBy", query = "SELECT p FROM Pr p WHERE p.approvedBy = :approvedBy")})
+    , @NamedQuery(name = "Pr.findByIdPr", query = "SELECT p FROM Pr p WHERE p.idPr = :idPr")
+    , @NamedQuery(name = "Pr.findByIdSc", query = "SELECT p FROM Pr p WHERE p.idSc = :idSc")
+    , @NamedQuery(name = "Pr.findByIdPc", query = "SELECT p FROM Pr p WHERE p.idPc = :idPc")})
 public class Pr implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idpurchase_req")
-    private Integer idpurchaseReq;
+    @Column(name = "id_pr", nullable = false)
+    private Integer idPr;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_FundCluster")
-    private int idFundCluster;
+    @Column(name = "id_sc", nullable = false)
+    private int idSc;
     @Basic(optional = false)
     @NotNull
-    private int office;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "responsibility_centercode")
-    private String responsibilityCentercode;
-    @Basic(optional = false)
-    @NotNull
-    @Temporal(TemporalType.DATE)
-    private Date date;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "stock_propnum")
-    private int stockPropnum;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    private String unit;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 90)
-    @Column(name = "item_description")
-    private String itemDescription;
-    @Basic(optional = false)
-    @NotNull
-    private int quantity;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "unit_cost")
-    private String unitCost;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "total_cost")
-    private String totalCost;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "pr_purpose")
-    private String prPurpose;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "requested_by")
-    private int requestedBy;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "approved_by")
-    private String approvedBy;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "office")
-    private List<Wfp> wfpList;
-    @JoinColumn(name = "enduser", referencedColumnName = "id_APP")
+    @Column(name = "id_pc", nullable = false)
+    private int idPc;
+    @JoinColumn(name = "id_app", referencedColumnName = "id_app", nullable = false)
     @ManyToOne(optional = false)
-    private App enduser;
-    @JoinColumn(name = "enduser", referencedColumnName = "id_PPMP")
+    private App idApp;
+    @JoinColumn(name = "id_office", referencedColumnName = "id_office", nullable = false)
     @ManyToOne(optional = false)
-    private Ppmp enduser1;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pr")
-    private Asset asset;
+    private Office idOffice;
+    @JoinColumn(name = "id_ppmp", referencedColumnName = "id_ppmp", nullable = false)
+    @ManyToOne(optional = false)
+    private Ppmp idPpmp;
+    @JoinColumn(name = "id_ris", referencedColumnName = "id_ris", nullable = false)
+    @ManyToOne(optional = false)
+    private Ris idRis;
+    @JoinColumn(name = "id_wfp", referencedColumnName = "id_wfp", nullable = false)
+    @ManyToOne(optional = false)
+    private Wfp idWfp;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPr")
+    private List<Sc> scList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPr")
+    private List<Pc> pcList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPr")
+    private List<Po> poList;
 
     public Pr() {
     }
 
-    public Pr(Integer idpurchaseReq) {
-        this.idpurchaseReq = idpurchaseReq;
+    public Pr(Integer idPr) {
+        this.idPr = idPr;
     }
 
-    public Pr(Integer idpurchaseReq, int idFundCluster, int office, String responsibilityCentercode, Date date, int stockPropnum, String unit, String itemDescription, int quantity, String unitCost, String totalCost, String prPurpose, int requestedBy, String approvedBy) {
-        this.idpurchaseReq = idpurchaseReq;
-        this.idFundCluster = idFundCluster;
-        this.office = office;
-        this.responsibilityCentercode = responsibilityCentercode;
-        this.date = date;
-        this.stockPropnum = stockPropnum;
-        this.unit = unit;
-        this.itemDescription = itemDescription;
-        this.quantity = quantity;
-        this.unitCost = unitCost;
-        this.totalCost = totalCost;
-        this.prPurpose = prPurpose;
-        this.requestedBy = requestedBy;
-        this.approvedBy = approvedBy;
+    public Pr(Integer idPr, int idSc, int idPc) {
+        this.idPr = idPr;
+        this.idSc = idSc;
+        this.idPc = idPc;
     }
 
-    public Integer getIdpurchaseReq() {
-        return idpurchaseReq;
+    public Integer getIdPr() {
+        return idPr;
     }
 
-    public void setIdpurchaseReq(Integer idpurchaseReq) {
-        this.idpurchaseReq = idpurchaseReq;
+    public void setIdPr(Integer idPr) {
+        this.idPr = idPr;
     }
 
-    public int getIdFundCluster() {
-        return idFundCluster;
+    public int getIdSc() {
+        return idSc;
     }
 
-    public void setIdFundCluster(int idFundCluster) {
-        this.idFundCluster = idFundCluster;
+    public void setIdSc(int idSc) {
+        this.idSc = idSc;
     }
 
-    public int getOffice() {
-        return office;
+    public int getIdPc() {
+        return idPc;
     }
 
-    public void setOffice(int office) {
-        this.office = office;
+    public void setIdPc(int idPc) {
+        this.idPc = idPc;
     }
 
-    public String getResponsibilityCentercode() {
-        return responsibilityCentercode;
+    public App getIdApp() {
+        return idApp;
     }
 
-    public void setResponsibilityCentercode(String responsibilityCentercode) {
-        this.responsibilityCentercode = responsibilityCentercode;
+    public void setIdApp(App idApp) {
+        this.idApp = idApp;
     }
 
-    public Date getDate() {
-        return date;
+    public Office getIdOffice() {
+        return idOffice;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setIdOffice(Office idOffice) {
+        this.idOffice = idOffice;
     }
 
-    public int getStockPropnum() {
-        return stockPropnum;
+    public Ppmp getIdPpmp() {
+        return idPpmp;
     }
 
-    public void setStockPropnum(int stockPropnum) {
-        this.stockPropnum = stockPropnum;
+    public void setIdPpmp(Ppmp idPpmp) {
+        this.idPpmp = idPpmp;
     }
 
-    public String getUnit() {
-        return unit;
+    public Ris getIdRis() {
+        return idRis;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setIdRis(Ris idRis) {
+        this.idRis = idRis;
     }
 
-    public String getItemDescription() {
-        return itemDescription;
+    public Wfp getIdWfp() {
+        return idWfp;
     }
 
-    public void setItemDescription(String itemDescription) {
-        this.itemDescription = itemDescription;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getUnitCost() {
-        return unitCost;
-    }
-
-    public void setUnitCost(String unitCost) {
-        this.unitCost = unitCost;
-    }
-
-    public String getTotalCost() {
-        return totalCost;
-    }
-
-    public void setTotalCost(String totalCost) {
-        this.totalCost = totalCost;
-    }
-
-    public String getPrPurpose() {
-        return prPurpose;
-    }
-
-    public void setPrPurpose(String prPurpose) {
-        this.prPurpose = prPurpose;
-    }
-
-    public int getRequestedBy() {
-        return requestedBy;
-    }
-
-    public void setRequestedBy(int requestedBy) {
-        this.requestedBy = requestedBy;
-    }
-
-    public String getApprovedBy() {
-        return approvedBy;
-    }
-
-    public void setApprovedBy(String approvedBy) {
-        this.approvedBy = approvedBy;
+    public void setIdWfp(Wfp idWfp) {
+        this.idWfp = idWfp;
     }
 
     @XmlTransient
-    public List<Wfp> getWfpList() {
-        return wfpList;
+    public List<Sc> getScList() {
+        return scList;
     }
 
-    public void setWfpList(List<Wfp> wfpList) {
-        this.wfpList = wfpList;
+    public void setScList(List<Sc> scList) {
+        this.scList = scList;
     }
 
-    public App getEnduser() {
-        return enduser;
+    @XmlTransient
+    public List<Pc> getPcList() {
+        return pcList;
     }
 
-    public void setEnduser(App enduser) {
-        this.enduser = enduser;
+    public void setPcList(List<Pc> pcList) {
+        this.pcList = pcList;
     }
 
-    public Ppmp getEnduser1() {
-        return enduser1;
+    @XmlTransient
+    public List<Po> getPoList() {
+        return poList;
     }
 
-    public void setEnduser1(Ppmp enduser1) {
-        this.enduser1 = enduser1;
-    }
-
-    public Asset getAsset() {
-        return asset;
-    }
-
-    public void setAsset(Asset asset) {
-        this.asset = asset;
+    public void setPoList(List<Po> poList) {
+        this.poList = poList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idpurchaseReq != null ? idpurchaseReq.hashCode() : 0);
+        hash += (idPr != null ? idPr.hashCode() : 0);
         return hash;
     }
 
@@ -308,7 +194,7 @@ public class Pr implements Serializable {
             return false;
         }
         Pr other = (Pr) object;
-        if ((this.idpurchaseReq == null && other.idpurchaseReq != null) || (this.idpurchaseReq != null && !this.idpurchaseReq.equals(other.idpurchaseReq))) {
+        if ((this.idPr == null && other.idPr != null) || (this.idPr != null && !this.idPr.equals(other.idPr))) {
             return false;
         }
         return true;
@@ -316,7 +202,7 @@ public class Pr implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.Pr[ idpurchaseReq=" + idpurchaseReq + " ]";
+        return "dao.Pr[ idPr=" + idPr + " ]";
     }
     
 }
