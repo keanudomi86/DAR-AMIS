@@ -17,53 +17,6 @@
       <!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
-      <!--header start-->
-      <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="index.jsp" class="logo"><b>DAR-AMIS</b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <!-- -->
-                <ul class="nav top-menu">
-                    <!-- settings start -->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-tasks"></i>
-                            <span class="badge bg-theme">4</span>
-                        </a>
-                        <ul class="dropdown-menu extended tasks-bar">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 4 pending tasks</p>
-                            </li>
-                            </ul>
-                    </li>
-                    <li id="header_inbox_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="badge bg-theme">5</span>
-                        </a>
-                        <ul class="dropdown-menu extended inbox">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 5 new messages</p>
-                            </li>
-                        </ul>
-                </ul>            
-                            
-                <!--  notification end -->
-            </div>
-            <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="index.jsp">Logout</a></li>
-            	</ul>
-            </div>
-        </header>
-      <!--header end-->
       
       
       <!-- **********************************************************************************************************************************************************
@@ -87,30 +40,21 @@
                     </h1>
                   <!--main content start-->
           <section class="wrapper">
-          	<h3><i class="fa fa-bullhorn"></i> Announcements</h3>
+          	
 				<div class="row">
 
               <div class="row mt">
                   <div class="col-md-12">
                       <div class="content-panel">
                           <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Advanced Table</h4>
+                              <h3><p class="centered"><i class="fa fa-bullhorn"></i>  Announcements</p></h3>
 	                  	  	  <hr>
-                              <thead>
-                              <tr>
-                                  <th><i class="fa fa-bullhorn"></i> Company</th>
-                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i> Description</th>
-                                  <th><i class="fa fa-bookmark"></i> Profit</th>
-                                  <th><i class=" fa fa-edit"></i> Status</th>
-                                  <th></th>
-                              </tr>
-                              </thead>
                               <tbody>
                               <tr>
-                                  <td><a href="basic_table.html#">Company Ltd</a></td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>12000.00$ </td>
-                                  <td><span class="label label-info label-mini">Due</span></td>
+                                  <td><a href="basic_table.html#">PPMP 00910001</a></td>
+                                  <td class="hidden-phone">Requires final signature from Director Rene</td>
+                                  <td>Mar 12 </td>
+                                  <td><span class="label label-info label-mini">Pending</span></td>
                                   <td>
                                       <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
                                       <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>

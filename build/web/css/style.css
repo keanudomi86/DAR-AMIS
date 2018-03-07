@@ -11,7 +11,7 @@ Premium: http://www.gridgum.com
 
 /* BASIC THEME CONFIGURATION */
 body {
-    color: #797979;
+    color: #000000;
 	background: #f2f2f2;
     font-family: 'Ruda', sans-serif;
     padding: 0px !important;
@@ -29,11 +29,11 @@ a, a:hover, a:focus {
 }
 ::selection {
 
-    background: #68dff0;
+    background: #10572b;
     color: #fff;
 }
 ::-moz-selection {
-    background: #68dff0;
+    background: #10572b;
     color: #fff;
 }
 
@@ -44,7 +44,7 @@ a, a:hover, a:focus {
 
 /* Bootstrap Modifications */
 .modal-header {
-	background: #68dff0;
+	background: #10572b;
 }
 
 .modal-title {
@@ -74,7 +74,7 @@ a, a:hover, a:focus {
 /*Theme Backgrounds*/
 
 .bg-theme {
-	background-color: #68dff0;
+	background-color: #10572b;
 }
 
 .bg-theme02 {
@@ -164,7 +164,7 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #797979;
+  border-top: 1px solid #000000;
 }
 
 
@@ -206,11 +206,11 @@ hr {
 /*Exclusive Theme Colors Configuration*/
 
 .label-theme {
-	background-color: #68dff0;
+	background-color: #10572b;
 }
 
 .bg-theme {
-	background-color: #68dff0;
+	background-color: #10572b;
 }
 
 ul.top-menu > li > .logout {
@@ -221,7 +221,7 @@ ul.top-menu > li > .logout {
 	border: 1px solid #64c3c2 !important;
 	padding: 5px 15px;
 	margin-right: 15px;
-	background: #68dff0;
+	background: #10572b;
 	margin-top: 15px;
 }
 
@@ -232,7 +232,7 @@ ul.top-menu > li > .logout {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: #424a5d;
+    background: #10572b;
 }
 
 #sidebar h5 {
@@ -295,7 +295,7 @@ ul.sidebar-menu {
 }
 
 ul.sidebar-menu li ul.sub li{
-    background: #424a5d;
+    background: #10572b;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
@@ -316,7 +316,7 @@ ul.sidebar-menu li ul.sub li a {
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    color: #aeb2b7;
+    color: #fafafa;
 }
 
 ul.sidebar-menu li ul.sub li a:hover {
@@ -325,7 +325,7 @@ ul.sidebar-menu li ul.sub li a:hover {
 }
 
 ul.sidebar-menu li ul.sub li.active a {
-    color: #68dff0;
+    color: #10572b;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -364,7 +364,7 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #68dff0;
+    background: #10572b;
     color: #fff;
     display: block;
 
@@ -422,7 +422,7 @@ ul.sidebar-menu li a.active i {
 }
 
 .black-bg {
-    background: #ffd777;
+    background: #F7BF20;
     border-bottom: 1px solid #c9aa5f;
 }
 
@@ -454,7 +454,7 @@ a.logo:hover, a.logo:focus {
 }
 
 a.logo span {
-    color: #68dff0;
+    color: #10572b;
 }
 
 
@@ -477,7 +477,7 @@ a.logo span {
 }
 
 ul.top-menu > li > a {
-    color: #666666;
+    color: #000000;
     font-size: 16px;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -493,7 +493,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     text-decoration: none;
     border-radius: 4px;
     -webkit-border-radius: 4px;
-    color: #b6b6b6 !important;
+    color: #fafafa !important;
 }
 
 .notify-row .badge {
@@ -532,7 +532,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .dropdown-menu.extended li p.green {
-    background-color: #68dff0;
+    background-color: #10572b;
     color: #fff;
 }
 
@@ -736,9 +736,9 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     border-top-color: #FCB322 !important;
 }
 .notify-arrow-green {
-    border-color: transparent transparent #68dff0;
-    border-bottom-color: #68dff0 !important;
-    border-top-color: #68dff0 !important;
+    border-color: transparent transparent #10572b;
+    border-bottom-color: #10572b !important;
+    border-top-color: #10572b !important;
 }
 
 
@@ -834,7 +834,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .ds a {
-	color: #68dff0;
+	color: #10572b;
 }
 
 /* LINE ICONS CONFIGURATION */
@@ -930,7 +930,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     position: absolute;
     bottom: 0;
     background: #ff865c;
-    color: #68dff0;
+    color: #10572b;
     width: 100%;
     -webkit-border-radius: 5px 5px 0 0;
     -moz-border-radius: 5px 5px 0 0;
@@ -1064,7 +1064,7 @@ PANELS CONFIGURATIONS
 /*Green Panel*/
 .green-panel {
 	text-align: center;
-	background: #68dff0;
+	background: #10572b;
 }
 .green-panel .green-header {
 	background: #43b1a9;
@@ -1108,7 +1108,7 @@ PANELS CONFIGURATIONS
 }
 
 .white-panel i {
-	color: #68dff0;
+	color: #10572b;
 	padding-right: 4px;
 	font-size: 14px;
 }
@@ -1523,7 +1523,7 @@ PANELS CONFIGURATIONS
 	font-weight: 900;
 }
 .profile-01 {
-	background: #68dff0;
+	background: #10572b;
 	height: 50px;
 }
 .profile-01:hover {
@@ -1571,7 +1571,7 @@ PANELS CONFIGURATIONS
 	color: #cdcdcd;
 }
 .pr2-social a:hover {
-	color: #68dff0;
+	color: #10572b;
 }
 .pr2-social i {
 	margin-top: 15px;
@@ -1616,7 +1616,7 @@ PANELS CONFIGURATIONS
 }
 .panel.terques-chart {
     background: transparent;
-    color: #797979;
+    color: #000000;
 }
 .panel.terques-chart .chart-tittle .value {
     float: right;
@@ -1627,7 +1627,7 @@ PANELS CONFIGURATIONS
     font-size: 12px;
 }
 .panel.terques-chart .chart-tittle .value a:hover, .panel.terques-chart .chart-tittle .value a.active {
-    color: #68dff0;
+    color: #10572b;
     font-size: 12px;
 }
 .panel.terques-chart .chart-tittle {
@@ -1682,7 +1682,7 @@ PANELS CONFIGURATIONS
   display: block;
   position: relative;
   overflow: hidden;
-  background-color: #68dff0;
+  background-color: #10572b;
   -webkit-transition: background-color 0.4s;
   -moz-transition: background-color 0.4s;
   -o-transition: background-color 0.4s;
@@ -1702,7 +1702,7 @@ PANELS CONFIGURATIONS
 }
 
 .project:hover .photo-wrapper {
-  background-color: #68dff0;
+  background-color: #10572b;
 	background-image:url(../img/zoom.png);
 	background-repeat:no-repeat;
 	background-position:center;
@@ -2146,7 +2146,7 @@ label {
     padding: 14px 15px;
     text-align: center;
     border-right: 1px solid #d5d8df;
-    color: #797979;
+    color: #000000;
 }
 
 .panel-footer.revenue-foot ul li a:hover, .panel-footer.revenue-foot ul li.active a {
@@ -2227,7 +2227,7 @@ label {
 
 /*footer*/
 .site-footer {
-    background: #68dff0;
+    background: #10572b;
     color: #fff;
     padding: 10px 0;
 }
