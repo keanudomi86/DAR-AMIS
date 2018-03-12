@@ -3,16 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/approve_forms.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_mgt.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/footer.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebarcheck.jsp</file>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_dir.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/ap_dashboard.jsp</file>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/index.jsp</file>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_ap.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_gsdc.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/mgt_dashboard.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_gsds.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/verify_forms.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/dir_dashboard.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/Login.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/profile.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/TestServlet.java</file>
         </group>
     </open-files>
 </project-private>

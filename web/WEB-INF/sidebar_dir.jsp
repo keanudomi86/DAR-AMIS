@@ -40,9 +40,11 @@
             </div>
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="dir_profile.jsp">Profile</a></li>
+                    <li><a class="logout" href="profile.jsp">Profile</a></li>
             	<ul class="nav pull-right top-menu">
                     <li><a class="logout" href="index.jsp">Logout</a></li>
+                <!--<ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="lock.jsp">Lock</a></li>-->
             	</ul>
             </div>
         </header>
@@ -54,7 +56,7 @@
               
               	  <p class="centered"><a href="profile.jsp"><img src="img/skype2512x512.png" class="img-circle" width="60"></a></p>
                   <h5 class="centered">Rene Colocar</h5>
-                  <p class="centered"><a href="#"><i class="fa fa-circle text-success"></i> Online</a></p>
+                  <p class="centered"><i class="fa fa-circle text-success"></i> Online</p>
                   
                   <li class="sub-menu">
                       <a href="javascript:;" >
@@ -62,10 +64,10 @@
                           <span>User Functions</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="calendar.html">Activate Accounts</a></li>
-                          <li><a  href="gallery.html">Manage Users</a></li>
-                          <li><a  href="todo_list.html">Deactivate Accounts</a></li>
-                          <li><a  href="todo_list.html">Make Announcement</a></li>
+                          <li><a  href="sctivate_accounts.jsp">Activate Accounts</a></li>
+                          <li><a  href="change_usertier.jsp">Manage Users</a></li>
+                          <li><a  href="deactivate_accounts.jsp">Deactivate Accounts</a></li>
+                          <li><a  href="make_announcement.jsp">Make Announcement</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -74,8 +76,8 @@
                           <span>For Approval</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank.html">Forms</a></li>
-                          <li><a  href="login.html">Reports</a></li>
+                          <li><a  href="aforms.jsp">Forms</a></li>
+                          <li><a  href="areports.jsp">Reports</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -89,14 +91,14 @@
                           <li><a  href="resource_alloc.jsp">Resource Allocation</a></li>
                       </ul>
                   </li>
-                                    <li class="sub-menu">
+                  <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-expand"></i>
                           <span>View</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank.html">Forms</a></li>
-                          <li><a  href="login.html">Reports</a></li>
+                          <li><a  href="forms.jsp">Forms</a></li>
+                          <li><a  href="responsive_table.jsp">Reports</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -105,8 +107,8 @@
                           <span>Help</span>
                       </a>
                       <ul class="sub">
-                          <li><a href="forms.jsp">FAQs</a></li>
-                          <li><a href="forms.jsp">DAR-AMIS Help Guide</a></li>
+                          <li><a href="faqs.jsp">FAQs</a></li>
+                          <li><a href="guide.jsp">DAR-AMIS Help Guide</a></li>
                       </ul>
                   </li>
                   <!--<li class="sub-menu">

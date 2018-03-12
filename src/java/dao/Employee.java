@@ -107,7 +107,7 @@ public class Employee implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "mobile_num", nullable = false)
-    private int mobileNum;
+    private String mobileNum;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -137,7 +137,7 @@ public class Employee implements Serializable {
         this.idEmployee = idEmployee;
     }
 
-    public Employee(Integer idEmployee, String lastName, String firstName, String civilStatus, String gender, String address, String dob, String division, String position, String email, int mobileNum, String employeeStatus, String username, String password) {
+    public Employee(Integer idEmployee, String lastName, String firstName, String civilStatus, String gender, String address, String dob, String division, String position, String email, String mobileNum, String employeeStatus, String username, String password) {
         this.idEmployee = idEmployee;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -242,11 +242,11 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public int getMobileNum() {
+    public String getMobileNum() {
         return mobileNum;
     }
 
-    public void setMobileNum(int mobileNum) {
+    public void setMobileNum(String mobileNum) {
         this.mobileNum = mobileNum;
     }
 

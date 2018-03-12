@@ -1,18 +1,96 @@
 <%-- 
-    Document   : sidebar_GSD Custodian
+    Document   : sidebar_GSD Chief
     Created on : 02 8, 18, 6:12:34 PM
     Author     : BavarianHotdog
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-      <aside>
+ <!--header start-->
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="index.jsp" class="logo"><b>DAR-AMIS</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <!-- -->
+                <ul class="nav top-menu">
+                    <!-- settings start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-tasks"></i>
+                            <span class="badge bg-theme">4</span>
+                        </a>
+                        <ul class="dropdown-menu extended tasks-bar">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">You have 4 pending tasks</p>
+                            </li>
+                            </ul>
+                    </li>
+                    <li id="header_inbox_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="badge bg-theme">5</span>
+                        </a>
+                        <ul class="dropdown-menu extended inbox">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">You have 5 new messages</p>
+                            </li>
+                        </ul>
+                </ul>            
+                            
+                <!--  notification end -->
+            </div>
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="dir_profile.jsp">Profile</a></li>
+            	<ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="index.jsp">Logout</a></li>
+            	</ul>
+            </div>
+        </header>
+      <!--header end-->      
+    <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.jsp"><img src="img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">Mario Golem</h5>
-
+              	  <p class="centered"><a href="profile.jsp"><img src="img/skype2512x512.png" class="img-circle" width="60"></a></p>
+                  <h5 class="centered">Gloria Juliano</h5>
+                  <p class="centered"><a href="#"><i class="fa fa-circle text-success"></i> Online</a></p>
+                  
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-bookmark"></i>
+                          <span>User Functions</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="todo_list.html">Make Announcement</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-pagelines"></i>
+                          <span>Verify Status</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a href="vforms.jsp">Forms</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>For Approval</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="blank.html">Forms</a></li>
+                          <li><a  href="login.html">Reports</a></li>
+                      </ul>
+                  </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
@@ -24,68 +102,24 @@
                           <li><a  href="resource_alloc.jsp">Resource Allocation</a></li>
                       </ul>
                   </li>
-
-                  <!--<li class="sub-menu">
+                    <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class="fa fa-bookmark"></i>
-                          <span>Tasks</span>
+                          <i class="fa fa-pencil"></i>
+                          <span>Create</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="calendar.html">Calendar</a></li>
-                          <li><a  href="gallery.html">Gallery</a></li>
-                          <li><a  href="todo_list.html">Todo List</a></li>
-                      </ul>
-                  </li> -->
-                  <!--<li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-book"></i>
-                          <span>Inventory</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="blank.html">Stock Count</a></li>
-                          <li><a  href="login.html">Property Count</a></li>
-                          <li><a  href="lock_screen.html">Disposal</a></li>
-                          <li><a  href="lock_screen.html">Donation</a></li>
-                      </ul>
-                  </li> -->
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-tasks"></i>
-                          <span>Forms</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a href="verify_forms.jsp">Verify Forms</a></li>
-                          <li><a href="approve_forms.jsp">Approve Forms</a></li>
-                          <!--<li><a href="V Forms"></a></li>
-                          <li><a  href="wfp.jsp">WFP</a></li>
-                          <li><a  href="ppmp.jsp">PPMP</a></li>
-                          <li><a  href="app.jsp">APP</a></li>
-                          <li><a  href="pr.jsp">PR</a></li>
-                          <li><a href="po.jsp">PO</a></li>
-                          <li><a  href="ptr.jsp">PTR</a></li>
-                          <li><a  href="par.jsp">PAR</a></li>
-                          <li><a  href="par.jsp">RFI</a></li>
-                          <li><a  href="par.jsp">AIF</a></li>
-                          <li><a  href="par.jsp">ICS</a></li>
-                          <li><a  href="par.jsp">PPELC</a></li>
-                          <li><a  href="par.jsp">RIS</a></li>
-                          <li><a  href="par.jsp">PAR</a></li> -->
+                          <li><a  href="blank.html">Forms</a></li>
+                          <li><a  href="login.html">Reports</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class="fa fa-th"></i>
-                          <span>Reports</span>
+                          <i class="fa fa-question-circle"></i>
+                          <span>Help</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="forms.jsp">View Filled Forms</a></li>
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.jsp">Responsive Table - Forms</a></li>
-                          <li><a  href="par.jsp">DV</a></li>
-                          <li><a  href="par.jsp">WMR</a></li>
-                          <li><a  href="par.jsp">RPPE</a></li>
-                          <li><a  href="par.jsp">SC</a></li>
-                          <li><a  href="par.jsp">PC</a></li>
+                          <li><a href="forms.jsp">FAQs</a></li>
+                          <li><a href="forms.jsp">DAR-AMIS Help Guide</a></li>
                       </ul>
                   </li>
               </ul>

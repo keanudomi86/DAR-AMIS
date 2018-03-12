@@ -16,19 +16,19 @@
               <h2 class="text-center text-bold">Asset Management Information System</h2>
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="dir_dashboard.jsp">
+		      <form class="form-login" action="Login" method="post">
 		        <h2 class="form-login-heading">Log In to Start your Session</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" placeholder="User ID" autofocus>
+		            <input name="username" type="text" class="form-control" placeholder="User ID" autofocus>
 		            <br>
-		            <input type="password" class="form-control" placeholder="Password">
+		            <input name="password" type="password" class="form-control" placeholder="Password">
 		            <label class="checkbox">
 		                <span class="pull-right">
 		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
 		
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block" href="dir_dashboard.jsp" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
+		            <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 		            <hr>
 		            <div class="registration">
 		                Don't have an account yet?<br/>
@@ -38,6 +38,9 @@
 		            </div>
 		
 		        </div>
+                        
+                        </form>
+                        <form>
 		
 		          <!-- Modal -->
 		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
