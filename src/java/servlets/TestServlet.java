@@ -71,7 +71,7 @@ public class TestServlet extends BaseServlet {
         e.setMiddleInitial("T");
         e.setLastName("Tester");
         e.setGender("Male");
-        e.setMobileNum(94357391);
+        e.setMobileNum("09999999999");
         e.setPosition("Admin Assistant");
         
        employeeFacade.create(e);

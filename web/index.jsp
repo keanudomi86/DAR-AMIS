@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : 01 21, 18, 1:11:28 AM
+    Author     : BavarianHotdog
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +39,7 @@
 		            <hr>
 		            <div class="registration">
 		                Don't have an account yet?<br/>
-		                <a class="" href="#">
+		                <a class="" href="register.jsp">
 		                    Create an account
 		                </a>
 		            </div>
