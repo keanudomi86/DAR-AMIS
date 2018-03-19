@@ -44,11 +44,15 @@
                             <option value="4">Separated</option>
                         </select>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
-                    </div> 
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control" name="gender" placeholder="Gender" required>
-                        <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
                     </div>
+                    <div class="form-group has-feedback">
+                        <select class="form-control" name="gender" placeholder="Gender" required>
+                            <option disabled selected>Gender</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                        <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
+                    </div> 
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" name="address" placeholder="Address" required>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
@@ -78,10 +82,6 @@
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" name="cellno" placeholder="Cellphone Number" required>
                         <span class="glyphicon glyphicon-phone form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control" name="empstatus" placeholder="Employee Status" required>
-                        <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
                         <select class="form-control" name="empstatus" placeholder="Employee Status" required>

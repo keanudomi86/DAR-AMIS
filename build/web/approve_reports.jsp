@@ -8,7 +8,7 @@
 <html lang="en">
   <head>
       <jsp:include page="WEB-INF/header.jsp" />       
-            <title>DAR-AMIS | User Dashboard</title>
+            <title>DAR-AMIS | Approve Reports</title>
   </head>
 
   <body>

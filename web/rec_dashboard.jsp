@@ -1,6 +1,6 @@
 <%-- 
-    Document   : gsd_homepage
-    Created on : 02 13, 18, 2:32:26 PM
+    Document   : rec_dashboard
+    Created on : 03 19, 18, 5:15:19 PM
     Author     : BavarianHotdog
 --%>
 
@@ -9,7 +9,7 @@
 <html lang="en">
   <head>
       <jsp:include page="WEB-INF/header.jsp" />       
-            <title>DAR-AMIS | GSD Dashboard</title>
+            <title>DAR-AMIS | Records Dashboard</title>
   </head>
 
   <body>
@@ -81,7 +81,7 @@
               <section class="content-header">
                     <h1>
                         Welcome!
-                        <small>General Services Division - Staff</small>
+                        <small>Records Staff</small>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
@@ -272,3 +272,4 @@
       <jsp:include page="WEB-INF/footer.jsp" />
   </body>
 </html>
+

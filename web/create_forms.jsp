@@ -90,19 +90,15 @@
 						      <span class="caret"></span>
 						    </button>
 						    <ul class="dropdown-menu">
-						      <li><a  href="wfp.jsp">WFP</a></li>
-                          <li><a  href="ppmp.jsp">PPMP</a></li>
-                          <li><a  href="app.jsp">APP</a></li>
-                          <li><a  href="pr.jsp">PR</a></li>
+                          <li><a href="pr.jsp">PR</a></li>
                           <li><a href="po.jsp">PO</a></li>
-                          <li><a  href="ptr.jsp">PTR</a></li>
-                          <li><a  href="par.jsp">PAR</a></li>
-                          <li><a  href="par.jsp">RFI</a></li>
-                          <li><a  href="par.jsp">AIF</a></li>
-                          <li><a  href="par.jsp">ICS</a></li>
-                          <li><a  href="par.jsp">PPELC</a></li>
-                          <li><a  href="par.jsp">RIS</a></li>
-                          <li><a  href="par.jsp">PAR</a></li>
+                          <li><a href="par.jsp">PAR</a></li>
+                          <li><a href="rfi.jsp">RFI</a></li>
+                          <li><a href="afi.jsp">AIF</a></li>
+                          <li><a href="ics.jsp">ICS</a></li>
+                          <li><a href="par.jsp">RIS</a></li>
+                          <li><a href="sc.jsp">SC</a></li>
+						    </ul>
 						    </ul>
 						  </div>
                 </section>

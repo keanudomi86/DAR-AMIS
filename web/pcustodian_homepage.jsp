@@ -1,15 +1,14 @@
 <%-- 
-    Document   : gsd_homepage
-    Created on : 02 13, 18, 2:32:26 PM
+    Document   : pcustodian_homepage
+    Created on : 02 13, 18, 2:32:50 PM
     Author     : BavarianHotdog
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
       <jsp:include page="WEB-INF/header.jsp" />       
-            <title>DAR-AMIS | GSD Dashboard</title>
+            <title>DAR-AMIS | Property Custodian Dashboard</title>
   </head>
 
   <body>
@@ -81,7 +80,7 @@
               <section class="content-header">
                     <h1>
                         Welcome!
-                        <small>General Services Division - Staff</small>
+                        <small>General Services Division - Property Custodian</small>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>

@@ -3,11 +3,6 @@
     Created on : 02 13, 18, 2:32:26 PM
     Author     : BavarianHotdog
 --%>
-<%-- 
-    Document   : ap_dashboard
-    Created on : 02 13, 18, 5:26:41 PM
-    Author     : BavarianHotdog
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
