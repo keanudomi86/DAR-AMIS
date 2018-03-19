@@ -8,7 +8,7 @@
 <html lang="en">
   <head>
       <jsp:include page="WEB-INF/header.jsp" />       
-            <title>DAR-AMIS | User Dashboard</title>
+            <title>DAR-AMIS | Admin Dashboard</title>
   </head>
 
   <body>
@@ -17,51 +17,6 @@
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
       <!--header start-->
-      <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="index.jsp" class="logo"><b>DAR-AMIS</b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <!-- -->
-                <ul class="nav top-menu">
-                    <!-- settings start -->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-tasks"></i>
-                            <span class="badge bg-theme">4</span>
-                        </a>
-                        <ul class="dropdown-menu extended tasks-bar">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 4 pending tasks</p>
-                            </li>
-                            </ul>
-                    </li>
-                    <li id="header_inbox_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="badge bg-theme">5</span>
-                        </a>
-                        <ul class="dropdown-menu extended inbox">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 5 new messages</p>
-                            </li>
-                        </ul>
-                </ul>            
-                            
-                <!--  notification end -->
-            </div>
-            <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="index.jsp">Logout</a></li>
-            	</ul>
-            </div>
-        </header>
       <!--header end-->
       
       
@@ -80,64 +35,71 @@
               <section class="content-header">
                     <h1>
                         Welcome!
-                        <small>Director</small>
+                        <small>Admin Assistant</small>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
-                                        
-                      <div class="row mt">
-                      <!-- SERVER STATUS PANELS -->
-                      	<div class="col-md-4 col-sm-4 mb">
-                      		<div class="white-panel pn">
-                      			<div class="white-header">
-						  			<h5>SAMPLE ASSET</h5>
-                      			</div>
-								<div class="row">
-									<div class="col-sm-6 col-xs-6 goleft">
-										<p><i class="fa fa-exclamation-circle"></i> 122</p>
-									</div>
-									<div class="col-sm-6 col-xs-6"></div>
-	                      		</div>
-	                      		<div class="centered">
-										<img src="img/pc.jpg" width="120">
-	                      		</div>
-                      		</div>
-                      	</div><!-- /col-md-4 -->
-                      	
-						<div class="col-md-4 mb">
-							<!-- WHITE PANEL - TOP USER -->
-							<div class="white-panel pn">
-								<div class="white-header">
-									<h5>NEWLY APPOINTED</h5>
-								</div>
-								<p><img src="img/ui-zac.jpg" class="img-circle" width="80"></p>
-								<p><b>James Murray</b></p>
-								<div class="row">
-									<div class="col-md-6">
-										<p class="small mt">MEMBER SINCE</p>
-										<p>2018</p>
-									</div>
-								</div>
-							</div>
-						</div><!-- /col-md-4 -->
-                      	<div class="col-md-4 mb">
-							<!-- WHITE PANEL - TOP USER -->
-							<div class="white-panel pn">
-								<div class="white-header">
-									<h5>NEWLY APPOINTED</h5>
-								</div>
-								<p><img src="img/lorde.jpg" class="img-circle" width="240"></p>
-								<p><b>Maria Magalona</b></p>
-								<div class="row">
-									<div class="col-md-6">
-										<p class="small mt">MEMBER SINCE</p>
-										<p>2018</p>
-									</div>
-								</div>
-							</div>
-						</div><!-- /col-md-4 -->
+                  <!--main content start-->
+          <section class="wrapper">
+          	
+				<div class="row">
 
-                    </div><!-- /row -->
+              <div class="row mt">
+                  <div class="col-md-12">
+                      <div class="content-panel">
+                          <table class="table table-striped table-advance table-hover">
+                              <h3><p class="centered"><i class="fa fa-bullhorn"></i>  Announcements</p></h3>
+	                  	  	  <hr>
+                              <tbody>
+                              <tr>
+                                  <td><a href="basic_table.html#">PPMP 00910001</a></td>
+                                  <td class="hidden-phone">Requires final signature from Director Rene</td>
+                                  <td>Mar 12 </td>
+                                  <td><span class="label label-info label-mini">Pending</span></td>
+                                  <td>
+                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                  </td>
+                              </tr>
+                                  <td>
+                                      <a href="basic_table.html#">
+                                          Dashgum ext
+                                      </a>
+                                  </td>
+                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                  <td>22000.50$ </td>
+                                  <td><span class="label label-success label-mini">Paid</span></td>
+                                  <td>
+                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td><a href="basic_table.html#">Total Ltd</a></td>
+                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                  <td>12120.00$ </td>
+                                  <td><span class="label label-warning label-mini">Due</span></td>
+                                  <td>
+                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      </div><!-- /content-panel -->
+                  </div><!-- /col-md-12 -->
+              </div><!-- /row -->
+
+		</section><! --/wrapper -->
+      </section><!-- /MAIN CONTENT -->
+
+      <!--main content end-->
+                                        
+                      
                     
                     				
                 </section>

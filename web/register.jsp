@@ -20,6 +20,10 @@
                 <h3 align="center"> Asset Management Information System </h3>
             </div>
 
+                        <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
+                        <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
+                    
+
             <div class="register-box-body">
                 <p class="login-box-msg">Register</p>
                 <form action="register" method="post">

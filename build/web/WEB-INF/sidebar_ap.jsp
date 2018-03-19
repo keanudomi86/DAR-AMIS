@@ -103,8 +103,8 @@
                           <span>Create</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="forms.jsp">Forms</a></li>
-                          <li><a  href="responsive_table">Reports</a></li>
+                          <li><a  href="create_forms.jsp">Forms</a></li>
+                          <li><a  href="create_reports.jsp">Reports</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -113,7 +113,7 @@
                           <span>Verify Status</span>
                       </a>
                       <ul class="sub">
-                          <li><a href="vforms.jsp">Forms</a></li>
+                          <li><a href="verify_forms.jsp">Forms</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">

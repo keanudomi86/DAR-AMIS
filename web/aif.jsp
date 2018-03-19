@@ -6,12 +6,34 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<html lang="en">
+  <head>
+    <jsp:include page="WEB-INF/header.jsp" /> 
+    <title>DAR-AMIS | PR</title>
+  </head>
+    <style>
+      .panel-default > .panel-heading-custom{
+
+        background-color: #10572b;
+        color: #ffffff ;     
+      }
+
+    </style>
+  <body>
+
+                 <!-- <tr><button type="button" class="btn btn-default">Create</button></tr><tr><button type="button" class="btn btn-default">Edit</button></tr><tr><button type="button" class="btn btn-default">View List</button></tr> -->
+		</section><! --/wrapper -->
+      </section>
+     </section>
+             <!-- /MAIN CONTENT -->
+
+      <!--main content end-->
+      <!--footer start-->
+      <jsp:include page="WEB-INF/copyright.jsp" />
+      <!--footer end-->
+  </section>
+      <jsp:include page="WEB-INF/footer.jsp" /> 
+  </body>
 </html>
+
+
