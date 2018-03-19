@@ -2,28 +2,30 @@
     Document   : sidebarcheck
     Created on : 02 13, 18, 5:13:40 PM
     Author     : BavarianHotdog
+getAttribute ("userData").getIdTier().getIdTier()
 --%>
 
-
+<%@page import="dao.Employee"%>
+<%@page import="dao.Tier"%>
 <%
-    int userType = Integer.parseInt(session.getAttribute("userType").toString());
-    if (userType == 1) {
+    int id_Tier = ( ((Employee)session.getAttribute("userData")).getIdTier().getIdTier());
+    if (id_Tier == 1) {
 %>
 <jsp:include page="sidebar_dir.jsp" />
-<%} else if (userType == 2) {%>
+<%} else if (id_Tier == 2) {%>
 <jsp:include page="sidebar_ap.jsp" />
-<%} else if (userType == 3) {%>
+<%} else if (id_Tier == 3) {%>
 <jsp:include page="sidebar_gsdc.jsp" />
-<%} else if (userType == 4) {%>
+<%} else if (id_Tier == 4) {%>
 <jsp:include page="sidebar_gsds.jsp" />
-<%} else if (userType == 5) {%>
+<%} else if (id_Tier == 5) {%>
 <jsp:include page="sidebar_pc.jsp" />
-<%} else if (userType == 6) {%>
+<%} else if (id_Tier == 6) {%>
 <jsp:include page="sidebar_mgt.jsp" />
-<%} else if (userType == 7) {%>
+<%} else if (id_Tier == 7) {%>
 <jsp:include page="sidebar_user.jsp" />
-<%} else if (userType == 8) {%>
+<%} else if (id_Tier == 8) {%>
 <jsp:include page="sidebar_rec.jsp" />
-<%} else if (userType == 9) {%>
+<%} else if (id_Tier == 9) {%>
 <jsp:include page="sidebar_def.jsp" />
 <%}%>

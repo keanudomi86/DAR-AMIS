@@ -2,6 +2,9 @@
     Document   : approve_forms
     Created on : 02 13, 18, 6:04:28 PM
     Author     : BavarianHotdog
+
+    TRANSFORM INTO VIEW ONLY
+
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -69,7 +72,7 @@
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
-        <jsp:include page="WEB-INF/sidebar_ap.jsp" />
+        <jsp:include page="WEB-INF/sidebarcheck.jsp" />
       <!--sidebar end-->
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT

@@ -1,3 +1,11 @@
+<%-- 
+    Document   : sidebar_Admin Assistant
+    Created on : 02 8, 18, 6:12:34 PM
+    Author     : BavarianHotdog
+--%>
+<%@page import="dao.Employee"%>
+<%@page import="dao.Tier"%>
+<%Employee emp = (Employee)session.getAttribute("userData");%>
 <!--header start-->
       <header class="header black-bg">
               <div class="sidebar-toggle-box">
@@ -9,8 +17,8 @@
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
                 <!-- -->
-                <ul class="nav top-menu">
-                    <!-- settings start -->
+                <!--<ul class="nav top-menu">
+                    <!-- settings start
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-tasks"></i>
@@ -34,13 +42,13 @@
                                 <p class="green">You have 5 new messages</p>
                             </li>
                         </ul>
-                </ul>            
+                </ul>-->            
                             
                 <!--  notification end -->
             </div>
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="dir_profile.jsp">Profile</a></li>
+                    <li><a class="logout" href="profile.jsp">Profile</a></li>
             	<ul class="nav pull-right top-menu">
                     <li><a class="logout" href="index.jsp">Logout</a></li>
             	</ul>
@@ -53,8 +61,8 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="profile.jsp"><img src="img/skype2512x512.png" class="img-circle" width="60"></a></p>
-                  <h5 class="centered">Weng Bilog</h5>
-                  <p class="centered"><a href="#"><i class="fa fa-circle text-success"></i> Online</a></p>
+                  <h5 class="centered"><%= emp.getFirstName()%> <%= emp.getLastName()%></h5>
+                  <p class="centered"><i class="fa fa-circle text-success"></i> Online</p>
                   
                   <li class="sub-menu">
                       <a href="javascript:;" >
@@ -62,10 +70,10 @@
                           <span>User Functions</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="calendar.html">Activate Accounts</a></li>
-                          <li><a  href="gallery.html">Manage Users</a></li>
-                          <li><a  href="todo_list.html">Deactivate Accounts</a></li>
-                          <li><a  href="todo_list.html">Make Announcement</a></li>
+                          <li><a  href="activate_accounts.jsp">Activate Accounts</a></li>
+                          <li><a  href="change_usertier.jsp">Manage Users</a></li>
+                          <li><a  href="deactivate_accounts/jsp">Deactivate Accounts</a></li>
+                          <li><a  href="make_announcement.jsp">Make Announcement</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -74,7 +82,7 @@
                           <span>For Approval</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank.html">Forms</a></li>
+                          <li><a  href="approve_forms.jsp">Forms</a></li>
                           <li><a  href="login.html">Reports</a></li>
                       </ul>
                   </li>
@@ -95,8 +103,8 @@
                           <span>Create</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank.html">Forms</a></li>
-                          <li><a  href="login.html">Reports</a></li>
+                          <li><a  href="forms.jsp">Forms</a></li>
+                          <li><a  href="responsive_table">Reports</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -114,8 +122,8 @@
                           <span>Help</span>
                       </a>
                       <ul class="sub">
-                          <li><a href="forms.jsp">FAQs</a></li>
-                          <li><a href="forms.jsp">DAR-AMIS Help Guide</a></li>
+                          <li><a href="faqs.jsp">FAQs</a></li>
+                          <li><a href="help.jsp">DAR-AMIS Help Guide</a></li>
                       </ul>
                   </li>
               </ul>

@@ -3,7 +3,9 @@
     Created on : 02 13, 18, 5:17:55 PM
     Author     : BavarianHotdog
 --%>
-
+<%@page import="dao.Employee"%>
+<%@page import="dao.Tier"%>
+<%Employee emp = (Employee)session.getAttribute("userData");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <!--header start-->
       <header class="header black-bg">
@@ -16,8 +18,8 @@
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
                 <!-- -->
-                <ul class="nav top-menu">
-                    <!-- settings start -->
+                <!--<ul class="nav top-menu">
+                    <!-- settings start
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-tasks"></i>
@@ -41,13 +43,13 @@
                                 <p class="green">You have 5 new messages</p>
                             </li>
                         </ul>
-                </ul>            
+                </ul> -->            
                             
                 <!--  notification end -->
             </div>
             <div class="top-menu">
                 <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="dir_profile.jsp">Profile</a></li>
+                    <li><a class="logout" href="profile.jsp">Profile</a></li>
             	<ul class="nav pull-right top-menu">
                     <li><a class="logout" href="index.jsp">Logout</a></li>
             	</ul>
@@ -60,8 +62,9 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="profile.jsp"><img src="img/skype2512x512.png" class="img-circle" width="60"></a></p>
-                  <h5 class="centered">Jonie Abante</h5>
-                  <p class="centered"><a href="#"><i class="fa fa-circle text-success"></i> Online</a></p>
+                  <h5 class="centered"><%= emp.getFirstName()%> <%= emp.getLastName()%></h5>
+                  <p class="centered"><i class="fa fa-circle text-success"></i> Online</p>
+                  
                   
                   <li class="sub-menu">
                       <a href="javascript:;" >
@@ -78,7 +81,7 @@
                           <span>Verify Status</span>
                       </a>
                       <ul class="sub">
-                          <li><a href="vforms.jsp">Forms</a></li>
+                          <li><a href="verify_forms.jsp">Forms</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -87,8 +90,8 @@
                           <span>For Approval</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank.html">Forms</a></li>
-                          <li><a  href="login.html">Reports</a></li>
+                          <li><a  href="approve_forms.jsp">Forms</a></li>
+                          <li><a  href="approve_reports.jsp">Reports</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -108,8 +111,8 @@
                           <span>Create</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank.html">Forms</a></li>
-                          <li><a  href="login.html">Reports</a></li>
+                          <li><a  href="create_forms.jsp">Forms</a></li>
+                          <li><a  href="create_reports.jsp">Reports</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -118,8 +121,8 @@
                           <span>Help</span>
                       </a>
                       <ul class="sub">
-                          <li><a href="forms.jsp">FAQs</a></li>
-                          <li><a href="forms.jsp">DAR-AMIS Help Guide</a></li>
+                          <li><a href="faqs.jsp">FAQs</a></li>
+                          <li><a href="help.jsp">DAR-AMIS Help Guide</a></li>
                       </ul>
                   </li>
               </ul>

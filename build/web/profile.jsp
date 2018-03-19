@@ -9,7 +9,7 @@
 <html lang="en">
   <head>
       <jsp:include page="WEB-INF/header.jsp" />       
-            <title>DAR-AMIS | Director Dashboard</title>
+            <title>DAR-AMIS | Profile</title>
   </head>
 
   <body>
@@ -19,7 +19,7 @@
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
-        <jsp:include page="WEB-INF/sidebar_dir.jsp" />
+        <jsp:include page="WEB-INF/sidebarcheck.jsp" />
       <!--sidebar end-->
       
       <!-- **********************************************************************************************************************************************************

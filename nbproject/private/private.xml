@@ -4,14 +4,45 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/footer.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/ActivateAccounts.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/activate_accounts.jsp</file>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebarcheck.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_dir.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/index.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/dao/Tier.java</file>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_ap.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/pr.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/ptr.jsp</file>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/dir_dashboard.jsp</file>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/Login.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/wfp.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_gsds.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/dao/Employee.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/index.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/po.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/register.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/resource_alloc.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/verify_forms.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/par.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/app.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_mgt.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_dir.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/database/Register.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_gsdc.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/gsdc_dashboard.jsp</file>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/profile.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/TestServlet.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/faqs.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/dao/Stockitem.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/pcustodian_homepage.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/approve_forms.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/ppmp.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/ap_dashboard.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/inspection.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/responsive_table.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/gsds_dashboard.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/make_announcement.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/user_dashboard.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/mgt_dashboard.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/monitoring.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/Logout.java</file>
         </group>
     </open-files>
 </project-private>

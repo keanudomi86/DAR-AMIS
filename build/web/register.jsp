@@ -14,14 +14,15 @@
         <title>DAR-AMIS - Sign Up</title>
     </head>
 <body class="hold-transition register-page">
+    <div class="container">
         <div class="register-box">
-            <div class="login-logo"><h2>Department of Agrarian Reform</h2>
-                <h3> Asset Management Information System </h3>
+            <div  class="login-logo" align="text-center"><h2 align="center">Department of Agrarian Reform</h2>
+                <h3 align="center"> Asset Management Information System </h3>
             </div>
 
             <div class="register-box-body">
                 <p class="login-box-msg">Register</p>
-                <form action="Register" method="post">
+                <form action="register" method="post">
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
@@ -35,9 +36,15 @@
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" name="civilstatus" placeholder="Civil Status" required>
+                        <select class="form-control" name="civilstatus" placeholder="Civil Status" required>
+                            <option disabled selected>Civil Status</option>
+                            <option value="1">Single</option>
+                            <option value="2">Married</option>
+                            <option value="3">Widowed</option>
+                            <option value="4">Separated</option>
+                        </select>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
-                    </div>
+                    </div> 
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" name="gender" placeholder="Gender" required>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
@@ -51,9 +58,15 @@
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" name="division" placeholder="Division" required>
+                        <select class="form-control" name="division" placeholder="Division" required>
+                            <option disabled selected>Division</option>
+                            <option value="1">Admin Services</option>
+                            <option value="2">General Services</option>
+                            <option value="3">Records</option>
+                            <option value="4">Management</option>
+                        </select>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
-                    </div>
+                    </div> 
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" name="position" placeholder="Position" required>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
@@ -71,6 +84,15 @@
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
+                        <select class="form-control" name="empstatus" placeholder="Employee Status" required>
+                            <option disabled selected>Employee Status</option>
+                            <option value="1">Regular</option>
+                            <option value="2">Contractual</option>
+                            <option value="3">Intern</option>
+                        </select>
+                        <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
+                    </div> 
+                    <div class="form-group has-feedback">
                         <input type="email" class="form-control" name="username" placeholder="Username" required>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
@@ -85,9 +107,9 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="checkbox icheck">
-                                <label>
+                                <!--<label>
                                     <input type="checkbox"> I agree to the <a href="#">terms and conditions.</a>
-                                </label>
+                                </label> -->
                             </div>
                         </div>
                     </div>
@@ -101,7 +123,6 @@
                 </form>
             </div>
         </div>
-        <jsp:include page="WEB-INF/copyright.jsp" /> 
       <jsp:include page="WEB-INF/footer.jsp" />
       <script>
             $(function () {
@@ -112,5 +133,6 @@
                 });
             });
         </script>
+    </div>>
     </body>
 </html>

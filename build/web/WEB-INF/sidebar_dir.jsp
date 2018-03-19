@@ -1,3 +1,6 @@
+<%@page import="dao.Employee"%>
+<%@page import="dao.Tier"%>
+<%Employee emp = (Employee)session.getAttribute("userData");%>
 <!--header start-->
       <header class="header black-bg">
               <div class="sidebar-toggle-box">
@@ -9,8 +12,8 @@
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
                 <!-- -->
-                <ul class="nav top-menu">
-                    <!-- settings start -->
+                <!--<ul class="nav top-menu">
+                    <!-- settings start 
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-tasks"></i>
@@ -34,7 +37,7 @@
                                 <p class="green">You have 5 new messages</p>
                             </li>
                         </ul>
-                </ul>            
+                </ul>-->            
                             
                 <!--  notification end -->
             </div>
@@ -55,7 +58,7 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="profile.jsp"><img src="img/skype2512x512.png" class="img-circle" width="60"></a></p>
-                  <h5 class="centered">Rene Colocar</h5>
+                  <h5 class="centered"><%= emp.getFirstName()%> <%= emp.getLastName()%></h5>
                   <p class="centered"><i class="fa fa-circle text-success"></i> Online</p>
                   
                   <li class="sub-menu">
@@ -64,7 +67,7 @@
                           <span>User Functions</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="sctivate_accounts.jsp">Activate Accounts</a></li>
+                          <li><a  href="activate_accounts.jsp">Activate Accounts</a></li>
                           <li><a  href="change_usertier.jsp">Manage Users</a></li>
                           <li><a  href="deactivate_accounts.jsp">Deactivate Accounts</a></li>
                           <li><a  href="make_announcement.jsp">Make Announcement</a></li>
@@ -76,8 +79,8 @@
                           <span>For Approval</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="aforms.jsp">Forms</a></li>
-                          <li><a  href="areports.jsp">Reports</a></li>
+                          <li><a  href="approve_forms.jsp">Forms</a></li>
+                          <li><a  href="approve_reports.jsp">Reports</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -103,12 +106,22 @@
                   </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
+                          <i class="fa fa-pencil"></i>
+                          <span>Create</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="create_forms.jsp">Forms</a></li>
+                          <li><a  href="create_reports.jsp">Reports</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
                           <i class="fa fa-question-circle"></i>
                           <span>Help</span>
                       </a>
                       <ul class="sub">
                           <li><a href="faqs.jsp">FAQs</a></li>
-                          <li><a href="guide.jsp">DAR-AMIS Help Guide</a></li>
+                          <li><a href="help.jsp">DAR-AMIS Help Guide</a></li>
                       </ul>
                   </li>
                   <!--<li class="sub-menu">
