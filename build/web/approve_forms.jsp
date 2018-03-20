@@ -97,9 +97,9 @@
                           <li><a href="po.jsp">PO</a></li>
                           <li><a href="par.jsp">PAR</a></li>
                           <li><a href="rfi.jsp">RFI</a></li>
-                          <li><a href="afi.jsp">AIF</a></li>
+                          <li><a href="aif.jsp">AIF</a></li>
                           <li><a href="ics.jsp">ICS</a></li>
-                          <li><a href="par.jsp">RIS</a></li>
+                          <li><a href="ris.jsp">RIS</a></li>
                           <li><a href="sc.jsp">SC</a></li>
 						    </ul>
 						  </div>

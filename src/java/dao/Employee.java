@@ -6,7 +6,9 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,11 +18,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -106,7 +110,8 @@ public class Employee implements Serializable {
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "mobile_num", nullable = false)
+    @Size(min = 1, max = 45)
+    @Column(name = "mobile_num", nullable = false, length = 45)
     private String mobileNum;
     @Basic(optional = false)
     @NotNull
@@ -123,12 +128,14 @@ public class Employee implements Serializable {
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String password;
-    @JoinColumn(name = "id_office", referencedColumnName = "id_office", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_office", referencedColumnName = "id_office")
+    @ManyToOne
     private Office idOffice;
-    @JoinColumn(name = "id_tier", referencedColumnName = "id_tier", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_tier", referencedColumnName = "id_tier")
+    @ManyToOne
     private Tier idTier;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "announcementBy")
+    private List<Announcements> announcementsList;
 
     public Employee() {
     }
@@ -288,6 +295,15 @@ public class Employee implements Serializable {
 
     public void setIdTier(Tier idTier) {
         this.idTier = idTier;
+    }
+
+    @XmlTransient
+    public List<Announcements> getAnnouncementsList() {
+        return announcementsList;
+    }
+
+    public void setAnnouncementsList(List<Announcements> announcementsList) {
+        this.announcementsList = announcementsList;
     }
 
     @Override

@@ -55,39 +55,10 @@ public class Login extends BaseServlet {
             
             session.setAttribute("userData", e);
             
-            if(e.getIdTier().getIdTier() == 1){
-                context = request.getServletContext();
-                rd = context.getRequestDispatcher("/dir_dashboard.jsp");
-                rd.forward(request, response);
-            }else if(e.getIdTier().getIdTier() == 2){
-                context = request.getServletContext();
-                rd = context.getRequestDispatcher("/ap_dashboard.jsp");
-                rd.forward(request, response);
-            }else if(e.getIdTier().getIdTier() == 3){
-                context = request.getServletContext();
-                rd = context.getRequestDispatcher("/gsdc_dashboard.jsp");
-                rd.forward(request, response);
-            }else if(e.getIdTier().getIdTier() == 4){
-                context = request.getServletContext();
-                rd = context.getRequestDispatcher("/gsds_dashboard.jsp");
-                rd.forward(request, response);
-            }else if(e.getIdTier().getIdTier() == 5){
-                context = request.getServletContext();
-                rd = context.getRequestDispatcher("/pcustodian_homepage.jsp");
-                rd.forward(request, response);
-            }else if(e.getIdTier().getIdTier() == 6){
-                context = request.getServletContext();
-                rd = context.getRequestDispatcher("/mgt_dashboard.jsp");
-                rd.forward(request, response);
-            }else if(e.getIdTier().getIdTier() == 7){
-                context = request.getServletContext();
-                rd = context.getRequestDispatcher("/user_dashboard.jsp");
-                rd.forward(request, response);
-            }else if(e.getIdTier().getIdTier() == 8){
-                context = request.getServletContext();
-                rd = context.getRequestDispatcher("/rec_dashboard.jsp");
-                rd.forward(request, response);
-            }
+            context = getServletContext();
+            rd = context.getRequestDispatcher("/HomePage");
+            rd.forward(request, response);
+            
                 
         }else{
             try(PrintWriter out = response.getWriter()){

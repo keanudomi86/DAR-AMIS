@@ -48,10 +48,10 @@
                         </div>
 
                         <div class="box-body border-radius-none">
-                            <form action="MakeAnnouncement" method="post">
+                            <form action="SubmitAnnouncement" method="post">
                                 <div class="col-md-12">
                                     <div class="form-group has-feedback">
-                                        <input type="text" class="form-control" placeholder="Subject" name="sub">
+                                        <input type="text" class="form-control" name="subject" placeholder="Subject" name="sub">
                                     </div>
                                     <div class="form-group has-feedback">
                                         <textarea class="form-control" name="announcement" placeholder="Announcement" rows="5"></textarea>

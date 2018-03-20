@@ -45,6 +45,8 @@ public class Pc implements Serializable {
     private Integer idPc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPc")
     private List<Rpcppe> rpcppeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPc")
+    private List<Ppelc> ppelcList;
     @JoinColumn(name = "id_dr", referencedColumnName = "id_dr", nullable = false)
     @ManyToOne(optional = false)
     private Dr idDr;
@@ -80,6 +82,15 @@ public class Pc implements Serializable {
 
     public void setRpcppeList(List<Rpcppe> rpcppeList) {
         this.rpcppeList = rpcppeList;
+    }
+
+    @XmlTransient
+    public List<Ppelc> getPpelcList() {
+        return ppelcList;
+    }
+
+    public void setPpelcList(List<Ppelc> ppelcList) {
+        this.ppelcList = ppelcList;
     }
 
     public Dr getIdDr() {

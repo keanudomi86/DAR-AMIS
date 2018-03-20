@@ -45,10 +45,14 @@ public class Ris implements Serializable {
     @NotNull
     @Column(name = "id_sc", nullable = false)
     private int idSc;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRis")
+    @OneToMany(mappedBy = "idRis")
     private List<Pr> prList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRis")
+    private List<RisDetails> risDetailsList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRis")
     private List<Sc> scList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRis")
+    private List<Rsmi> rsmiList;
 
     public Ris() {
     }
@@ -88,12 +92,30 @@ public class Ris implements Serializable {
     }
 
     @XmlTransient
+    public List<RisDetails> getRisDetailsList() {
+        return risDetailsList;
+    }
+
+    public void setRisDetailsList(List<RisDetails> risDetailsList) {
+        this.risDetailsList = risDetailsList;
+    }
+
+    @XmlTransient
     public List<Sc> getScList() {
         return scList;
     }
 
     public void setScList(List<Sc> scList) {
         this.scList = scList;
+    }
+
+    @XmlTransient
+    public List<Rsmi> getRsmiList() {
+        return rsmiList;
+    }
+
+    public void setRsmiList(List<Rsmi> rsmiList) {
+        this.rsmiList = rsmiList;
     }
 
     @Override

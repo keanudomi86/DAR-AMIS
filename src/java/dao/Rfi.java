@@ -6,7 +6,9 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,10 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,12 +44,16 @@ public class Rfi implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_rfi", nullable = false)
     private Integer idRfi;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRfi")
+    private List<RfiDeliveries> rfiDeliveriesList;
     @JoinColumn(name = "id_po", referencedColumnName = "id_po", nullable = false)
     @ManyToOne(optional = false)
     private Po idPo;
     @JoinColumn(name = "id_rfi", referencedColumnName = "idrfi_details", nullable = false, insertable = false, updatable = false)
     @OneToOne(optional = false)
     private RfiFk rfiFk;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRfi")
+    private List<RfiRepairPost> rfiRepairPostList;
 
     public Rfi() {
     }
@@ -62,6 +70,15 @@ public class Rfi implements Serializable {
         this.idRfi = idRfi;
     }
 
+    @XmlTransient
+    public List<RfiDeliveries> getRfiDeliveriesList() {
+        return rfiDeliveriesList;
+    }
+
+    public void setRfiDeliveriesList(List<RfiDeliveries> rfiDeliveriesList) {
+        this.rfiDeliveriesList = rfiDeliveriesList;
+    }
+
     public Po getIdPo() {
         return idPo;
     }
@@ -76,6 +93,15 @@ public class Rfi implements Serializable {
 
     public void setRfiFk(RfiFk rfiFk) {
         this.rfiFk = rfiFk;
+    }
+
+    @XmlTransient
+    public List<RfiRepairPost> getRfiRepairPostList() {
+        return rfiRepairPostList;
+    }
+
+    public void setRfiRepairPostList(List<RfiRepairPost> rfiRepairPostList) {
+        this.rfiRepairPostList = rfiRepairPostList;
     }
 
     @Override

@@ -6,6 +6,7 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,8 +21,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,7 +41,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pr.findAll", query = "SELECT p FROM Pr p")
     , @NamedQuery(name = "Pr.findByIdPr", query = "SELECT p FROM Pr p WHERE p.idPr = :idPr")
     , @NamedQuery(name = "Pr.findByIdSc", query = "SELECT p FROM Pr p WHERE p.idSc = :idSc")
-    , @NamedQuery(name = "Pr.findByIdPc", query = "SELECT p FROM Pr p WHERE p.idPc = :idPc")})
+    , @NamedQuery(name = "Pr.findByIdPc", query = "SELECT p FROM Pr p WHERE p.idPc = :idPc")
+    , @NamedQuery(name = "Pr.findByEntityName", query = "SELECT p FROM Pr p WHERE p.entityName = :entityName")
+    , @NamedQuery(name = "Pr.findByDate", query = "SELECT p FROM Pr p WHERE p.date = :date")
+    , @NamedQuery(name = "Pr.findByFundCluster", query = "SELECT p FROM Pr p WHERE p.fundCluster = :fundCluster")
+    , @NamedQuery(name = "Pr.findByResponsibilityCenterCode", query = "SELECT p FROM Pr p WHERE p.responsibilityCenterCode = :responsibilityCenterCode")})
 public class Pr implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,29 +54,43 @@ public class Pr implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_pr", nullable = false)
     private Integer idPr;
+    @Column(name = "id_sc")
+    private Integer idSc;
+    @Column(name = "id_pc")
+    private Integer idPc;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_sc", nullable = false)
-    private int idSc;
+    @Size(min = 1, max = 45)
+    @Column(name = "entity_name", nullable = false, length = 45)
+    private String entityName;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_pc", nullable = false)
-    private int idPc;
-    @JoinColumn(name = "id_app", referencedColumnName = "id_app", nullable = false)
-    @ManyToOne(optional = false)
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    @Size(max = 45)
+    @Column(name = "fund_cluster", length = 45)
+    private String fundCluster;
+    @Size(max = 45)
+    @Column(name = "responsibility_center_code", length = 45)
+    private String responsibilityCenterCode;
+    @JoinColumn(name = "id_app", referencedColumnName = "id_app")
+    @ManyToOne
     private App idApp;
-    @JoinColumn(name = "id_office", referencedColumnName = "id_office", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_office", referencedColumnName = "id_office")
+    @ManyToOne
     private Office idOffice;
-    @JoinColumn(name = "id_ppmp", referencedColumnName = "id_ppmp", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_ppmp", referencedColumnName = "id_ppmp")
+    @ManyToOne
     private Ppmp idPpmp;
-    @JoinColumn(name = "id_ris", referencedColumnName = "id_ris", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_ris", referencedColumnName = "id_ris")
+    @ManyToOne
     private Ris idRis;
-    @JoinColumn(name = "id_wfp", referencedColumnName = "id_wfp", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_wfp", referencedColumnName = "id_wfp")
+    @ManyToOne
     private Wfp idWfp;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPr")
+    private List<PrDetails> prDetailsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPr")
     private List<Sc> scList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPr")
@@ -83,10 +105,10 @@ public class Pr implements Serializable {
         this.idPr = idPr;
     }
 
-    public Pr(Integer idPr, int idSc, int idPc) {
+    public Pr(Integer idPr, String entityName, Date date) {
         this.idPr = idPr;
-        this.idSc = idSc;
-        this.idPc = idPc;
+        this.entityName = entityName;
+        this.date = date;
     }
 
     public Integer getIdPr() {
@@ -97,20 +119,52 @@ public class Pr implements Serializable {
         this.idPr = idPr;
     }
 
-    public int getIdSc() {
+    public Integer getIdSc() {
         return idSc;
     }
 
-    public void setIdSc(int idSc) {
+    public void setIdSc(Integer idSc) {
         this.idSc = idSc;
     }
 
-    public int getIdPc() {
+    public Integer getIdPc() {
         return idPc;
     }
 
-    public void setIdPc(int idPc) {
+    public void setIdPc(Integer idPc) {
         this.idPc = idPc;
+    }
+
+    public String getEntityName() {
+        return entityName;
+    }
+
+    public void setEntityName(String entityName) {
+        this.entityName = entityName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getFundCluster() {
+        return fundCluster;
+    }
+
+    public void setFundCluster(String fundCluster) {
+        this.fundCluster = fundCluster;
+    }
+
+    public String getResponsibilityCenterCode() {
+        return responsibilityCenterCode;
+    }
+
+    public void setResponsibilityCenterCode(String responsibilityCenterCode) {
+        this.responsibilityCenterCode = responsibilityCenterCode;
     }
 
     public App getIdApp() {
@@ -151,6 +205,15 @@ public class Pr implements Serializable {
 
     public void setIdWfp(Wfp idWfp) {
         this.idWfp = idWfp;
+    }
+
+    @XmlTransient
+    public List<PrDetails> getPrDetailsList() {
+        return prDetailsList;
+    }
+
+    public void setPrDetailsList(List<PrDetails> prDetailsList) {
+        this.prDetailsList = prDetailsList;
     }
 
     @XmlTransient

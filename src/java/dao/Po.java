@@ -59,11 +59,13 @@ public class Po implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPo")
     private List<Sc> scList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPo")
+    private List<Apc> apcList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPo")
     private List<Pc> pcList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPo")
-    private List<Rfi> rfiList;
+    private List<PoDetails> poDetailsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPo")
-    private List<Apc> apcList;
+    private List<Rfi> rfiList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPo")
     private List<Aif> aifList;
     @JoinColumn(name = "id_asset", referencedColumnName = "id_asset", nullable = false)
@@ -129,6 +131,15 @@ public class Po implements Serializable {
     }
 
     @XmlTransient
+    public List<Apc> getApcList() {
+        return apcList;
+    }
+
+    public void setApcList(List<Apc> apcList) {
+        this.apcList = apcList;
+    }
+
+    @XmlTransient
     public List<Pc> getPcList() {
         return pcList;
     }
@@ -138,21 +149,21 @@ public class Po implements Serializable {
     }
 
     @XmlTransient
+    public List<PoDetails> getPoDetailsList() {
+        return poDetailsList;
+    }
+
+    public void setPoDetailsList(List<PoDetails> poDetailsList) {
+        this.poDetailsList = poDetailsList;
+    }
+
+    @XmlTransient
     public List<Rfi> getRfiList() {
         return rfiList;
     }
 
     public void setRfiList(List<Rfi> rfiList) {
         this.rfiList = rfiList;
-    }
-
-    @XmlTransient
-    public List<Apc> getApcList() {
-        return apcList;
-    }
-
-    public void setApcList(List<Apc> apcList) {
-        this.apcList = apcList;
     }
 
     @XmlTransient

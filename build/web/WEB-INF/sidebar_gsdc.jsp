@@ -72,10 +72,10 @@
                           <span>User Functions</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="todo_list.html">Make Announcement</a></li>
+                          <li><a  href="make_announcement.jsp">Make Announcement</a></li>
                       </ul>
                   </li>
-                  <li class="sub-menu">
+                  <!-- <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-pagelines"></i>
                           <span>Verify Status</span>
@@ -83,7 +83,7 @@
                       <ul class="sub">
                           <li><a href="verify_forms.jsp">Forms</a></li>
                       </ul>
-                  </li>
+                  </li> -->
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>

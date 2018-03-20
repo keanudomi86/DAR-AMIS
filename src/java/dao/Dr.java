@@ -54,11 +54,15 @@ public class Dr implements Serializable {
     @NotNull
     @Column(name = "id_pc", nullable = false)
     private int idPc;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDr")
+    private List<DrDetails> drDetailsList;
     @JoinColumn(name = "id_po", referencedColumnName = "id_po", nullable = false)
     @ManyToOne(optional = false)
     private Po idPo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDr")
     private List<Sc> scList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDr")
+    private List<Rsmi> rsmiList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDr")
     private List<Pc> pcList;
 
@@ -99,6 +103,15 @@ public class Dr implements Serializable {
         this.idPc = idPc;
     }
 
+    @XmlTransient
+    public List<DrDetails> getDrDetailsList() {
+        return drDetailsList;
+    }
+
+    public void setDrDetailsList(List<DrDetails> drDetailsList) {
+        this.drDetailsList = drDetailsList;
+    }
+
     public Po getIdPo() {
         return idPo;
     }
@@ -114,6 +127,15 @@ public class Dr implements Serializable {
 
     public void setScList(List<Sc> scList) {
         this.scList = scList;
+    }
+
+    @XmlTransient
+    public List<Rsmi> getRsmiList() {
+        return rsmiList;
+    }
+
+    public void setRsmiList(List<Rsmi> rsmiList) {
+        this.rsmiList = rsmiList;
     }
 
     @XmlTransient

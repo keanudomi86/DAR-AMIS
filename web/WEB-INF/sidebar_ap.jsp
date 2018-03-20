@@ -83,7 +83,7 @@
                       </a>
                       <ul class="sub">
                           <li><a  href="approve_forms.jsp">Forms</a></li>
-                          <li><a  href="login.html">Reports</a></li>
+                          <li><a  href="approve_reports.jsp">Reports</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -107,7 +107,7 @@
                           <li><a  href="create_reports.jsp">Reports</a></li>
                       </ul>
                   </li>
-                  <li class="sub-menu">
+                  <!--<li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-pagelines"></i>
                           <span>Verify Status</span>
@@ -115,7 +115,7 @@
                       <ul class="sub">
                           <li><a href="verify_forms.jsp">Forms</a></li>
                       </ul>
-                  </li>
+                  </li> -->
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-question-circle"></i>

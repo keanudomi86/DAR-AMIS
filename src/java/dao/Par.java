@@ -53,6 +53,8 @@ public class Par implements Serializable {
     @OneToOne(optional = false)
     private ParDetails parDetails;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPar")
+    private List<Ptr> ptrList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPar")
     private List<Pc> pcList;
 
     public Par() {
@@ -89,6 +91,15 @@ public class Par implements Serializable {
 
     public void setParDetails(ParDetails parDetails) {
         this.parDetails = parDetails;
+    }
+
+    @XmlTransient
+    public List<Ptr> getPtrList() {
+        return ptrList;
+    }
+
+    public void setPtrList(List<Ptr> ptrList) {
+        this.ptrList = ptrList;
     }
 
     @XmlTransient

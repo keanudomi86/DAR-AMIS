@@ -76,7 +76,7 @@
                           <li><a  href="create_reports.jsp">Reports</a></li>
                       </ul>
                   </li>
-                  <li class="sub-menu">
+                 <!-- <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-pagelines"></i>
                           <span>Verify Status</span>
@@ -84,7 +84,7 @@
                       <ul class="sub">
                           <li><a href="verify_forms.jsp">Forms</a></li>
                       </ul>
-                  </li>
+                  </li> -->
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>

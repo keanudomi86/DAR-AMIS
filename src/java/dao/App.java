@@ -8,7 +8,6 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,11 +42,11 @@ public class App implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_app", nullable = false)
     private Integer idApp;
+    @OneToMany(mappedBy = "idApp")
+    private List<Pr> prList;
     @JoinColumn(name = "id_office", referencedColumnName = "id_office", nullable = false)
     @ManyToOne(optional = false)
     private Office idOffice;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idApp")
-    private List<Pr> prList;
 
     public App() {
     }
@@ -64,14 +63,6 @@ public class App implements Serializable {
         this.idApp = idApp;
     }
 
-    public Office getIdOffice() {
-        return idOffice;
-    }
-
-    public void setIdOffice(Office idOffice) {
-        this.idOffice = idOffice;
-    }
-
     @XmlTransient
     public List<Pr> getPrList() {
         return prList;
@@ -79,6 +70,14 @@ public class App implements Serializable {
 
     public void setPrList(List<Pr> prList) {
         this.prList = prList;
+    }
+
+    public Office getIdOffice() {
+        return idOffice;
+    }
+
+    public void setIdOffice(Office idOffice) {
+        this.idOffice = idOffice;
     }
 
     @Override

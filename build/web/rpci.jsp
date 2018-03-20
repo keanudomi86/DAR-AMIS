@@ -25,53 +25,6 @@
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
       <!--header start-->
-      
-      <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="index.jsp" class="logo"><b>DAR-AMIS</b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <!-- -->
-                <ul class="nav top-menu">
-                    <!-- settings start -->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-tasks"></i>
-                            <span class="badge bg-theme">4</span>
-                        </a>
-                        <ul class="dropdown-menu extended tasks-bar">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 4 pending tasks</p>
-                            </li>
-                            </ul>
-                    </li>
-                    <li id="header_inbox_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="badge bg-theme">5</span>
-                        </a>
-                        <ul class="dropdown-menu extended inbox">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 5 new messages</p>
-                            </li>
-                        </ul>
-                </ul>            
-                            
-                <!--  notification end -->
-            </div>
-            <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="index.jsp">Logout</a></li>
-            	</ul>
-            </div>
-        </header>
-      
       <!--header end-->
       
       <!-- **********************************************************************************************************************************************************
@@ -93,7 +46,7 @@
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
-                  <div class="container-fluid">
+                 <div class="container-fluid">
       <div class="panel panel-default">
 
         <!-- P1 -->
@@ -200,7 +153,7 @@
 			                <div><input type="text"  size="5"name ="Article" align= "text-center" placeholder="Article"></div>
 			            </td>
 			            <td>
-			                <div><input type="text"  size="30" name="Description" align= "text-center" placeholder="Description"></div>
+			                <div><textarea type="text"  size="30" name="Description" align= "text-center" placeholder="Description"></textarea></div>
 			            </td>
 			            <td>
 			                <div><input type="text"  size="5" name="StockNum" align= "text-center" placeholder="Stock No."></div>
@@ -221,7 +174,7 @@
 			                <div><input type="text"  size="7" name="Value" align= "text-center" placeholder="Value"></div>
 			            </td>
 			            <td>
-			                <div><input type="text"  name="Remarks" align= "text-center" placeholder="Remarks"></div>
+			                <div><textarea type="text"  name="Remarks" align= "text-center" placeholder="Remarks"></textarea></div>
 			            </td>
 			          
 			            <td><a class="deleteRow"></a>
@@ -252,14 +205,14 @@
 							
 
 					        cols += '<td><input type="text" size="5" placeholder="Article" name="Article' + counter + '"/></td>';
-					        cols += '<td><input type="text" size="30" placeholder="Description" 	name="Description' 		   + counter + '"/></td>';
+					        cols += '<td><textarea type="text" size="30" placeholder="Description" 	name="Description' 		   + counter + '"/></td>';
 					        cols += '<td><input type="text" size="5" placeholder="Stock No."  name="StockNum' + counter + '"/></td>';
 					        cols += '<td><input type="text"size="20"  placeholder="Unit of Measure" 	name="UnitMeasure' 	   + counter + '"/></td>';
 							cols += '<td><input type="text" size="10" placeholder="Quantity" 	name="QuantityBalance' 		   + counter + '"/></td>';
 					        cols += '<td><input type="text" size="10" placeholder="Quantity"  name="OnHandQuantity' + counter + '"/></td>';
 					        cols += '<td><input type="text" size="10" placeholder="Quantity" 	name="SAQuantity' 	   + counter + '"/></td>';
 					        cols += '<td><input type="text" size="7" placeholder="Quantity" 	name="QuantityBalance' 		   + counter + '"/></td>';
-					        cols += '<td><input type="text" placeholder="Remarks"  name="Remarks' + counter + '"/></td>';
+					        cols += '<td><textarea type="text" placeholder="Remarks"  name="Remarks' + counter + '"/></td>';
 					        
 							
 					        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
@@ -307,57 +260,13 @@
 
 		<!-- P3 -->
 		<!--Inspection -->
-		<div class = "panel-heading panel-heading-custom">
-			<div class= "row">
-			    <div class="col-sm-2"><label align= "text-left"></label></div>
-			</div>
-		</div>
-
-		<div class="panel-body">
-		    <div class = "row">
-			
-              <div class="col-sm-2"><label align= "text-center"><b>Certified Correct:</b></label></div>
-              <div class="col-sm-2"><label align= "text-center"></label></div>
-			  		  
-			  
-			   <!-- Blank text for spacing --> 
-              <div class="col-sm-2"><label align= "text-center"></label></div>              
-
-           
-			  </div>
-			<!-- Blank Row -->
-            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-			
-			<div class = "row">
-			
-              <div class="col-sm-2"><label align= "text-center">Name:</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name of checker:"></div>
-              <div class="col-sm-2"><label align= "text-center"></label></div>
-		
-              
-		</div>
-		<!-- Blank Row -->
-            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-			
-			<div class = "row">
-			
-			<div class="col-sm-2"><label align= "text-center">Designation:</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Position of Signatory"></div>
-              <div class="col-sm-2"><label align= "text-center"></label></div>
-			  
-			  </div>
-			
-			
-			
-		</div>
+	
 			
 			<!--Inspection -->
 		<div class = "panel-heading panel-heading-custom">
 			<div class= "row">
-			    <div class="col-sm-2"><label align= "text-center"></label></div>
-				<div class="col-sm-2"><label align= "text-center"></label></div>
-				<div class="col-sm-1"><label align= "text-center"></label></div>
-			    <div class="col-sm-2"><label align= "text-center"></label></div>
+			    <div class="col-sm-2"><label align= "text-center">Certified Correct:</label></div>
+			
 			</div>
 		</div>
 			
@@ -367,7 +276,7 @@
 		<div class="panel-body">
 		    <div class = "row">
 			
-              <div class="col-sm-2"><label align= "text-center"><b>Certified Correct:</b></label></div>
+              <div class="col-sm-2"><label align= "text-center"><b></b></label></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			  		  
 			  
@@ -402,14 +311,14 @@
 		</div>
 			<div class = "panel-heading panel-heading-custom">
 			<div class= "row">
-			    <div class="col-sm-2"><label align= "text-left"></label></div>
+			    <div class="col-sm-2"><label align= "text-left">Approved By:</label></div>
 			</div>
 		</div>
 
 		<div class="panel-body">
 		    <div class = "row">
 			
-              <div class="col-sm-2"><label align= "text-center"><b>Certified Correct:</b></label></div>
+              <div class="col-sm-2"><label align= "text-center"><b></b></label></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			  		  
 			  
@@ -444,14 +353,14 @@
 
 			<div class = "panel-heading panel-heading-custom">
 			<div class= "row">
-			    <div class="col-sm-2"><label align= "text-left"></label></div>
+			    <div class="col-sm-2"><label align= "text-left">Verified By:</label></div>
 			</div>
 		</div>
 
 		<div class="panel-body">
 		    <div class = "row">
 			
-              <div class="col-sm-2"><label align= "text-center"><b>Certified Correct:</b></label></div>
+              <div class="col-sm-2"><label align= "text-center"><b></b></label></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			  		  
 			  
@@ -479,7 +388,11 @@
 			  
 			  </div>
 			
-                </div>
+			
+			
+		</div>
+      </div>
+                 </div>
 			
 		     
                  <!-- <tr><button type="button" class="btn btn-default">Create</button></tr><tr><button type="button" class="btn btn-default">Edit</button></tr><tr><button type="button" class="btn btn-default">View List</button></tr> -->

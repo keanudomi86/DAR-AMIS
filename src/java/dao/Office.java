@@ -56,15 +56,15 @@ public class Office implements Serializable {
     @Column(nullable = false, length = 45)
     private String division;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
-    private List<App> appList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
     private List<Wfp> wfpList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
+    @OneToMany(mappedBy = "idOffice")
     private List<Pr> prList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
+    @OneToMany(mappedBy = "idOffice")
     private List<Employee> employeeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
     private List<Ppmp> ppmpList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
+    private List<App> appList;
 
     public Office() {
     }
@@ -104,15 +104,6 @@ public class Office implements Serializable {
     }
 
     @XmlTransient
-    public List<App> getAppList() {
-        return appList;
-    }
-
-    public void setAppList(List<App> appList) {
-        this.appList = appList;
-    }
-
-    @XmlTransient
     public List<Wfp> getWfpList() {
         return wfpList;
     }
@@ -146,6 +137,15 @@ public class Office implements Serializable {
 
     public void setPpmpList(List<Ppmp> ppmpList) {
         this.ppmpList = ppmpList;
+    }
+
+    @XmlTransient
+    public List<App> getAppList() {
+        return appList;
+    }
+
+    public void setAppList(List<App> appList) {
+        this.appList = appList;
     }
 
     @Override

@@ -27,6 +27,26 @@
     <class>dao.Wfp</class>
     <class>dao.WfpDetails</class>
     <class>dao.Announcements</class>
+    <class>dao.App_1</class>
+    <class>dao.Ris_1</class>
+    <class>dao.Ppmp_1</class>
+    <class>dao.Wfp_1</class>
+    <class>dao.Ptr</class>
+    <class>dao.PoDetails</class>
+    <class>dao.Ics</class>
+    <class>dao.PrDetails</class>
+    <class>dao.RfiDeliveries</class>
+    <class>dao.DrDetails</class>
+    <class>dao.RisDetails</class>
+    <class>dao.RfiRepairPost</class>
+    <class>dao.Iirup</class>
+    <class>dao.PtrDetails</class>
+    <class>dao.Ppelc</class>
+    <class>dao.IirupDetails</class>
+    <class>dao.Wmr</class>
+    <class>dao.IcsDetails</class>
+    <class>dao.Rsmi</class>
+    <class>dao.WmrDetails</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/daramis?zeroDateTimeBehavior=convertToNull"/>

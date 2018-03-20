@@ -7,6 +7,7 @@ package controller;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -115,7 +116,7 @@ public abstract class AbstractFacade<T> {
     //uncomment when ready to implement
     //change T in Class<T> to which class should be returned
     //usually it's the inheriting class
-    /*public List<T> findByQuery(String q, Class<T> resultClass, 
+    public List<T> findByQuery(String q, Class<T> resultClass, 
             String parameter, Object value){
         List<T> t = null;
         TypedQuery tq;
@@ -128,6 +129,6 @@ public abstract class AbstractFacade<T> {
             closeEntityManager();
         
         return t;
-    }*/
+    }
     
 }

@@ -10,6 +10,14 @@
   <head>
     <jsp:include page="WEB-INF/header.jsp" /> 
     <title>DAR-AMIS | PAR</title>
+    <style>
+      .panel-default > .panel-heading-custom{
+
+        background-color: #10572b;
+        color: #ffffff ;     
+      }
+
+    </style>
   </head>
 
   <body>
@@ -31,13 +39,11 @@
           <section class="wrapper">
               <section class="content-header">
                     <h1>
-                        PAR
-                        <small>Choices</small>
+                        Property Acknowledgement Receipt - Form
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
 			<div class="container-fluid">
-      <h2>DAR</h2>
       <div class="panel panel-default">
 
         <!-- P1 -->
