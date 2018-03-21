@@ -90,7 +90,7 @@
 						      <span class="caret"></span>
 						    </button>
 						    <ul class="dropdown-menu">
-                          <li><a href="pr.jsp">PR</a></li>
+                          <li><a href="/DAR-AMIS/PRPage">PR</a></li>
                           <li><a href="po.jsp">PO</a></li>
                           <li><a href="par.jsp">PAR</a></li>
                           <li><a href="rfi.jsp">RFI</a></li>

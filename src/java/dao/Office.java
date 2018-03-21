@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Office.findAll", query = "SELECT o FROM Office o")
     , @NamedQuery(name = "Office.findByIdOffice", query = "SELECT o FROM Office o WHERE o.idOffice = :idOffice")
-    , @NamedQuery(name = "Office.findByDepartment", query = "SELECT o FROM Office o WHERE o.department = :department")
-    , @NamedQuery(name = "Office.findByDivision", query = "SELECT o FROM Office o WHERE o.division = :division")})
+    , @NamedQuery(name = "Office.findByDepartment", query = "SELECT o FROM Office o WHERE o.department = :department")})
 public class Office implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,21 +49,8 @@ public class Office implements Serializable {
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String department;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
-    private String division;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
-    private List<Wfp> wfpList;
-    @OneToMany(mappedBy = "idOffice")
-    private List<Pr> prList;
-    @OneToMany(mappedBy = "idOffice")
-    private List<Employee> employeeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
-    private List<Ppmp> ppmpList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
-    private List<App> appList;
+    private List<Division> divisionList;
 
     public Office() {
     }
@@ -73,10 +59,9 @@ public class Office implements Serializable {
         this.idOffice = idOffice;
     }
 
-    public Office(Integer idOffice, String department, String division) {
+    public Office(Integer idOffice, String department) {
         this.idOffice = idOffice;
         this.department = department;
-        this.division = division;
     }
 
     public Integer getIdOffice() {
@@ -95,57 +80,13 @@ public class Office implements Serializable {
         this.department = department;
     }
 
-    public String getDivision() {
-        return division;
-    }
-
-    public void setDivision(String division) {
-        this.division = division;
-    }
-
     @XmlTransient
-    public List<Wfp> getWfpList() {
-        return wfpList;
+    public List<Division> getDivisionList() {
+        return divisionList;
     }
 
-    public void setWfpList(List<Wfp> wfpList) {
-        this.wfpList = wfpList;
-    }
-
-    @XmlTransient
-    public List<Pr> getPrList() {
-        return prList;
-    }
-
-    public void setPrList(List<Pr> prList) {
-        this.prList = prList;
-    }
-
-    @XmlTransient
-    public List<Employee> getEmployeeList() {
-        return employeeList;
-    }
-
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
-    }
-
-    @XmlTransient
-    public List<Ppmp> getPpmpList() {
-        return ppmpList;
-    }
-
-    public void setPpmpList(List<Ppmp> ppmpList) {
-        this.ppmpList = ppmpList;
-    }
-
-    @XmlTransient
-    public List<App> getAppList() {
-        return appList;
-    }
-
-    public void setAppList(List<App> appList) {
-        this.appList = appList;
+    public void setDivisionList(List<Division> divisionList) {
+        this.divisionList = divisionList;
     }
 
     @Override

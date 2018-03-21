@@ -3,9 +3,12 @@
     Created on : 02 20, 18, 5:27:21 PM
     Author     : BavarianHotdog
 --%>
+<%@page import="dao.Division"%>
 <%@page import="dao.Employee"%>
 <%@page import="dao.Tier"%>
 <%Employee emp = (Employee)session.getAttribute("userData");%>
+<%Division div = (Division)session.getAttribute("userData");%>
+<%Tier ti = (Tier)session.getAttribute("userData");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +41,7 @@
 						
 						<div class="col-md-4 profile-text">
                                                         <h2 class="centered"><%= emp.getFirstName()%> <%= emp.getLastName()%></h2>
-                                                        <h4 class="centered"><%= emp.getDivision()%> - <%= emp.getPosition()%></h4>
+                                                        <h4 class="centered"><%= div.getIdDivision()%> - <%= ti.getPosition()%></h4>
                                                         <h4 class="centered"><%= emp.getDob()%> - <%= emp.getEmail()%> - <%= emp.getMobileNum()%></h4>
 							<br>
 						</div><! --/col-md-4 -->

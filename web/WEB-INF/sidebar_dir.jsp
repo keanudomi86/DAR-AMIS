@@ -1,6 +1,7 @@
 <%@page import="dao.Employee"%>
 <%@page import="dao.Tier"%>
 <%Employee emp = (Employee)session.getAttribute("userData");%>
+<%String root = request.getContextPath();%>
 <!--header start-->
       <header class="header black-bg">
               <div class="sidebar-toggle-box">
@@ -67,9 +68,9 @@
                           <span>User Functions</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="activate_accounts.jsp">Activate Accounts</a></li>
-                          <li><a  href="change_usertier.jsp">Manage Users</a></li>
-                          <li><a  href="deactivate_accounts.jsp">Deactivate Accounts</a></li>
+                          <li><a  href="<%=root%>/ActivateAccounts">Activate Accounts</a></li>
+                          <li><a  href="<%=root%>/ManageAccounts">Manage Users</a></li>
+                          <li><a  href="<%=root%>/DeactivateAccounts">Deactivate Accounts</a></li>
                           <li><a  href="make_announcement.jsp">Make Announcement</a></li>
                       </ul>
                   </li>
@@ -110,7 +111,7 @@
                           <span>Create</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="create_forms.jsp">Forms</a></li>
+                          <li><a  href="/DAR-AMIS/CreateForms">Forms</a></li>
                           <li><a  href="create_reports.jsp">Reports</a></li>
                       </ul>
                   </li>

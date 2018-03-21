@@ -52,16 +52,14 @@ public class SignUp extends BaseServlet {
             dob = Date.from(Instant.now());
         }
         
-        e.setDob(dob.toString());
+        e.setDob(dob);
         
-        e.setDivision(request.getParameter("division"));
-        e.setPosition(request.getParameter("position"));
         e.setEmail(request.getParameter("email"));
         e.setMobileNum(request.getParameter("mobile_number"));
         e.setEmployeeStatus(request.getParameter("employment_status"));
         e.setUsername(request.getParameter("username"));
         e.setPassword(request.getParameter("password"));
-        
+        e.setUserActivated(0);
         
        employeeFacade.create(e);
         

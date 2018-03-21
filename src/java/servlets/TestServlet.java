@@ -51,7 +51,6 @@ public class TestServlet extends BaseServlet {
         e.setPassword("password");
         e.setAddress("123 Fake Street");
         e.setCivilStatus("Widowed");
-        e.setDivision("Admin");
         
         //for date input
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -62,7 +61,7 @@ public class TestServlet extends BaseServlet {
             dob = Date.from(Instant.now());
         }
         
-        e.setDob(dob.toString());
+        e.setDob(dob);
         
         
         e.setEmail("eeeee@email.com");
@@ -72,7 +71,6 @@ public class TestServlet extends BaseServlet {
         e.setLastName("Tester");
         e.setGender("Male");
         e.setMobileNum("09999999999");
-        e.setPosition("Admin Assistant");
         
        employeeFacade.create(e);
         

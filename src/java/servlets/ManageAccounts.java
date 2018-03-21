@@ -21,14 +21,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Myles Mempin
+ * @author BavarianHotdog
  */
-@WebServlet(name = "ActivateAccounts", urlPatterns = {"/ActivateAccounts"})
-public class ActivateAccounts extends BaseServlet {
-    
+@WebServlet(name = "ManageAccounts", urlPatterns = {"/ManageAccounts"})
+public class ManageAccounts extends BaseServlet {
+
     @EJB
     private final EmployeeFacade employeeFacade = new EmployeeFacade(); 
     
@@ -46,8 +47,19 @@ public class ActivateAccounts extends BaseServlet {
         
         Iterator<Employee> empIter = employees.iterator();
         
+        HttpSession session = request.getSession();
+        
+        Employee curUser = (Employee) session.getAttribute("userData");
+        
         while(empIter.hasNext()){
-            if(empIter.next().getUserActivated() == 1){
+            if(curUser != null && (empIter.next().getIdTier().getIdTier() < curUser.getIdTier().getIdTier())){
+                empIter.remove();
+            }
+        }
+        
+        empIter = employees.iterator();
+        while(empIter.hasNext()){
+            if(empIter.next().getUserActivated() == 0){
                 empIter.remove();
             }
         }
@@ -57,10 +69,10 @@ public class ActivateAccounts extends BaseServlet {
         
         ServletContext context = getServletContext();
         RequestDispatcher rd;
-        rd = context.getRequestDispatcher("/activate_accounts.jsp");
+        rd = context.getRequestDispatcher("/change_usertier.jsp");
         rd.forward(request, response);
         
     }
-
     
+
 }

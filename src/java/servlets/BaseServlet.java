@@ -75,5 +75,13 @@ public abstract class BaseServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    public void generateTextResponse(HttpServletResponse response, String msg)
+            throws IOException {
+        response.setContentType("text/plain");
+        try(PrintWriter out = response.getWriter()){
+            out.println(msg);
+        }
+    }
 
 }

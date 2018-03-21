@@ -3,7 +3,9 @@
     Created on : 03 13, 18, 1:11:28 AM
     Author     : BavarianHotdog
 --%>
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.Division"%>
+<%ArrayList<Division> divisions = (ArrayList<Division>)request.getAttribute("divisions");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,7 +28,7 @@
 
             <div class="register-box-body">
                 <p class="login-box-msg">Register</p>
-                <form action="register" method="post">
+                <form action="Register" method="post">
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
@@ -67,11 +69,10 @@
                     </div>
                     <div class="form-group has-feedback">
                         <select class="form-control" name="division" placeholder="Division" required>
-                            <option disabled selected>Division</option>
-                            <option value="1">Admin Services</option>
-                            <option value="2">General Services</option>
-                            <option value="3">Records</option>
-                            <option value="4">Management</option>
+                            <option disabled selected>Please select division</option>
+                            <%for(Division d: divisions){%>
+                                <option><%=d.getIdDivision()%> - <%=d.getIdOffice().getDepartment()%>/<%=d.getDivision()%></option>
+                            <%}%>
                         </select>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
                     </div> 

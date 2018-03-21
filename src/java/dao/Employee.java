@@ -6,9 +6,8 @@
 package dao;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,13 +17,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -44,13 +43,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByGender", query = "SELECT e FROM Employee e WHERE e.gender = :gender")
     , @NamedQuery(name = "Employee.findByAddress", query = "SELECT e FROM Employee e WHERE e.address = :address")
     , @NamedQuery(name = "Employee.findByDob", query = "SELECT e FROM Employee e WHERE e.dob = :dob")
-    , @NamedQuery(name = "Employee.findByDivision", query = "SELECT e FROM Employee e WHERE e.division = :division")
-    , @NamedQuery(name = "Employee.findByPosition", query = "SELECT e FROM Employee e WHERE e.position = :position")
     , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")
     , @NamedQuery(name = "Employee.findByMobileNum", query = "SELECT e FROM Employee e WHERE e.mobileNum = :mobileNum")
     , @NamedQuery(name = "Employee.findByEmployeeStatus", query = "SELECT e FROM Employee e WHERE e.employeeStatus = :employeeStatus")
     , @NamedQuery(name = "Employee.findByUsername", query = "SELECT e FROM Employee e WHERE e.username = :username")
-    , @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password")})
+    , @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password")
+    , @NamedQuery(name = "Employee.findByUserActivated", query = "SELECT e FROM Employee e WHERE e.userActivated = :userActivated")
+    , @NamedQuery(name = "Employee.findByStartDate", query = "SELECT e FROM Employee e WHERE e.startDate = :startDate")})
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -89,19 +88,9 @@ public class Employee implements Serializable {
     private String address;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
-    private String dob;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
-    private String division;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
-    private String position;
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dob;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -128,14 +117,19 @@ public class Employee implements Serializable {
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String password;
-    @JoinColumn(name = "id_office", referencedColumnName = "id_office")
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "user_activated", nullable = false)
+    private int userActivated;
+    @Column(name = "start_date")
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @JoinColumn(name = "id_division", referencedColumnName = "id_division")
     @ManyToOne
-    private Office idOffice;
+    private Division idDivision;
     @JoinColumn(name = "id_tier", referencedColumnName = "id_tier")
     @ManyToOne
     private Tier idTier;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "announcementBy")
-    private List<Announcements> announcementsList;
 
     public Employee() {
     }
@@ -144,7 +138,7 @@ public class Employee implements Serializable {
         this.idEmployee = idEmployee;
     }
 
-    public Employee(Integer idEmployee, String lastName, String firstName, String civilStatus, String gender, String address, String dob, String division, String position, String email, String mobileNum, String employeeStatus, String username, String password) {
+    public Employee(Integer idEmployee, String lastName, String firstName, String civilStatus, String gender, String address, Date dob, String email, String mobileNum, String employeeStatus, String username, String password, int userActivated) {
         this.idEmployee = idEmployee;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -152,13 +146,12 @@ public class Employee implements Serializable {
         this.gender = gender;
         this.address = address;
         this.dob = dob;
-        this.division = division;
-        this.position = position;
         this.email = email;
         this.mobileNum = mobileNum;
         this.employeeStatus = employeeStatus;
         this.username = username;
         this.password = password;
+        this.userActivated = userActivated;
     }
 
     public Integer getIdEmployee() {
@@ -217,28 +210,12 @@ public class Employee implements Serializable {
         this.address = address;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
-    }
-
-    public String getDivision() {
-        return division;
-    }
-
-    public void setDivision(String division) {
-        this.division = division;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
     }
 
     public String getEmail() {
@@ -281,12 +258,28 @@ public class Employee implements Serializable {
         this.password = password;
     }
 
-    public Office getIdOffice() {
-        return idOffice;
+    public int getUserActivated() {
+        return userActivated;
     }
 
-    public void setIdOffice(Office idOffice) {
-        this.idOffice = idOffice;
+    public void setUserActivated(int userActivated) {
+        this.userActivated = userActivated;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Division getIdDivision() {
+        return idDivision;
+    }
+
+    public void setIdDivision(Division idDivision) {
+        this.idDivision = idDivision;
     }
 
     public Tier getIdTier() {
@@ -295,15 +288,6 @@ public class Employee implements Serializable {
 
     public void setIdTier(Tier idTier) {
         this.idTier = idTier;
-    }
-
-    @XmlTransient
-    public List<Announcements> getAnnouncementsList() {
-        return announcementsList;
-    }
-
-    public void setAnnouncementsList(List<Announcements> announcementsList) {
-        this.announcementsList = announcementsList;
     }
 
     @Override

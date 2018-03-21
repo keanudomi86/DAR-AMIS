@@ -49,7 +49,7 @@ public class Login extends BaseServlet {
         
         HttpSession session = request.getSession();
         
-        if(e != null){
+        if(e != null && e.getUserActivated() == 1){
             
             e.setPassword("");
             

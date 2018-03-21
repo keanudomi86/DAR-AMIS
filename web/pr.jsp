@@ -50,14 +50,14 @@
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
-                  <div class="container-fluid">
-      <div class="panel panel-default">
-
-        <!-- P1 -->
-        <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Purchase Request</STRONG></p></div> 
-            <div class="panel-body"> 
-                <%if(session.getAttribute("formMode").equals("approve")){%>
-                 <form>
+        
+            
+               <!-- ...................APPROVE FORM................................................................. -->
+                <!-- P1 -->
+                <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Purchase Request</STRONG></p></div> 
+                    <div class="panel-body"> 
+                    <%if(session.getAttribute("formMode").equals("approve")){%>
+                <form>
                     <!-- First Row -->
                     <div class = "row">
 
@@ -128,6 +128,7 @@
                          </div>
                          </form> 
                       </div> -->
+                        </div>
                     </div>
 
                         <!-- Date script for JS -->
@@ -331,8 +332,12 @@
                       <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Designation"></div>
                     </div>            
                 </div> 
-        </form>
-                <%}else if(session.getAttribute("formMode").equals("create")){%>
+                <!--</form>
+        
+        <!-- .............CREATE FORM...............................................................................--> 
+        <%}else if(session.getAttribute("formMode").equals("create")){%>
+                
+        <div class = "panel-heading panel-heading-custom"><label> Purchase Request</label></div>
                 <form method="POST" action="CreatePR">
                             <!-- First Row -->
                             <div class = "row">
@@ -341,12 +346,11 @@
 
                                       <!-- Entity Name Dropdown -->
                                       <div class="col-sm-2">
-                                       <div class="btn-group">
-                                        <select class="form-control" name="entity">
-                                                <option>Entity</option>
-                                                
+                                        <div class="btn-group">
+                                            <select class="form-control" name="entity">
+                                            <option>Entity</option>                                                
                                             </select>
-                                      </div>
+                                        </div>
                                       </div> 
 
                                       <script>
@@ -367,52 +371,47 @@
                                       </script>                              
                                 <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label>Choose Office</div>
                                     <!-- Entity Name Dropdown -->
-                                      <div class="col-sm-2">
-                                          <select class="form-control" name="office" onclick="test()">
-                                                <%int ctr = 1;%>
-                                                <%for(Office o: offices){%>
-                                                <option><%=o.getIdOffice()%> - <%=o.getDepartment()%></option>
-                                                <%ctr++;%>
+                                    <div class="col-sm-2">
+                                        <select class="form-control" name="office" onclick="test()">
+                                            <%int ctr = 1;%>
+                                            <%for(Office o: offices){%>
+                                            <option><%=o.getIdOffice()%> - <%=o.getDepartment()%></option>
+                                            <%ctr++;%>
                                             <%}%>
-                                            </select>
-                                      </div>
-                                      </div> 
-                                </div>
+                                        </select>
+                                    </div>
+                                </div> 
+                            </div>
                             
                             
-                              <!-- Blank text for spacing --> 
+                            <!-- Blank text for spacing --> 
                             <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div>
                             </div> 
-
-                            <!-- Blank Row -->
                             
-
                             <!-- Second Row -->
                             <div class = "row">
-
-                               
-
-                              <!-- Date -->
-                              <div class="col-sm-2"><label align= "text-center">Date</label></div>
-                              <div class="col-sm-2">
+                        
+                                <!-- Date -->
+                                <div class="col-sm-2"><label align= "text-center">Date</label></div>
+                                <div class="col-sm-2">
                                 <div class="form-group"> 
 
-                                  <div class="input-group">
-                                    <!-- This comment out adds an icon at the left side of the date text-->
-                                    <!--<div class="input-group-addon">
-                                      <i class="fa fa-calendar"></i>
-                                    </div> -->
-                                   <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
-                                  </div>
-                                 </div>
+                                    <div class="input-group">
+                                        <!-- This comment out adds an icon at the left side of the date text-->
+                                        <!--<div class="input-group-addon">
+                                          <i class="fa fa-calendar"></i>
+                                        </div> -->
+                                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
+                                    </div>
+                                </div>
                                  <!--<div class="form-group">
                                   <div>
                                    <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
                                   </div>
                                  </div>
                                  </form> 
-                              </div> -->
-                            </div>
+                                </div> -->
+                                </div>
 
                                 <!-- Date script for JS -->
                                 <script>
@@ -427,9 +426,7 @@
                                       })
                                   })
                                 </script>
-                             </div>
-
-
+                            </div> <!--end of 2nd row-->
 
                             <!-- Blank Row -->
                             <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
@@ -437,8 +434,8 @@
                             <!-- Third Row -->
                             <div class = "row">
 
-                              <div class="col-sm-2"><label align= "text-center">Fund Cluster</label></div>
-                              <!-- Entity Name Dropdown -->
+                                <div class="col-sm-2"><label align= "text-center">Fund Cluster</label></div>
+                                <!-- Entity Name Dropdown -->
                                       <div class="col-sm-2">
                                           <select class="form-control" name="fundCluster">
                                                 
@@ -449,14 +446,13 @@
 
                               <div class="col-sm-2"><label align= "text-center">Responsibility Center Code</label></div>
                               <!-- Entity Name Dropdown -->
-                                      <div class="col-sm-2">
-                                          <select class="form-control" name="rcc">
-                                                
-                                                <option>hi</option>
-                                            </select>
-                                      </div>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="rcc">
+                                    <option>hi</option>
+                                    </select>
+                                </div>
 
-                            </div> 
+                            </div> <!-- end of 3rd row -->
                             <!-- Blank Row -->
                             <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
 
@@ -607,8 +603,8 @@
                         <button name="submit" type="submit" value="submit">Submit</button>
                 </form>
            <%}%>
-          </div>         
-        </div>
+                     
+        
                  <!-- <tr><button type="button" class="btn btn-default">Create</button></tr><tr><button type="button" class="btn btn-default">Edit</button></tr><tr><button type="button" class="btn btn-default">View List</button></tr> -->
 		</section><! --/wrapper -->
       </section>

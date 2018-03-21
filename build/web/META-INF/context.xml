@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/DAR-AMIS">
-  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="daramis" password="p@ssword" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/daramis?zeroDateTimeBehavior=convertToNull" username="root"/>
-</Context>
