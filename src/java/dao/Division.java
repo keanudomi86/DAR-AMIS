@@ -51,11 +51,11 @@ public class Division implements Serializable {
     @Size(min = 1, max = 16777215)
     @Column(nullable = false, length = 16777215)
     private String division;
+    @OneToMany(mappedBy = "idDivision")
+    private List<Employee> employeeList;
     @JoinColumn(name = "id_office", referencedColumnName = "id_office", nullable = false)
     @ManyToOne(optional = false)
     private Office idOffice;
-    @OneToMany(mappedBy = "idDivision")
-    private List<Employee> employeeList;
 
     public Division() {
     }
@@ -85,14 +85,6 @@ public class Division implements Serializable {
         this.division = division;
     }
 
-    public Office getIdOffice() {
-        return idOffice;
-    }
-
-    public void setIdOffice(Office idOffice) {
-        this.idOffice = idOffice;
-    }
-
     @XmlTransient
     public List<Employee> getEmployeeList() {
         return employeeList;
@@ -100,6 +92,14 @@ public class Division implements Serializable {
 
     public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
+    }
+
+    public Office getIdOffice() {
+        return idOffice;
+    }
+
+    public void setIdOffice(Office idOffice) {
+        this.idOffice = idOffice;
     }
 
     @Override
