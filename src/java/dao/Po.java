@@ -56,6 +56,8 @@ public class Po implements Serializable {
     private int idPc;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPo")
     private List<Dr> drList;
+    @OneToMany(mappedBy = "idPo")
+    private List<FormRepo> formRepoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPo")
     private List<Sc> scList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPo")
@@ -119,6 +121,15 @@ public class Po implements Serializable {
 
     public void setDrList(List<Dr> drList) {
         this.drList = drList;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     @XmlTransient

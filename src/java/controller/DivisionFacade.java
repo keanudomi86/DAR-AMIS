@@ -25,6 +25,7 @@ public class DivisionFacade extends AbstractFacade<Division> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
     @Override
     public void closeEntityManager() {
         em.close();

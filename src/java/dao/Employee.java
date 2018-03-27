@@ -134,6 +134,12 @@ public class Employee implements Serializable {
     @JoinColumn(name = "id_tier", referencedColumnName = "id_tier")
     @ManyToOne
     private Tier idTier;
+    @OneToMany(mappedBy = "approvedBy")
+    private List<FormRepo> formRepoList;
+    @OneToMany(mappedBy = "createdBy")
+    private List<FormRepo> formRepoList1;
+    @OneToMany(mappedBy = "deniedBy")
+    private List<FormRepo> formRepoList2;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "announcementBy")
     private List<Announcements> announcementsList;
 
@@ -294,6 +300,33 @@ public class Employee implements Serializable {
 
     public void setIdTier(Tier idTier) {
         this.idTier = idTier;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList1() {
+        return formRepoList1;
+    }
+
+    public void setFormRepoList1(List<FormRepo> formRepoList1) {
+        this.formRepoList1 = formRepoList1;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList2() {
+        return formRepoList2;
+    }
+
+    public void setFormRepoList2(List<FormRepo> formRepoList2) {
+        this.formRepoList2 = formRepoList2;
     }
 
     @XmlTransient

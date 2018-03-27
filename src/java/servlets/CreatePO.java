@@ -5,10 +5,18 @@
  */
 package servlets;
 
+import controller.EmployeeFacade;
+import controller.FormRepoFacade;
 import controller.PoDetailsFacade;
 import controller.PoFacade;
+import controller.PrDetailsFacade;
+import controller.PrFacade;
+import dao.Employee;
+import dao.FormRepo;
 import dao.Po;
 import dao.PoDetails;
+import dao.Pr;
+import dao.PrDetails;
 import java.io.IOException;
 import java.math.*;
 import java.text.DateFormat;
@@ -26,6 +34,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,17 +48,41 @@ public class CreatePO extends BaseServlet {
     
     @EJB
     private PoDetailsFacade poDetailsFacade = new PoDetailsFacade();
+    
+    @EJB
+    private PrFacade prFacade = new PrFacade();
+    
+    @EJB
+    private FormRepoFacade repoFacade = new FormRepoFacade();
+    
+    @EJB
+    private EmployeeFacade employeeFacade = new EmployeeFacade();
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         PoDetails newPoDetails = new PoDetails();
+        Po po = new Po();
+        Pr pr = prFacade.find(Integer.parseInt(request.getParameter("prID")));
         
-        newPoDetails.setEntity(request.getParameter("entity"));
+        po.setIdPr(pr);
+        
+        poFacade.create(po);
+        
+        ArrayList<Po> pos = new ArrayList<Po>(poFacade.findAll());
+        
+        for(Po curPo: pos){
+            if(curPo.getIdPr().equals(po.getIdPr())){
+                po = curPo;
+            }
+        }
+        
+        newPoDetails.setIdPo(po);
         newPoDetails.setSupplier("supplier");
         newPoDetails.setDate(Date.from(Instant.now()));
         newPoDetails.setAddress(request.getParameter("address"));
         newPoDetails.setModeOfProc(request.getParameter("mode"));
-        newPoDetails.setTin(new BigInteger(request.getParameter("tin")));
+        newPoDetails.setTin((request.getParameter("tin")));
         newPoDetails.setGentlemen(request.getParameter("gentlemen"));
         newPoDetails.setPlaceDelivery(request.getParameter("place_delivery"));
         newPoDetails.setModeOfProc2(request.getParameter("mode2"));
@@ -61,7 +94,7 @@ public class CreatePO extends BaseServlet {
             startDate = df.parse(date_delivery);
             newPoDetails.setDateDelivery(startDate);
         } catch (ParseException ex) {
-            Logger.getLogger(CreatePO.class.getName()).log(Level.SEVERE, null, ex);
+            newPoDetails.setDateDelivery(Date.from(Instant.now()));
         }
         
         
@@ -79,53 +112,47 @@ public class CreatePO extends BaseServlet {
             Logger.getLogger(CreatePO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
         newPoDetails.setPayTerm2(request.getParameter("payment_term"));
         
         
         String date_orsbus = request.getParameter("date_ors/burs");
         Date newDate2;
         try {
-            newDate2 = df.parse(date_delivery2);
+            newDate2 = df.parse(date_orsbus);
             newPoDetails.setDateOrsburs(newDate2);
         } catch (ParseException ex) {
-            Logger.getLogger(CreatePO.class.getName()).log(Level.SEVERE, null, ex);
+            newPoDetails.setDateDelivery(Date.from(Instant.now()));
         }
         
         
         newPoDetails.setNameReq(request.getParameter("name_req"));
-        newPoDetails.setAmount(Float.parseFloat(request.getParameter("amount")));
+        newPoDetails.setAmount(Float.parseFloat(request.getParameter("total_cost")));
         
         poDetailsFacade.create(newPoDetails);
         
-        ArrayList<Po> prList = new ArrayList<Po>(poFacade.findAll());
+        FormRepo newRepoEntry = new FormRepo();
         
-        for(Po po: prList){
-            if(newPoDetails.getIdPoDetails() == po.getIdPo()){
-                //newPoDetails = po;
+        newRepoEntry.setIdPo(po);
+        
+        Employee emp = (Employee)session.getAttribute("userData");
+        
+        ArrayList<Employee> employees = new ArrayList<Employee>(employeeFacade.findAll());
+        
+        for(Employee curEmp: employees){
+            if(emp.getUsername() == curEmp.getUsername()){
+                emp = curEmp;
             }
         }
         
-        String[] units = request.getParameterValues("unit");
-        String[] descs = request.getParameterValues("description");
-        String[] quantities = request.getParameterValues("quantity");
-        String[] costs = request.getParameterValues("cost");
+        newRepoEntry.setCreatedBy(emp);
         
-        for(int ctr = 0; ctr < units.length; ctr++){
-            PoDetails details = new PoDetails();
-            
-            //details.setIdPo(newPoDetails);
-            details.setUnit(units[ctr]);
-            details.setDescription(descs[ctr]);
-            details.setQuantity(Integer.parseInt(quantities[ctr]));
-            details.setCost(Float.parseFloat(costs[ctr]));
-            
-            poDetailsFacade.create(details);
-        }
+        repoFacade.create(newRepoEntry);
+        
         
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher("/CreateForms");
         rd.forward(request, response);
+
     }
 
 }

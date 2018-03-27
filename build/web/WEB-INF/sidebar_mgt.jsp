@@ -72,6 +72,7 @@
                       </a>
                       <ul class="sub">
                           <li><a  href="inspection.jsp">Inspection</a></li>
+                          <li><a  href="rfi.jsp">View RFI</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">

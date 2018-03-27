@@ -6,6 +6,7 @@
 package servlets;
 
 import controller.RisDetailsFacade;
+import controller.RisFacade;
 import dao.RisDetails;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,13 +26,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CreateRIS", urlPatterns = {"/CreateRIS"})
 public class CreateRIS extends BaseServlet {
-    
+    @EJB
+    private RisFacade risFacade = new RisFacade();
     
     @EJB
     private RisDetailsFacade risDetailsFacade = new RisDetailsFacade();
     
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String msg = "Error creating RIS Form. Try again.";
+        
         RisDetails newRisDetails = new RisDetails();
         
         newRisDetails.setEnityName(request.getParameter("entity"));

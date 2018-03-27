@@ -3,7 +3,7 @@
     Created on : 01 21, 18, 1:11:28 AM
     Author     : BavarianHotdog
 --%>
-
+<%String root = request.getContextPath();%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,7 @@
 		            <hr>
 		            <div class="registration">
 		                Don't have an account yet?<br/>
-		                <a class="" href="register.jsp">
+		                <a class="" href="<%=root%>/RegisterUser">
 		                    Create an account
 		                </a>
 		            </div>

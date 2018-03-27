@@ -5,6 +5,7 @@
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.Division"%>
+<%@page import="dao.Office"%>
 <%ArrayList<Division> divisions = (ArrayList<Division>)request.getAttribute("divisions");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

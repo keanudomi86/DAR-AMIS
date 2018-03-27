@@ -101,7 +101,7 @@
                           <span>View</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="forms.jsp">Forms</a></li>
+                          <li><a  href="formrepo.jsp">Forms</a></li>
                           <li><a  href="responsive_table.jsp">Reports</a></li>
                       </ul>
                   </li>

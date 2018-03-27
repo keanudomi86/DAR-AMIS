@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.RfiFk;
+import dao.FormRepo;
 import database.EMFListener;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author BavarianHotdog
  */
 @Stateless
-public class RfiFkFacade extends AbstractFacade<RfiFk> {
+public class FormRepoFacade extends AbstractFacade<FormRepo> {
 
     @PersistenceContext(unitName = "DARAMISPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class RfiFkFacade extends AbstractFacade<RfiFk> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
-    @Override
+
+@Override
     public void closeEntityManager() {
         em.close();
     }
@@ -36,8 +36,8 @@ public class RfiFkFacade extends AbstractFacade<RfiFk> {
         em = EMFListener.createEntityManager();
     }
 
-    public RfiFkFacade() {
-        super(RfiFk.class);
+    public FormRepoFacade() {
+        super(FormRepo.class);
     }
     
 }

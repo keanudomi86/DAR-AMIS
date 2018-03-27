@@ -73,6 +73,9 @@
                           <span>User Functions</span>
                       </a>
                       <ul class="sub">
+                          <li><a  href="<%=root%>/ActivateAccounts">Activate Accounts</a></li>
+                          <li><a  href="<%=root%>/ManageAccounts">Manage Users</a></li>
+                          <li><a  href="<%=root%>/DeactivateAccounts">Deactivate Accounts</a></li>
                           <li><a  href="make_announcement.jsp">Make Announcement</a></li>
                       </ul>
                   </li>

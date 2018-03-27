@@ -96,6 +96,8 @@ public class Sc implements Serializable {
     private Integer balanceQty;
     @Column(name = "no_days_left")
     private Integer noDaysLeft;
+    @OneToMany(mappedBy = "idSc")
+    private List<FormRepo> formRepoList;
     @JoinColumn(name = "id_dr", referencedColumnName = "id_dr", nullable = false)
     @ManyToOne(optional = false)
     private Dr idDr;
@@ -236,6 +238,15 @@ public class Sc implements Serializable {
 
     public void setNoDaysLeft(Integer noDaysLeft) {
         this.noDaysLeft = noDaysLeft;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     public Dr getIdDr() {

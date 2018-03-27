@@ -29,7 +29,7 @@ public class CreateForms extends BaseServlet {
     //create EJB injections for all your forms here
     //sample already provided, retrieving data in PR table
     @EJB
-    private PrFacade prFacade = new PrFacade();
+    private FormRepoFacade repoFacade = new FormRepoFacade();
     //end block
     
     @Override
@@ -38,11 +38,11 @@ public class CreateForms extends BaseServlet {
         session.setAttribute("formMode", "create");
         
         //retireve form data here
-        ArrayList<Pr> prs = new ArrayList<Pr>(prFacade.findAll());
+        ArrayList<FormRepo> forms = new ArrayList<FormRepo>(repoFacade.findAll());
         //end block
         
         //pass data to jsp page via request here
-        request.setAttribute("prs", prs);
+        request.setAttribute("forms", forms);
         //end block
         
         ServletContext context = getServletContext();

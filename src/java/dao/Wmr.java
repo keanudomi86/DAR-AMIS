@@ -41,6 +41,8 @@ public class Wmr implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_wmr", nullable = false)
     private Integer idWmr;
+    @OneToMany(mappedBy = "idWmr")
+    private List<FormRepo> formRepoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idWmr")
     private List<Iirup> iirupList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idWmr")
@@ -59,6 +61,15 @@ public class Wmr implements Serializable {
 
     public void setIdWmr(Integer idWmr) {
         this.idWmr = idWmr;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     @XmlTransient

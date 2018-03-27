@@ -91,6 +91,8 @@ public class Pr implements Serializable {
     private Wfp idWfp;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPr")
     private List<PrDetails> prDetailsList;
+    @OneToMany(mappedBy = "idPr")
+    private List<FormRepo> formRepoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPr")
     private List<Sc> scList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPr")
@@ -214,6 +216,15 @@ public class Pr implements Serializable {
 
     public void setPrDetailsList(List<PrDetails> prDetailsList) {
         this.prDetailsList = prDetailsList;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     @XmlTransient

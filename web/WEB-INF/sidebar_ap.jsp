@@ -1,5 +1,5 @@
 <%-- 
-    Document   : sidebar_Admin Assistant
+    Document   : sidebar_Admin Officer
     Created on : 02 8, 18, 6:12:34 PM
     Author     : BavarianHotdog
 --%>
@@ -104,7 +104,7 @@
                           <span>Create</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="create_forms.jsp">Forms</a></li>
+                          <li><a  href="/DAR-AMIS/CreateForms">Forms</a></li>
                           <li><a  href="create_reports.jsp">Reports</a></li>
                       </ul>
                   </li>

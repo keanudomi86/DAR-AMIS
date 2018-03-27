@@ -7,6 +7,7 @@ package dao;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,6 +24,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -122,6 +125,8 @@ public class Rpci implements Serializable {
     @Size(max = 45)
     @Column(name = "designation_ver", length = 45)
     private String designationVer;
+    @OneToMany(mappedBy = "idRpci")
+    private List<FormRepo> formRepoList;
     @JoinColumn(name = "id_sc", referencedColumnName = "id_sc", nullable = false)
     @ManyToOne(optional = false)
     private Sc idSc;
@@ -307,6 +312,15 @@ public class Rpci implements Serializable {
 
     public void setDesignationVer(String designationVer) {
         this.designationVer = designationVer;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     public Sc getIdSc() {

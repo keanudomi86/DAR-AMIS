@@ -45,6 +45,8 @@ public class Ptr implements Serializable {
     private Integer idPtr;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPtr")
     private List<PtrDetails> ptrDetailsList;
+    @OneToMany(mappedBy = "idPtr")
+    private List<FormRepo> formRepoList;
     @JoinColumn(name = "id_ics", referencedColumnName = "id_ics", nullable = false)
     @ManyToOne(optional = false)
     private Ics idIcs;
@@ -74,6 +76,15 @@ public class Ptr implements Serializable {
 
     public void setPtrDetailsList(List<PtrDetails> ptrDetailsList) {
         this.ptrDetailsList = ptrDetailsList;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     public Ics getIdIcs() {

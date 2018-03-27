@@ -3,7 +3,13 @@
     Created on : 02 13, 18, 5:17:55 PM
     Author     : BavarianHotdog
 --%>
+<%@page import="dao.Announcements"%>
 <%@page import="dao.Employee"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.Instant"%>
+<%@page import="java.time.ZoneOffset"%>
+<%ArrayList<Announcements> announcements = (ArrayList<Announcements>)(session.getAttribute("announcements"));%>
 <%@page import="dao.Tier"%>
 <%Employee emp = (Employee)session.getAttribute("userData");%>
 <%String root = request.getContextPath();%>

@@ -6,6 +6,7 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,6 +43,8 @@ public class Aif implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_aif", nullable = false)
     private Integer idAif;
+    @OneToMany(mappedBy = "idAif")
+    private List<FormRepo> formRepoList;
     @JoinColumn(name = "id_aif", referencedColumnName = "idaif_details", nullable = false, insertable = false, updatable = false)
     @OneToOne(optional = false)
     private AifDetails aifDetails;
@@ -60,6 +65,15 @@ public class Aif implements Serializable {
 
     public void setIdAif(Integer idAif) {
         this.idAif = idAif;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     public AifDetails getAifDetails() {

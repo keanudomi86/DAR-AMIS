@@ -6,6 +6,7 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +42,8 @@ public class Rsmi implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_rsmi", nullable = false)
     private Integer idRsmi;
+    @OneToMany(mappedBy = "idRsmi")
+    private List<FormRepo> formRepoList;
     @JoinColumn(name = "id_dr", referencedColumnName = "id_dr", nullable = false)
     @ManyToOne(optional = false)
     private Dr idDr;
@@ -59,6 +64,15 @@ public class Rsmi implements Serializable {
 
     public void setIdRsmi(Integer idRsmi) {
         this.idRsmi = idRsmi;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     public Dr getIdDr() {

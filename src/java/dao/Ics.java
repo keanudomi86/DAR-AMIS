@@ -49,6 +49,8 @@ public class Ics implements Serializable {
     private int idIcsDetails;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idIcs")
     private List<IcsDetails> icsDetailsList;
+    @OneToMany(mappedBy = "idIcs")
+    private List<FormRepo> formRepoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idIcs")
     private List<Ptr> ptrList;
 
@@ -87,6 +89,15 @@ public class Ics implements Serializable {
 
     public void setIcsDetailsList(List<IcsDetails> icsDetailsList) {
         this.icsDetailsList = icsDetailsList;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     @XmlTransient

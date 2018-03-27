@@ -49,6 +49,8 @@ public class Ris implements Serializable {
     private List<Pr> prList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRis")
     private List<RisDetails> risDetailsList;
+    @OneToMany(mappedBy = "idRis")
+    private List<FormRepo> formRepoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRis")
     private List<Sc> scList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRis")
@@ -98,6 +100,15 @@ public class Ris implements Serializable {
 
     public void setRisDetailsList(List<RisDetails> risDetailsList) {
         this.risDetailsList = risDetailsList;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     @XmlTransient

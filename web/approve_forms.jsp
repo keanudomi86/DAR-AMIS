@@ -20,51 +20,6 @@
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
       <!--header start-->
-      <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="index.jsp" class="logo"><b>DAR-AMIS</b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <!-- -->
-                <ul class="nav top-menu">
-                    <!-- settings start -->
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-tasks"></i>
-                            <span class="badge bg-theme">4</span>
-                        </a>
-                        <ul class="dropdown-menu extended tasks-bar">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 4 pending tasks</p>
-                            </li>
-                            </ul>
-                    </li>
-                    <li id="header_inbox_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="badge bg-theme">5</span>
-                        </a>
-                        <ul class="dropdown-menu extended inbox">
-                            <div class="notify-arrow notify-arrow-green"></div>
-                            <li>
-                                <p class="green">You have 5 new messages</p>
-                            </li>
-                        </ul>
-                </ul>            
-                            
-                <!--  notification end -->
-            </div>
-            <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="index.jsp">Logout</a></li>
-            	</ul>
-            </div>
-        </header>
       <!--header end-->
       
       
@@ -93,16 +48,106 @@
                      <span class="caret"></span>
                      </button>			    
                           <ul class="dropdown-menu">
-                          <li><a href="pr.jsp">PR</a></li>
-                          <li><a href="po.jsp">PO</a></li>
-                          <li><a href="par.jsp">PAR</a></li>
-                          <li><a href="rfi.jsp">RFI</a></li>
-                          <li><a href="aif.jsp">AIF</a></li>
-                          <li><a href="ics.jsp">ICS</a></li>
-                          <li><a href="ris.jsp">RIS</a></li>
-                          <li><a href="sc.jsp">SC</a></li>
+                          <li><a href="po.jsp">Purchase Order</a></li>
+                          <li><a href="par.jsp">Property Acknowledgement Receipt</a></li>
+                          <li><a href="rfi.jsp">Request For Inspection</a></li>
+                          <li><a href="aif.jsp">Assignment of Inspector Form</a></li>
+                          <li><a href="ics.jsp">Inventory Custodian Slip</a></li>
+                          <li><a href="ris.jsp">Requisition and Issuance Slip</a></li>
+                          <li><a href="sc.jsp">Stock Card</a></li>
 						    </ul>
 						  </div>
+                  
+                  <div class="content-panel">
+                          <table class="table table-striped table-advance table-hover">
+	                  	  	  <h4><i class="fa fa-angle-right"></i> Approval of Forms</h4>
+	                  	  	  <hr>
+                              <thead>
+                              <tr>
+                                  <th>Form ID</th>
+                                  <th>Form Type</th>
+                                <th></i>Created By</th>
+                                <th></i>Created Date</th>
+                                <th>View Form</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+                                  
+                                  <!--<th><i class="fa fa-envelope-o"></i> Type</th>
+                                  <th class="hidden-phone"><i class="fa fa-pencil"></i> Description</th>
+                                  <th><i class="fa fa-bookmark"></i> Person Responsible</th>
+                                  <th><i class=" fa fa-edit"></i> Status</th>
+                                  <th></th>-->
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                  <td><a href="basic_table.html#">0001</a></td>
+                                  <td class="hidden-phone">Purchase Request</td>
+                                  <td>Maria Rowena Bilog </td>
+                                  <td>November 10, 2017</td>
+                                  <td><button>WFP</button><button>APP</button></td>
+                                  <td><span class="label label-info label-mini">Pending</span></td>
+                                  <td>
+                                      <button class="btn btn-success btn-s"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-danger btn-s"><i class="fa fa-trash-o "></i></button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td><a href="basic_table.html#">2190</a></td>
+                                  <td class="hidden-phone">Request Inquisition Slip</td>
+                                  <td>Jonie Abante </td>
+                                  <td>January 29, 2017</td>
+                                  <td><button><a href="wfp.jsp">WFP</a></button><button><a href="app.jsp">APP</a></button></td>
+                                  <td><span class="label label-info label-mini">Due</span></td>
+                                  <td>
+                                      <button class="btn btn-success btn-s"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></button>
+                                      <button class="btn btn-danger btn-s"><i class="fa fa-trash-o "></i></button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td><a href="basic_table.html#">3124</a></td>
+                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                  <td>12000.00$ </td>
+                                  <td>November 10, 2017</td>
+                                  <td><button><a href="wfp.jsp">WFP</a></button><button><a href="app.jsp">APP</a></button></td>
+                                  <td><span class="label label-info label-mini">Due</span></td>
+                                  <td>
+                                      <button class="btn btn-success btn-s"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></button>
+                                      <button class="btn btn-danger btn-s"><i class="fa fa-trash-o "></i></button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td><a href="basic_table.html#">Company Ltd</a></td>
+                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                  <td>12000.00$ </td>
+                                  <td>November 10, 2017</td>
+                                  <td><button>WFP</button><button>APP</button></td>
+                                  <td><span class="label label-info label-mini">Due</span></td>
+                                  <td>
+                                      <button class="btn btn-success btn-s"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></button>
+                                      <button class="btn btn-danger btn-s"><i class="fa fa-trash-o "></i></button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td><a href="basic_table.html#">Company Ltd</a></td>
+                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
+                                  <td>12000.00$ </td>
+                                  <td>November 10, 2017</td>
+                                  <td><button><a href="wfp.jsp"></a>WFP</button><button><a href="app.jsp">APP</button></td>
+                                  <td><span class="label label-info label-mini">Due</span></td>
+                                  <td>
+                                      <button class="btn btn-success btn-s"><i class="fa fa-check"></i></button>
+                                      <button class="btn btn-primary btn-s"><i class="fa fa-pencil"></i></button>
+                                      <button class="btn btn-danger btn-s"><i class="fa fa-trash-o "></i></button>
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+                      </div><!-- /content-panel -->
                 </section>
           </section>
       <!--main content end-->

@@ -43,6 +43,8 @@ public class Iirup implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_iirup", nullable = false)
     private Integer idIirup;
+    @OneToMany(mappedBy = "idIirup")
+    private List<FormRepo> formRepoList;
     @JoinColumn(name = "id_ppelc", referencedColumnName = "id_ppelc", nullable = false)
     @ManyToOne(optional = false)
     private Ppelc idPpelc;
@@ -65,6 +67,15 @@ public class Iirup implements Serializable {
 
     public void setIdIirup(Integer idIirup) {
         this.idIirup = idIirup;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     public Ppelc getIdPpelc() {

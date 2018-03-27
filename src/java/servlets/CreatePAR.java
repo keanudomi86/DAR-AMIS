@@ -6,6 +6,7 @@
 package servlets;
 
 import controller.ParDetailsFacade;
+import controller.ParFacade;
 import dao.ParDetails;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -29,12 +30,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CreatePAR", urlPatterns = {"/CreatePAR"})
 public class CreatePAR extends BaseServlet {
+    @EJB
+    private ParFacade parFacade = new ParFacade();
 
     @EJB
     private ParDetailsFacade parDetailsFacade = new ParDetailsFacade();
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String msg = "Error creating PR Form. Try again.";
+        
         ParDetails newParDetails = new ParDetails();
         
         newParDetails.setEntity(request.getParameter("entity"));

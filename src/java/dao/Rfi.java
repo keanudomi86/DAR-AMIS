@@ -44,6 +44,8 @@ public class Rfi implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_rfi", nullable = false)
     private Integer idRfi;
+    @OneToMany(mappedBy = "idRfi")
+    private List<FormRepo> formRepoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRfi")
     private List<RfiDeliveries> rfiDeliveriesList;
     @JoinColumn(name = "id_po", referencedColumnName = "id_po", nullable = false)
@@ -68,6 +70,15 @@ public class Rfi implements Serializable {
 
     public void setIdRfi(Integer idRfi) {
         this.idRfi = idRfi;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     @XmlTransient

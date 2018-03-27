@@ -46,6 +46,8 @@ public class Ppelc implements Serializable {
     @JoinColumn(name = "id_pc", referencedColumnName = "id_pc", nullable = false)
     @ManyToOne(optional = false)
     private Pc idPc;
+    @OneToMany(mappedBy = "idPpelc")
+    private List<FormRepo> formRepoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPpelc")
     private List<Iirup> iirupList;
 
@@ -70,6 +72,15 @@ public class Ppelc implements Serializable {
 
     public void setIdPc(Pc idPc) {
         this.idPc = idPc;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     @XmlTransient

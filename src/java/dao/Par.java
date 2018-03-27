@@ -49,6 +49,8 @@ public class Par implements Serializable {
     @NotNull
     @Column(name = "id_pc", nullable = false)
     private int idPc;
+    @OneToMany(mappedBy = "idPar")
+    private List<FormRepo> formRepoList;
     @JoinColumn(name = "id_par", referencedColumnName = "idpar_details", nullable = false, insertable = false, updatable = false)
     @OneToOne(optional = false)
     private ParDetails parDetails;
@@ -83,6 +85,15 @@ public class Par implements Serializable {
 
     public void setIdPc(int idPc) {
         this.idPc = idPc;
+    }
+
+    @XmlTransient
+    public List<FormRepo> getFormRepoList() {
+        return formRepoList;
+    }
+
+    public void setFormRepoList(List<FormRepo> formRepoList) {
+        this.formRepoList = formRepoList;
     }
 
     public ParDetails getParDetails() {

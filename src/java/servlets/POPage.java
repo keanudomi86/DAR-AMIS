@@ -5,8 +5,8 @@
  */
 package servlets;
 
-import controller.OfficeFacade;
-import dao.Office;
+import controller.PrFacade;
+import dao.Pr;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -27,12 +27,17 @@ import javax.servlet.http.HttpServletResponse;
 public class POPage extends BaseServlet {
     
     @EJB
-    private OfficeFacade officeFacade = new OfficeFacade();
-
+    private PrFacade prFacade = new PrFacade();
+    
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         ArrayList<Office> offices = new ArrayList<Office>(officeFacade.findAll());
-        request.setAttribute("offices", offices);
+        
+        int prID = Integer.parseInt(request.getParameter("pr_id"));
+        
+        Pr pr = prFacade.find(prID);
+        
+        request.setAttribute("pr", pr);
+        
         
         ServletContext context = getServletContext();
         RequestDispatcher rd;

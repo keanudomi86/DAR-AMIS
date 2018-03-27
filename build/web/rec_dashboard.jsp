@@ -3,13 +3,20 @@
     Created on : 03 19, 18, 5:15:19 PM
     Author     : BavarianHotdog
 --%>
-
+<%@page import="dao.Announcements"%>
+<%@page import="dao.Employee"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.Instant"%>
+<%@page import="java.time.ZoneOffset"%>
+<%Employee e = (Employee)(session.getAttribute("userData"));%>
+<%ArrayList<Announcements> announcements = (ArrayList<Announcements>)(session.getAttribute("announcements"));%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
       <jsp:include page="WEB-INF/header.jsp" />       
-            <title>DAR-AMIS | Records Dashboard</title>
+            <title>DAR-AMIS | Procurement Division Chief Dashboard</title>
   </head>
 
   <body>
@@ -36,7 +43,7 @@
               <section class="content-header">
                     <h1>
                         Welcome!
-                        <small>Records Staff</small>
+                        <small>Division Chief</small>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>

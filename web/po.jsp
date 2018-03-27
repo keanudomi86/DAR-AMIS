@@ -3,9 +3,10 @@
     Created on : 02 8, 18, 7:51:34 PM
     Author     : BavarianHotdog
 --%>
+<%@page import="dao.PrDetails"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="dao.Office"%>
-<%ArrayList<Office> offices = (ArrayList<Office>)request.getAttribute("offices");%>
+<%@page import="dao.Pr"%>
+<%Pr pr = (Pr)request.getAttribute("pr");%>
 <%String root = request.getContextPath();%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,10 +22,20 @@
       }
 
     </style>
+    <script>
+        function createPO(){
+            if(confirm("Submit this form?")){
+                url = "<%=root%>/CreatePO";
+                $.post(url, $("#poForm").serialize(), function(data){
+                    alert(data);
+                });
+            }
+        }
+    </script>
   </head>
-
+  
   <body>
-
+      
   <section id="container" >
       <!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
@@ -43,9 +54,11 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
+      
          <section id="main-content">
           <section class="wrapper">
               <section class="content-header">
+                  <form id="poForm">
                     <h1>
                         Purchase Order - Form
                         <small>Choices</small>
@@ -54,956 +67,411 @@
                     </h1>
                   <div class="container-fluid">
                 <div class="panel panel-default">
+                    
+                        <!-- P1 -->
+                        <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Purchase Order</STRONG></p></div> 
+                            <div class="panel-body"> 
+                            <!-- First Row -->
+                            <div class = "row">
 
-        <!-- ...................APPROVE FORM................................................................. -->
-                <!-- P1 -->
-        <%if(session.getAttribute("formMode").equals("approve")){%>
-            <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Purchase Order</STRONG></p></div> 
-                <div class="panel-body">
+                              <div class="col-sm-2"><label align= "text-center">Entity Name</label></div>              
 
-                    <form>
-                        <!-- First Row -->
-                        <div class = "row">
+                              <!-- Entity Name Dropdown -->
+                              <div class="col-sm-2">
+                                  <input type="text" value="<%=pr.getEntityName()%>" class="form-control" name="entityName">
+                                </div> 
+                              <!-- Entity Name Dropdown script for JS-->
 
-                          <div class="col-sm-2"><label align= "text-center">Entity Name</label></div>              
 
-                          <!-- Entity Name Dropdown -->
-                                          <div class="col-sm-2">
-                                           <div class="btn-group">
-                                            <select class="form-control" name="entity">
-                                                <option>Entity</option>
-                                            </select>
-                                          </div>
-                                          </div> 
+                              <!-- Blank text for spacing --> 
+                              <div class="col-sm-2"><label align= "text-center"></label></div>              
 
-                          <!-- Entity Name Dropdown script for JS-->
+                              <div class="col-sm-2"><label align= "text-center">PR Reference No.</label></div>
+                              <div class="col-sm-2"><input type="text"  value="<%=pr.getIdPr()%>" align= "text-center" name="prID" placeholder="PR Reference No."></div>
 
-                                          <script>
-                                            $(function(){
-                                                                $("#1").click(function () {
-                                                                $("#opt").text($(this).text());
-                                                                });
-                                                                $("#2").click(function () {
-                                                                $("#opt").text($(this).text());
-                                                                });
-                                                                $("#3").click(function () {
-                                                                $("#opt").text($(this).text());
-                                                                });
-                                                                $("#4").click(function () {
-                                                                $("#opt").text($(this).text());
-                                                                });
-                                                            });
-                                          </script>
-
-
-                          <!-- Blank text for spacing --> 
-                          <div class="col-sm-2"><label align= "text-center"></label></div>              
-
-                          <div class="col-sm-2"><label align= "text-center">PO No.</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="PR No."></div>
-
-                        </div> 
-
-                        <!-- Blank Row -->
-                        <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                        <!-- Second Row -->
-                        <div class = "row">
-
-                          <div class="col-sm-2"><label align= "text-center">Supplier</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Supplier"></div>
-                          <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                          <!-- Date -->
-                          <div class="col-sm-2"><label align= "text-center">Date</label></div>
-                          <div class="col-sm-2">
-                            <!-- <form method="post"> 
-                             <div class="form-group "> -->
-
-                              <div class="input-group">
-                                <!-- This comment out adds an icon at the left side of the date text-->
-                                <!--<div class="input-group-addon">
-                                  <i class="fa fa-calendar"></i>
-                                </div> -->
-                               <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
-                              </div>
-                             </div>
-                             <!--<div class="form-group">
-                              <div>
-                               <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
-                              </div>
-                             </div>
-                             </form> 
-                          </div> -->
-                        </div>
-
-                            <!-- Date script for JS -->
-                            <script>
-                              $(document).ready(function(){
-                                  var date_input=$('input[name="date"]'); //our date input has the name "date"
-                                  var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                                  date_input.datepicker({
-                                      format: 'mm/dd/yyyy',
-                                      container: container,
-                                      todayHighlight: true,
-                                      autoclose: true,
-                                  })
-                              })
-                            </script>
-
-
-
-                        <!-- Blank Row -->
-                        <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                        <!-- Third Row -->
-                        <div class = "row">
-
-                          <div class="col-sm-2"><label align= "text-center">Address</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Address"></div>
-                          <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                          <div class="col-sm-2"><label align= "text-center">Mode of Procurement</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Mode of Procurement"></div>
-
-                        </div> 
-
-                        <!-- Blank Row -->
-                        <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                        <!-- Fourth Row -->
-                        <div class = "row">
-
-                          <div class="col-sm-2"><label align= "text-center">TIN</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="TIN"></div>
-                          <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                        </div> 
-
-                        <!-- Blank Row -->
-                        <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                  <!-- P2 -->
-                  <!--Gentlemen -->
-                  <div class = "panel-heading panel-heading-custom">
-                    <div class= "row">
-                        <div class="col-sm-2"><label align= "text-left">Gentlemen</label></div>
-                    </div>
-                  </div>
-
-                  <div class="panel-body">
-                      <div class= "row">
-                        <div class="col-sm-4"><textarea rows="3" cols="170" placeholder="Gentlemen"></textarea> </div>              
-                    </div>     
-                  </div>
-
-                  <div class="panel-body">
-                      <!-- First Row -->
-                      <div class= "row">
-                        <div class="col-sm-2"><label align= "text-center">Place of Delivery</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Place of Delivery"></div>
-                          <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                          <div class="col-sm-2"><label align= "text-center">Mode of Procurement</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Mode of Procurement"></div>  
-                        </div>
-
-                        <!-- Blank Row -->
-                        <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                      <!-- Second Row -->
-                      <div class= "row">
-                        <!-- Date -->
-                          <div class="col-sm-2"><label align= "text-center">Date of Delivery</label></div>
-                          <div class="col-sm-2">
-                            <!-- <form method="post"> 
-                             <div class="form-group "> -->
-
-                              <div class="input-group">
-                                <!-- This comment out adds an icon at the left side of the date text-->
-                                <!--<div class="input-group-addon">
-                                  <i class="fa fa-calendar"></i>
-                                </div> -->
-                               <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
-                              </div>
-                             </div>
-                             <!--<div class="form-group">
-                              <div>
-                               <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
-                              </div>
-                             </div>
-                             </form> 
-                          </div> -->
-
-                          <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                          <div class="col-sm-2"><label align= "text-center">Payment Term</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Payment Term"></div>  
-
-                        </div>
-
-                          <!-- Date script for JS -->
-                            <script>
-                              $(document).ready(function(){
-                                  var date_input=$('input[name="date"]'); //our date input has the name "date"
-                                  var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                                  date_input.datepicker({
-                                      format: 'mm/dd/yyyy',
-                                      container: container,
-                                      todayHighlight: true,
-                                      autoclose: true,
-                                  })
-                              })
-                            </script>
-
-
-
-
-                  </div>
-
-                    <!-- P2 --> 
-                    <div class = "panel-heading panel-heading-custom">
-                        <div class= "row">
-                          <div class="col-sm-2"><label align= "text-center">Stock Property No.</label></div>
-                          <div class="col-sm-2"><label align= "text-center">Unit</label></div>
-                          <div class="col-sm-2"><label align= "text-center">Description</label></div>
-                          <div class="col-sm-2"><label align= "text-center">Quantity</label></div>
-                          <div class="col-sm-2"><label align= "text-center">Unit Cost</label></div>
-                          <div class="col-sm-2"><label align= "text-center">Amount</label></div>
-                        </div>
-                    </div>
-
-                    <div class="panel-body">
-
-                            <!-- Input for Repeating Section -->
-                                    <table id="myTable" class=" table order-list">
-
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div><input type="text"  name ="stockPropertyNo" align= "text-center" placeholder="Stock Property No"></div>
-                                                </td>
-                                                <td>
-                                                    <div><input type="text"  name="unit" align= "text-center" placeholder="Unit"></div>
-                                                </td>
-                                                <td>
-                                                    <div><input type="text"  name="itemDescription" align= "text-center" placeholder="Description"></div>
-                                                </td>
-                                                <td>
-                                                    <div><input type="text"  name="quantity" align= "text-center" placeholder="Quantity"></div>
-                                                </td>
-                                                <td>
-                                                    <div><input type="text"  name="unitCost" align= "text-center" placeholder="Unit Cost"></div>
-                                                </td>
-                                                <td>
-                                                    <div><input type="text"  name="totalCost" align= "text-center" placeholder="Amount"></div>
-                                                </td>
-                                                <td><a class="deleteRow"></a>
-
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colspan="7" style="text-align: left;">
-                                                    <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-
-                                                    <!-- Repeating section script for JS -->
-                                                    <script>
-                                                    $(document).ready(function () {
-                                                        var counter = 0;
-
-                                                        $("#addrow").on("click", function () {
-                                                            var newRow = $("<tr>");
-                                                            var cols = "";
-
-                                                            cols += '<td><input type="text" placeholder="Stock Property No" name="stockPropertyNo' + counter + '"/></td>';
-                                                            cols += '<td><input type="text" placeholder="Unit" 				      name="unit' 		       + counter + '"/></td>';
-                                                            cols += '<td><input type="text" placeholder="Description"       name="description'     + counter + '"/></td>';
-                                                            cols += '<td><input type="text" placeholder="Quantity" 			    name="quantity' 	     + counter + '"/></td>';
-                                                            cols += '<td><input type="text" placeholder="Unit Cost" 		    name="unitCost' 	     + counter + '"/></td>';
-                                                            cols += '<td><input type="text" placeholder="Amount" 		        name="totalCost' 	     + counter + '"/></td>';
-
-                                                            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
-                                                            newRow.append(cols);
-                                                            $("table.order-list").append(newRow);
-                                                            counter++;
-                                                        });
-
-
-
-                                                        $("table.order-list").on("click", ".ibtnDel", function (event) {
-                                                            $(this).closest("tr").remove();       
-                                                            counter -= 1
-                                                        });
-
-
-                                                    });
-
-
-
-                                                    function calculateRow(row) {
-                                                        var price = +row.find('input[name^="price"]').val();
-
-                                                    }
-
-                                                    function calculateGrandTotal() {
-                                                        var grandTotal = 0;
-                                                        $("table.order-list").find('input[name^="price"]').each(function () {
-                                                            grandTotal += +$(this).val();
-                                                        });
-                                                        $("#grandtotal").text(grandTotal.toFixed(2)); 
-                                                    }
-                                                    </script>
-
-
-
-                                                <div class= "row">
-                                                  <div class="col-sm-2"><label align= "text-center">Total Amount in Words</label></div>
-                                <div class="col-sm-4"><textarea rows="1" cols="148" placeholder="Total Amount in Words"></textarea> </div>
-
-                                                </div>
-                                              </div>
-
-                                <!-- P3 -->
-                            <!--Letter -->
-                            <div class = "panel-heading panel-heading-custom">
-                                    <div class= "row">
-                                        <div class="col-sm-2"><label align= "text-left"> </label></div>
-                                    </div>
-                            </div>
-
-                            <div class="panel-body">
-                                <div class= "row">
-                                        <div class="col-sm-12"><label align= "text-center">In case of failure to make the full delivery within the time specified above, a penalty of one-tenth (1/10) of one percent for every day shae be imposed on the undelivered item/s. </label></div>
-                                        </div>     
-                            </div>
-
-
-                      <div class="panel-body">
-
-                        <div class = "row">
-
-                                <div class="col-sm-2"><label align= "text-center">Conforme</label></div>              
-                                <div class="col-sm-2"><label align= "text-center"></label></div>                   
-
-                                <!-- Blank text for spacing --> 
-                                <div class="col-sm-2"><label align= "text-center"></label></div>              
-
-                                <div class="col-sm-2"><label align= "text-center">Very yours Truly,</label></div>
-                                <div class="col-sm-2"><label align= "text-center"></label></div> 
-
-                         </div> 
-
-                         <!-- Blank Row -->
-                              <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                        <div class = "row">
-
-                                <div class="col-sm-2"><label align= "text-center">Name</label></div>              
-                                <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name"></div>                    
-
-                                <!-- Blank text for spacing --> 
-                                <div class="col-sm-2"><label align= "text-center"></label></div>              
-
-                                <div class="col-sm-2"><label align= "text-center">Name</label></div>
-                                <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name"></div>
-
-                         </div> 
-
-                              <!-- Blank Row -->
-                              <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                              <!-- Second Row -->
-                              <div class= "row">
-                              <!-- Date -->
-                                <div class="col-sm-2"><label align= "text-center">Date of Delivery</label></div>
-                                <div class="col-sm-2">
-                                  <!-- <form method="post"> 
-                                   <div class="form-group "> -->
-
-                                    <div class="input-group">
-                                      <!-- This comment out adds an icon at the left side of the date text-->
-                                      <!--<div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                      </div> -->
-                                     <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
-                                    </div>
-                                   </div>
-                                   <!--<div class="form-group">
-                                    <div>
-                                     <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
-                                    </div>
-                                   </div>
-                                   </form> 
-                                </div> -->
-
-                                <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                                <div class="col-sm-2"><label align= "text-center">Payment Term</label></div>
-                                <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Payment Term"></div>  
-
-                              </div>
-
-                                <!-- Date script for JS -->
-                                  <script>
-                                    $(document).ready(function(){
-                                        var date_input=$('input[name="date"]'); //our date input has the name "date"
-                                        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                                        date_input.datepicker({
-                                            format: 'mm/dd/yyyy',
-                                            container: container,
-                                            todayHighlight: true,
-                                            autoclose: true,
-                                        })
-                                    })
-                                  </script>
-
-                              <!-- Blank Row -->
-                              <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                            </div>
-
-                    <!-- P4 -->
-                    <!-- Requested by -->
-
-                    <div class = "panel-heading panel-heading-custom">
-                        <div class= "row">
-                          <div class="col-sm-2"><label align= "text-left">Requested By</label></div>
-                        </div>
-                    </div>
-
-                    <div class="panel-body">
-                        <div class = "row">
-                          <div class="col-sm-2"><label align= "text-center">Fund Cluster</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Fund Cluster"></div>
-                          <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                          <div class="col-sm-2"><label align= "text-center">ORS/BURS No</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="ORS/BURS No"></div>
-                        </div>
+                            </div> 
 
                             <!-- Blank Row -->
                             <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
 
-                        <div class = "row">
+                            <!-- Second Row -->
+                            <div class = "row">
 
-                          <div class="col-sm-2"><label align= "text-center">Fund Available</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Fund Available"></div>
-                          <div class="col-sm-2"><label align= "text-center"></label></div>
+                              <div class="col-sm-2"><label align= "text-center">Supplier</label></div>
+                              <div class="col-sm-2"><input name="supplier" type="text"  align= "text-center" placeholder="Supplier"></div>
+                              <div class="col-sm-2"><label align= "text-center"></label></div>
 
-                          <div class="col-sm-2"><label align= "text-center">Date of ORS/BURS No</label></div>
-                                <div class="col-sm-2">
-                                  <!-- <form method="post"> 
-                                   <div class="form-group "> -->
+                              <!-- Date -->
+                              <div class="col-sm-2"><label align= "text-center">Date</label></div>
+                              <div class="col-sm-2">
+                                  
+                                  <div class="input-group">
+                                    <!-- This comment out adds an icon at the left side of the date text-->
+                                    <!--<div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                    </div> -->
+                                    <script>
+                                        $(document).ready(function(){
+                                            var today = new Date();
+                                            
+                                            $("[name='datePosted']").val(today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear());
+                                        });
+                                    </script>
+                                   <input class="form-control" id="date" name="datePosted" placeholder="MM/DD/YYYY" type="text">
+                                  </div>
+                                 </div>
+                                 <!--<div class="form-group">
+                                  <div>
+                                   <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
+                                  </div>
+                                 </div>
+                                 </form> 
+                              </div> -->
+                            </div>
 
-                                    <div class="input-group">
-                                      <!-- This comment out adds an icon at the left side of the date text-->
-                                      <!--<div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                      </div> -->
-                                     <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
-                                    </div>
-                                   </div>
-                        </div>
-
-                        <!-- Blank Row -->
-                        <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                        <div class = "row">
-                          <div class="col-sm-2"><label align= "text-center">Name</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name"></div>
-                          <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                          <div class="col-sm-2"><label align= "text-center">Amount</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Amount"></div>
-                        </div>
-                    </div> 
-                  </form>
-              </div>         
-            </div>
-                       <!-- .............CREATE FORM...............................................................................--> 
-        <%}else if(session.getAttribute("formMode").equals("create")){%> 
-                
-            <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Purchase Order</STRONG></p></div> 
-            <div class="panel-body">
-            <form>
-            <!-- First Row -->
-            <div class = "row">
-
-              <div class="col-sm-2"><label align= "text-center">Entity Name</label></div>              
-
-                <!-- Entity Name Dropdown -->
-                                <div class="col-sm-2">
-                                 <div class="btn-group">
-                                  <select class="form-control" name="entity">
-                                      <option>Entity</option>
-                                  </select>
-                                </div>
-                                </div> 
-
-                <!-- Entity Name Dropdown script for JS-->
-
+                                <!-- Date script for JS -->
                                 <script>
-                                  $(function(){
-                                                      $("#1").click(function () {
-                                                      $("#opt").text($(this).text());
-                                                      });
-                                                      $("#2").click(function () {
-                                                      $("#opt").text($(this).text());
-                                                      });
-                                                      $("#3").click(function () {
-                                                      $("#opt").text($(this).text());
-                                                      });
-                                                      $("#4").click(function () {
-                                                      $("#opt").text($(this).text());
-                                                      });
-                                                  });
+                                  $(document).ready(function(){
+                                      var date_input=$('input[name="date"]'); //our date input has the name "date"
+                                      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                                      date_input.datepicker({
+                                          format: 'mm/dd/yyyy',
+                                          container: container,
+                                          todayHighlight: true,
+                                          autoclose: true,
+                                      })
+                                  })
                                 </script>
 
 
-                <!-- Blank text for spacing --> 
-                <div class="col-sm-2"><label align= "text-center"></label></div>              
 
-                <div class="col-sm-2"><label align= "text-center">PO No.</label></div>
-                <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="PR No."></div>
-              </div>
-            
+                            <!-- Blank Row -->
+                            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
 
-            <!-- Blank Row -->
-            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
+                            <!-- Third Row -->
+                            <div class = "row">
 
-            <!-- Second Row -->
-            <div class = "row">
+                              <div class="col-sm-2"><label align= "text-center">Address</label></div>
+                              <div class="col-sm-2"><input name="address" type="text"  align= "text-center" placeholder="Address"></div>
+                              <div class="col-sm-2"><label align= "text-center"></label></div>
 
-              <div class="col-sm-2"><label align= "text-center">Supplier</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Supplier"></div>
-              <div class="col-sm-2"><label align= "text-center"></label></div>
+                              <div class="col-sm-2"><label align= "text-center">Mode of Procurement</label></div>
+                              <div class="col-sm-2"><input name="mode" type="text"  align= "text-center" placeholder="Mode of Procurement"></div>
 
-              <!-- Date -->
-              <div class="col-sm-2"><label align= "text-center">Date</label></div>
-              <div class="col-sm-2">
-                <!-- <form method="post"> 
-                 <div class="form-group "> -->
-                  
-                  <div class="input-group">
-                    <!-- This comment out adds an icon at the left side of the date text-->
-                    <!--<div class="input-group-addon">
-                      <i class="fa fa-calendar"></i>
-                    </div> -->
-                   <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
-                  </div>
-                 </div>
-                 <!--<div class="form-group">
-                  <div>
-                   <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
-                  </div>
-                 </div>
-                 </form> 
-              </div> -->
-            </div>
+                            </div> 
 
-            	<!-- Date script for JS -->
-                <script>
-                  $(document).ready(function(){
-                      var date_input=$('input[name="date"]'); //our date input has the name "date"
-                      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                      date_input.datepicker({
-                          format: 'mm/dd/yyyy',
-                          container: container,
-                          todayHighlight: true,
-                          autoclose: true,
-                      })
-                  })
-                </script>
+                            <!-- Blank Row -->
+                            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
 
-            
+                            <!-- Fourth Row -->
+                            <div class = "row">
 
-            <!-- Blank Row -->
-            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
+                              <div class="col-sm-2"><label align= "text-center">TIN</label></div>
+                              <div class="col-sm-2"><input name="tin" type="text"  align= "text-center" placeholder="TIN"></div>
+                              <div class="col-sm-2"><label align= "text-center"></label></div>
 
-            <!-- Third Row -->
-            <div class = "row">
+                            </div> 
 
-              <div class="col-sm-2"><label align= "text-center">Address</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Address"></div>
-              <div class="col-sm-2"><label align= "text-center"></label></div>
+                            <!-- Blank Row -->
+                            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
 
-              <div class="col-sm-2"><label align= "text-center">Mode of Procurement</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Mode of Procurement"></div>
+                          </div>
 
-            </div> 
-
-            <!-- Blank Row -->
-            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-            <!-- Fourth Row -->
-            <div class = "row">
-
-              <div class="col-sm-2"><label align= "text-center">TIN</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="TIN"></div>
-              <div class="col-sm-2"><label align= "text-center"></label></div>
-
-            </div> 
-
-            <!-- Blank Row -->
-            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-          
-
-            <!-- P2 -->
-            <!--Gentlemen -->
-            <div class = "panel-heading panel-heading-custom">
-              <div class= "row">
-                  <div class="col-sm-2"><label align= "text-left">Gentlemen</label></div>
-              </div>
-            </div>
-
-            <div class="panel-body">
-                <div class= "row">
-                  <div class="col-sm-4"><textarea rows="3" cols="170" placeholder="Gentlemen"></textarea> </div>              
-              </div>     
-            </div>
-
-            <div class="panel-body">
-                <!-- First Row -->
-                <div class= "row">
-                  <div class="col-sm-2"><label align= "text-center">Place of Delivery</label></div>
-                    <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Place of Delivery"></div>
-                    <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                    <div class="col-sm-2"><label align= "text-center">Mode of Procurement</label></div>
-                    <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Mode of Procurement"></div>  
-                  </div>
-
-                  <!-- Blank Row -->
-                  <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                <!-- Second Row -->
-                <div class= "row">
-                  <!-- Date -->
-                    <div class="col-sm-2"><label align= "text-center">Date of Delivery</label></div>
-                    <div class="col-sm-2">
-                      <!-- <form method="post"> 
-                       <div class="form-group "> -->
-
-                        <div class="input-group">
-                          <!-- This comment out adds an icon at the left side of the date text-->
-                          <!--<div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                          </div> -->
-                         <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
-                        </div>
-                       </div>
-                       <!--<div class="form-group">
-                        <div>
-                         <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
-                        </div>
-                       </div>
-                       </form> 
-                    </div> -->
-
-                    <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                    <div class="col-sm-2"><label align= "text-center">Payment Term</label></div>
-                    <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Payment Term"></div>  
-
-                  </div>
-
-                    <!-- Date script for JS -->
-                      <script>
-                        $(document).ready(function(){
-                            var date_input=$('input[name="date"]'); //our date input has the name "date"
-                            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                            date_input.datepicker({
-                                format: 'mm/dd/yyyy',
-                                container: container,
-                                todayHighlight: true,
-                                autoclose: true,
-                            })
-                        })
-                      </script>
-
-
-
-
-            </div>
-
-              <!-- P2 --> 
-              <div class = "panel-heading panel-heading-custom">
-                  <div class= "row">
-                    <div class="col-sm-2"><label align= "text-center">Stock Property No.</label></div>
-                    <div class="col-sm-2"><label align= "text-center">Unit</label></div>
-                    <div class="col-sm-2"><label align= "text-center">Description</label></div>
-                    <div class="col-sm-2"><label align= "text-center">Quantity</label></div>
-                    <div class="col-sm-2"><label align= "text-center">Unit Cost</label></div>
-                    <div class="col-sm-2"><label align= "text-center">Amount</label></div>
-                  </div>
-              </div>
-
-              <div class="panel-body">
-
-                      <!-- Input for Repeating Section -->
-                              <table id="myTable" class=" table order-list">
-
-                                  <tbody>
-                                      <tr>
-                                          <td>
-                                              <div><input type="text"  name ="stockPropertyNo" align= "text-center" placeholder="Stock Property No"></div>
-                                          </td>
-                                          <td>
-                                              <div><input type="text"  name="unit" align= "text-center" placeholder="Unit"></div>
-                                          </td>
-                                          <td>
-                                              <div><input type="text"  name="itemDescription" align= "text-center" placeholder="Description"></div>
-                                          </td>
-                                          <td>
-                                              <div><input type="text"  name="quantity" align= "text-center" placeholder="Quantity"></div>
-                                          </td>
-                                          <td>
-                                              <div><input type="text"  name="unitCost" align= "text-center" placeholder="Unit Cost"></div>
-                                          </td>
-                                          <td>
-                                              <div><input type="text"  name="totalCost" align= "text-center" placeholder="Amount"></div>
-                                          </td>
-                                          <td><a class="deleteRow"></a>
-
-                                          </td>
-                                      </tr>
-                                  </tbody>
-                                  <tfoot>
-                                      <tr>
-                                          <td colspan="7" style="text-align: left;">
-                                              <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row" />
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                      </tr>
-                                  </tfoot>
-                              </table>
-
-                                              <!-- Repeating section script for JS -->
-                                              <script>
-                                              $(document).ready(function () {
-                                                  var counter = 0;
-
-                                                  $("#addrow").on("click", function () {
-                                                      var newRow = $("<tr>");
-                                                      var cols = "";
-
-                                                      cols += '<td><input type="text" placeholder="Stock Property No" name="stockPropertyNo' + counter + '"/></td>';
-                                                      cols += '<td><input type="text" placeholder="Unit" 				      name="unit' 		       + counter + '"/></td>';
-                                                      cols += '<td><input type="text" placeholder="Description"       name="description'     + counter + '"/></td>';
-                                                      cols += '<td><input type="text" placeholder="Quantity" 			    name="quantity' 	     + counter + '"/></td>';
-                                                      cols += '<td><input type="text" placeholder="Unit Cost" 		    name="unitCost' 	     + counter + '"/></td>';
-                                                      cols += '<td><input type="text" placeholder="Amount" 		        name="totalCost' 	     + counter + '"/></td>';
-
-                                                      cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
-                                                      newRow.append(cols);
-                                                      $("table.order-list").append(newRow);
-                                                      counter++;
-                                                  });
-
-
-
-                                                  $("table.order-list").on("click", ".ibtnDel", function (event) {
-                                                      $(this).closest("tr").remove();       
-                                                      counter -= 1
-                                                  });
-
-
-                                              });
-
-
-
-                                              function calculateRow(row) {
-                                                  var price = +row.find('input[name^="price"]').val();
-
-                                              }
-
-                                              function calculateGrandTotal() {
-                                                  var grandTotal = 0;
-                                                  $("table.order-list").find('input[name^="price"]').each(function () {
-                                                      grandTotal += +$(this).val();
-                                                  });
-                                                  $("#grandtotal").text(grandTotal.toFixed(2)); 
-                                              }
-                                              </script>
-
-
-
-                                          <div class= "row">
-                                            <div class="col-sm-2"><label align= "text-center">Total Amount in Words</label></div>
-                          <div class="col-sm-4"><textarea rows="1" cols="148" placeholder="Total Amount in Words"></textarea> </div>
-
-                                          </div>
-              </div>
-
-                          <!-- P3 -->
-                      <!--Letter -->
+                      <!-- P2 -->
+                      <!--Gentlemen -->
                       <div class = "panel-heading panel-heading-custom">
-                              <div class= "row">
-                                  <div class="col-sm-2"><label align= "text-left"> </label></div>
-                              </div>
+                        <div class= "row">
+                            <div class="col-sm-2"><label align= "text-left">Gentlemen</label></div>
+                        </div>
                       </div>
 
                       <div class="panel-body">
                           <div class= "row">
-                                  <div class="col-sm-12"><label align= "text-center">In case of failure to make the full delivery within the time specified above, a penalty of one-tenth (1/10) of one percent for every day shae be imposed on the undelivered item/s. </label></div>
-                                  </div>     
+                            <div class="col-sm-4"><textarea name="gentlemen" rows="3" cols="170" placeholder="Gentlemen"></textarea> </div>              
+                        </div>     
                       </div>
 
+                      <div class="panel-body">
+                          <!-- First Row -->
+                          <div class= "row">
+                            <div class="col-sm-2"><label align= "text-center">Place of Delivery</label></div>
+                              <div class="col-sm-2"><input name="place_delivery" type="text"  align= "text-center" placeholder="Place of Delivery"></div>
+                              <div class="col-sm-2"><label align= "text-center"></label></div>
 
-                <div class="panel-body">
+                              <div class="col-sm-2"><label align= "text-center">Mode of Procurement</label></div>
+                              <div class="col-sm-2"><input name="mode2" type="text"  align= "text-center" placeholder="Mode of Procurement"></div>  
+                            </div>
 
-                  <div class = "row">
+                            <!-- Blank Row -->
+                            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
 
-                          <div class="col-sm-2"><label align= "text-center">Conforme</label></div>              
-                          <div class="col-sm-2"><label align= "text-center"></label></div>                   
+                          <!-- Second Row -->
+                          <div class= "row">
+                            <!-- Date -->
+                              <div class="col-sm-2"><label align= "text-center">Date of Delivery</label></div>
+                              <div class="col-sm-2">
+                                <!-- <form method="post"> 
+                                 <div class="form-group "> -->
 
-                          <!-- Blank text for spacing --> 
-                          <div class="col-sm-2"><label align= "text-center"></label></div>              
+                                  <div class="input-group">
+                                    <!-- This comment out adds an icon at the left side of the date text-->
+                                    <!--<div class="input-group-addon">
+                                      <i class="fa fa-calendar"></i>
+                                    </div> -->
+                                   <input class="form-control" id="date" name="date_delivery" placeholder="MM/DD/YYYY" type="text">
+                                  </div>
+                                 </div>
+                                 <!--<div class="form-group">
+                                  <div>
+                                   <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
+                                  </div>
+                                 </div>
+                                 </form> 
+                              </div> -->
 
-                          <div class="col-sm-2"><label align= "text-center">Very yours Truly,</label></div>
-                          <div class="col-sm-2"><label align= "text-center"></label></div> 
+                              <div class="col-sm-2"><label align= "text-center"></label></div>
 
-                   </div> 
+                              <div class="col-sm-2"><label align= "text-center">Payment Term</label></div>
+                              <div class="col-sm-2"><input name="pay_term" type="text"  align= "text-center" placeholder="Payment Term"></div>  
 
-                   <!-- Blank Row -->
-                        <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
+                            </div>
 
-                  <div class = "row">
+                              <!-- Date script for JS -->
+                                <script>
+                                  $(document).ready(function(){
+                                      var date_input=$('input[name="date"]'); //our date input has the name "date"
+                                      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                                      date_input.datepicker({
+                                          format: 'mm/dd/yyyy',
+                                          container: container,
+                                          todayHighlight: true,
+                                          autoclose: true,
+                                      })
+                                  })
+                                </script>
 
-                          <div class="col-sm-2"><label align= "text-center">Name</label></div>              
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name"></div>                    
 
-                          <!-- Blank text for spacing --> 
-                          <div class="col-sm-2"><label align= "text-center"></label></div>              
 
-                          <div class="col-sm-2"><label align= "text-center">Name</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name"></div>
 
-                   </div> 
+                      </div>
 
-                        <!-- Blank Row -->
-                        <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                        <!-- Second Row -->
-                        <div class= "row">
-                        <!-- Date -->
-                          <div class="col-sm-2"><label align= "text-center">Date of Delivery</label></div>
-                          <div class="col-sm-2">
-                            <!-- <form method="post"> 
-                             <div class="form-group "> -->
-
-                              <div class="input-group">
-                                <!-- This comment out adds an icon at the left side of the date text-->
-                                <!--<div class="input-group-addon">
-                                  <i class="fa fa-calendar"></i>
-                                </div> -->
-                               <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
-                              </div>
-                             </div>
-                             <!--<div class="form-group">
-                              <div>
-                               <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
-                              </div>
-                             </div>
-                             </form> 
-                          </div> -->
-
-                          <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                          <div class="col-sm-2"><label align= "text-center">Payment Term</label></div>
-                          <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Payment Term"></div>  
-
+                        <!-- P2 --> 
+                        <div class = "panel-heading panel-heading-custom">
+                            <div class= "row">
+                              <div class="col-sm-2"><label align= "text-center">Stock Property No.</label></div>
+                              <div class="col-sm-2"><label align= "text-center">Unit</label></div>
+                              <div class="col-sm-2"><label align= "text-center">Description</label></div>
+                              <div class="col-sm-2"><label align= "text-center">Quantity</label></div>
+                              <div class="col-sm-2"><label align= "text-center">Unit Cost</label></div>
+                              <div class="col-sm-2"><label align= "text-center">Amount</label></div>
+                            </div>
                         </div>
 
-                          <!-- Date script for JS -->
-                            <script>
-                              $(document).ready(function(){
-                                  var date_input=$('input[name="date"]'); //our date input has the name "date"
-                                  var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                                  date_input.datepicker({
-                                      format: 'mm/dd/yyyy',
-                                      container: container,
-                                      todayHighlight: true,
-                                      autoclose: true,
-                                  })
-                              })
-                            </script>
+                        <div class="panel-body">
 
-                        <!-- Blank Row -->
-                        <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
+                                <!-- Input for Repeating Section -->
+                                        <table id="myTable" class=" table order-list">
 
+                                            <tbody>
+                                                <%for(PrDetails details: pr.getPrDetailsList()){%>
+                                                    <tr>
+                                                        <td>
+                                                            <div><input type="text"  name ="stock_no" align= "text-center" value="<%=details.getIdPrDetails()%>" placeholder="Stock Property No"></div>
+                                                        </td>
+                                                        <td>
+                                                            <div><input type="text"  name="unit" align= "text-center" placeholder="Unit" value="<%=details.getUnit()%>"></div>
+                                                        </td>
+                                                        <td>
+                                                            <div><input type="text"  name="description" align= "text-center" placeholder="Description" value="<%=details.getDescription()%>"></div>
+                                                        </td>
+                                                        <td>
+                                                            <div><input type="text"  name="quantity" align= "text-center" placeholder="Quantity" value="<%=details.getQuantity()%>"></div>
+                                                        </td>
+                                                        <td>
+                                                            <div><input type="text"  name="cost" align= "text-center" placeholder="Unit Cost" value="<%=details.getCost()%>"></div>
+                                                        </td>
+                                                        <td>
+                                                            <div><input type="text"  name="total_cost" align= "text-center" placeholder="Amount" value="<%=details.getQuantity() * details.getCost()%>"></div>
+                                                        </td>
+                                                    </tr>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
+
+
+
+                                                    <div class= "row">
+                                                      <div class="col-sm-2"><label align= "text-center">Total Amount in Words</label></div>
+                                                        <div class="col-sm-4">
+                                                            <textarea name="amount_words" rows="1" cols="130" placeholder="Total Amount in Words"></textarea> 
+                                                        </div>
+
+                                                    </div>
+                                                  </div>
+
+                                    <!-- P3 -->
+                                <!--Letter -->
+                                <div class = "panel-heading panel-heading-custom">
+                                        <div class= "row">
+                                            <div class="col-sm-2"><label align= "text-left"> </label></div>
+                                        </div>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class= "row">
+                                            <div class="col-sm-12"><label align= "text-center">In case of failure to make the full delivery within the time specified above, a penalty of one-tenth (1/10) of one percent for every day shae be imposed on the undelivered item/s. </label></div>
+                                            </div>     
+                                </div>
+
+
+                          <div class="panel-body">
+
+                            <div class = "row">
+
+                                    <div class="col-sm-2"><label align= "text-center">Conforme</label></div>              
+                                    <div class="col-sm-2"><label align= "text-center"></label></div>                   
+
+                                    <!-- Blank text for spacing --> 
+                                    <div class="col-sm-2"><label align= "text-center"></label></div>              
+
+                                    <div class="col-sm-2"><label align= "text-center">Very yours Truly,</label></div>
+                                    <div class="col-sm-2"><label align= "text-center"></label></div> 
+
+                             </div> 
+
+                             <!-- Blank Row -->
+                                  <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
+
+                            <div class = "row">
+
+                                    <div class="col-sm-2"><label align= "text-center">Name</label></div>              
+                                    <div class="col-sm-2"><input name="name_conforme" type="text"  align= "text-center" placeholder="Name"></div>                    
+
+                                    <!-- Blank text for spacing --> 
+                                    <div class="col-sm-2"><label align= "text-center"></label></div>              
+
+                                    <div class="col-sm-2"><label align= "text-center">Name</label></div>
+                                    <div class="col-sm-2"><input name="name_truly" type="text"  align= "text-center" placeholder="Name"></div>
+
+                             </div> 
+
+                                  <!-- Blank Row -->
+                                  <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
+
+                                  <!-- Second Row -->
+                                  <div class= "row">
+                                  <!-- Date -->
+                                    <div class="col-sm-2"><label align= "text-center">Date of Delivery</label></div>
+                                    <div class="col-sm-2">
+                                      <!-- <form method="post"> 
+                                       <div class="form-group "> -->
+
+                                        <div class="input-group">
+                                          <!-- This comment out adds an icon at the left side of the date text-->
+                                          <!--<div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                          </div> -->
+                                         <input class="form-control" id="date" name="date2" placeholder="MM/DD/YYYY" type="text">
+                                        </div>
+                                       </div>
+                                       <!--<div class="form-group">
+                                        <div>
+                                         <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
+                                        </div>
+                                       </div>
+                                       </form> 
+                                    </div> -->
+
+                                    <div class="col-sm-2"><label align= "text-center"></label></div>
+
+                                    <div class="col-sm-2"><label align= "text-center">Payment Term</label></div>
+                                    <div class="col-sm-2"><input name="payment_term" type="text"  align= "text-center" placeholder="Payment Term"></div>  
+
+                                  </div>
+
+                                    <!-- Date script for JS -->
+                                      <script>
+                                        $(document).ready(function(){
+                                            var date_input=$('input[name="date"]'); //our date input has the name "date"
+                                            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                                            date_input.datepicker({
+                                                format: 'mm/dd/yyyy',
+                                                container: container,
+                                                todayHighlight: true,
+                                                autoclose: true,
+                                            })
+                                        })
+                                      </script>
+
+                                  <!-- Blank Row -->
+                                  <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
+
+                                </div>
+
+                        <!-- P4 -->
+                        <!-- Requested by -->
+
+                        <div class = "panel-heading panel-heading-custom">
+                            <div class= "row">
+                              <div class="col-sm-2"><label align= "text-left">Requested By</label></div>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class = "row">
+                              <div class="col-sm-2"><label align= "text-center">Fund Cluster</label></div>
+                              <div class="col-sm-2"><input name="fund_cluster" value="<%=pr.getFundCluster()%>" type="text"  align= "text-center" placeholder="Fund Cluster"></div>
+                              <div class="col-sm-2"><label align= "text-center"></label></div>
+
+                              <div class="col-sm-2"><label align= "text-center">ORS/BURS No</label></div>
+                              <div class="col-sm-2"><input name="ors/burs_no" type="text"  align= "text-center" placeholder="ORS/BURS No"></div>
+                            </div>
+
+                                <!-- Blank Row -->
+                                <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
+
+                            <div class = "row">
+
+                              <div class="col-sm-2"><label align= "text-center">Fund Available</label></div>
+                              <div class="col-sm-2"><input name="fund_avail" type="text"  align= "text-center" placeholder="Fund Available"></div>
+                              <div class="col-sm-2"><label align= "text-center"></label></div>
+
+                              <div class="col-sm-2"><label align= "text-center">Date of ORS/BURS No</label></div>
+                                    <div class="col-sm-2">
+                                      <!-- <form method="post"> 
+                                       <div class="form-group "> -->
+
+                                        <div class="input-group">
+                                          <!-- This comment out adds an icon at the left side of the date text-->
+                                          <!--<div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                          </div> -->
+                                         <input class="form-control" id="date" name="date_ors/burs" placeholder="MM/DD/YYYY" type="text">
+                                        </div>
+                                       </div>
+                            </div>
+
+                            <!-- Blank Row -->
+                            <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
+
+                            <div class = "row">
+                              <div class="col-sm-2"><label align= "text-center">Name</label></div>
+                              <div class="col-sm-2"><input name="name_req" type="text"  align= "text-center" placeholder="Name"></div>
+                              <div class="col-sm-2"><label align= "text-center"></label></div>
+
+                              <div class="col-sm-2"><label align= "text-center">Amount</label></div>
+                              <div class="col-sm-2"><input name="amount" type="text"  align= "text-center" placeholder="Amount"></div>
+                            </div>
+                        </div> 
+                          </div>         
+                        </div>
                       </div>
 
-              <!-- P4 -->
-              <!-- Requested by -->
-
-              <div class = "panel-heading panel-heading-custom">
-                  <div class= "row">
-                    <div class="col-sm-2"><label align= "text-left">Requested By</label></div>
-                  </div>
-              </div>
-
-              <div class="panel-body">
-                  <div class = "row">
-                    <div class="col-sm-2"><label align= "text-center">Fund Cluster</label></div>
-                    <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Fund Cluster"></div>
-                    <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                    <div class="col-sm-2"><label align= "text-center">ORS/BURS No</label></div>
-                    <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="ORS/BURS No"></div>
-                  </div>
-
-                      <!-- Blank Row -->
-                      <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                  <div class = "row">
-
-                    <div class="col-sm-2"><label align= "text-center">Fund Available</label></div>
-                    <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Fund Available"></div>
-                    <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                    <div class="col-sm-2"><label align= "text-center">Date of ORS/BURS No</label></div>
-                          <div class="col-sm-2">
-                            <!-- <form method="post"> 
-                             <div class="form-group "> -->
-
-                              <div class="input-group">
-                                <!-- This comment out adds an icon at the left side of the date text-->
-                                <!--<div class="input-group-addon">
-                                  <i class="fa fa-calendar"></i>
-                                </div> -->
-                               <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
-                              </div>
-                             </div>
-                  </div>
-
-                  <!-- Blank Row -->
-                  <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
-
-                  <div class = "row">
-                    <div class="col-sm-2"><label align= "text-center">Name</label></div>
-                    <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name"></div>
-                    <div class="col-sm-2"><label align= "text-center"></label></div>
-
-                    <div class="col-sm-2"><label align= "text-center">Amount</label></div>
-                    <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Amount"></div>
-                  </div>
-              </div>
-            </form>
-            <button onclick="submitPO()">Submit</button>
-            </div>
-        <%}%>
-		</section><! --/wrapper -->
+                    </div>
+        </form>
+        <button onclick="createPO()">Submit</button>
+                              
+        </section><! --/wrapper -->
       </section>
      </section>
              <!-- /MAIN CONTENT -->

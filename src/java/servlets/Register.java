@@ -39,7 +39,7 @@ public class Register extends BaseServlet {
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int registerSuccessful = 0;
+        int registerSuccessful = 0, usernameExists = 0;
         Employee e = new Employee();
         
         if(!request.getParameter("pass1").equals(request.getParameter("pass2"))){
@@ -63,7 +63,29 @@ public class Register extends BaseServlet {
             
             e.setIdDivision(divFacade.find(divId));
 
-            e.setUsername(request.getParameter("username"));
+            ArrayList<Employee> employees = new ArrayList<Employee>(employeeFacade.findAll());
+            
+            for(Employee emp: employees){
+                if(emp.getUsername().equals(request.getParameter("username"))){
+                    usernameExists = 1;
+                }
+            }
+            
+            if(usernameExists == 0)
+                e.setUsername(request.getParameter("username"));
+            else{
+                 try(PrintWriter out = response.getWriter()){
+                    response.setContentType("text/html");
+                    out.println("<html>");
+                    out.println("<head>");
+                    out.println("<title>User registration</title>");
+                    out.println("</head>");
+                    out.println("<body>");
+                    out.println("<h3>Username already exists. Go back and try again.");
+                    out.println("</body>");
+                    out.println("</html>");
+                 }
+            }
             e.setPassword(request.getParameter("pass1"));
 
 

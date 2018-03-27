@@ -88,7 +88,7 @@ public class PoDetails implements Serializable {
     @Size(max = 45)
     @Column(name = "mode_of_proc", length = 45)
     private String modeOfProc;
-    private BigInteger tin;
+    private String tin;
     @Size(max = 45)
     @Column(length = 45)
     private String gentlemen;
@@ -213,11 +213,11 @@ public class PoDetails implements Serializable {
         this.modeOfProc = modeOfProc;
     }
 
-    public BigInteger getTin() {
+    public String getTin() {
         return tin;
     }
 
-    public void setTin(BigInteger tin) {
+    public void setTin(String tin) {
         this.tin = tin;
     }
 
