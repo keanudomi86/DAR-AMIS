@@ -103,6 +103,10 @@
                       </a>
                       <ul class="sub">
                           <li><a  href="monitoring.jsp">Monitoring and Tracking</a></li>
+                          <li><a  href="assetacquisition.jsp">Asset Acquisition</a></li>
+                          <li><a  href="assetassignment.jsp">Asset Assignment</a></li>
+                          <li><a  href="assethistory.jsp">Asset History</a></li>
+                          <li><a  href="assetlocation.jsp">Asset Location</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
