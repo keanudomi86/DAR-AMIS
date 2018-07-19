@@ -13,7 +13,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.jsp" class="logo"><b>DAR-AMIS</b></a>
+            <a href="ap_dashboard.jsp" class="logo"><b>DAR-AMIS</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -96,6 +96,10 @@
                           <li><a  href="monitoring.jsp">Monitoring and Tracking</a></li>
                           <!--<li><a  href="buttons.html">Tracking</a></li> -->
                           <li><a  href="resource_alloc.jsp">Resource Allocation</a></li>
+                          <li><a  href="assetacquisition.jsp">Asset Acquisition</a></li>
+                          <li><a  href="assetassignment.jsp">Asset Assignment</a></li>
+                          <li><a  href="assethistory.jsp">Asset History</a></li>
+                          <li><a  href="assetlocation.jsp">Asset Location</a></li>
                       </ul>
                   </li>
                     <li class="sub-menu">
