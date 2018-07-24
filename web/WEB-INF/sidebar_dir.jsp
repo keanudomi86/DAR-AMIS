@@ -189,8 +189,8 @@
                           <span>Procurement</span>
                       </a>
                       <ul class="sub">
-                          <li><a href="wfp.jsp">WFP</a></li>
-                          <li><a href="ppmp.jsp">PPMP</a></li>
+                          <li><a href="<%=root%>/WFPForm">WFP</a></li>
+                          <li><a href="<%=root%>/PPMPForm">PPMP</a></li>
                           <li><a href="<%=root%>/APPForm">APP</a></li>
                       </ul>
                   </li>
@@ -228,7 +228,8 @@
                           <li><a  href="ProcurementView.jsp">View Procurement Forms</a></li>
                           <li><a  href="pr.jsp">PR</a></li>
                           <li><a  href="formrepo.jsp">Forms</a></li>
-                          <li><a  href="responsive_table.jsp">Reports</a></li>
+                          <li><a  href="view_report_temp.jsp">Report Templates</a></li>
+                          <li><a  href="responsive_table.jsp">Reports (Real-Time)</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
