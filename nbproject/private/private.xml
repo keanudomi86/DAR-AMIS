@@ -3,42 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/RegisterUser.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/CreatePR.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/CreatePO.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/pr.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/controller/DrFacade.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/dir_dashboard.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_gsds.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/rpci.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/CreateWFP.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/po.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/Register.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_pc.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/register.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/ics.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/PRRundown.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/dao/Pr.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/SignUp.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/controller/EmployeeFacade.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_mgt.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/WEB-INF/sidebar_dir.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/pr_rundown.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/dao/Po.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/profile.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/iar.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/PARPage.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/rec_dashboard.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/pcustodian_homepage.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/controller/FormRepoFacade.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/create_forms.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/approve_forms.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/PRPage.java</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/gsds_dashboard.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/user_dashboard.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/iirup.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/mgt_dashboard.jsp</file>
-            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/IARPage.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/aif.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/ris.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/src/java/servlets/PRPage.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/src/java/servlets/RPCIPage.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/par.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/src/java/servlets/CreatePOSelectFormsPR.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/src/java/controller/AbstractFacade.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/create_reports.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/src/java/servlets/CreatePR.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/rfi.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/src/java/servlets/CreateAPP.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/rpci.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/src/java/servlets/CreatePPMP.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/pr.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/ics.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/sc.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/formrepo.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Desktop/July%2018/GitHub/DAR-AMIS/web/po.jsp</file>
         </group>
     </open-files>
 </project-private>
