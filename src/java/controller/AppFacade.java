@@ -13,19 +13,21 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author BavarianHotdog
+ * @author Myles Mempin
  */
 @Stateless
 public class AppFacade extends AbstractFacade<App> {
-
     @PersistenceContext(unitName = "DARAMISPU")
     private EntityManager em;
+
+    public AppFacade() {
+        super(App.class);
+    }
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
     @Override
     public void closeEntityManager() {
         em.close();
@@ -34,10 +36,6 @@ public class AppFacade extends AbstractFacade<App> {
     @Override
     public void setEntityManager() {
         em = EMFListener.createEntityManager();
-    }
-
-    public AppFacade() {
-        super(App.class);
     }
     
 }

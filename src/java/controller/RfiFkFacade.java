@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.Division;
+import dao.RfiFk;
 import database.EMFListener;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,11 +13,10 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author BavarianHotdog
+ * @author Myles Mempin
  */
 @Stateless
-public class DivisionFacade extends AbstractFacade<Division> {
-
+public class RfiFkFacade extends AbstractFacade<RfiFk> {
     @PersistenceContext(unitName = "DARAMISPU")
     private EntityManager em;
 
@@ -36,8 +35,8 @@ public class DivisionFacade extends AbstractFacade<Division> {
         em = EMFListener.createEntityManager();
     }
 
-    public DivisionFacade() {
-        super(Division.class);
+    public RfiFkFacade() {
+        super(RfiFk.class);
     }
     
 }

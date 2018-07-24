@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.Division;
+import dao.IarDetails;
 import database.EMFListener;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,11 +13,10 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author BavarianHotdog
+ * @author Myles Mempin
  */
 @Stateless
-public class DivisionFacade extends AbstractFacade<Division> {
-
+public class IarDetailsFacade extends AbstractFacade<IarDetails> {
     @PersistenceContext(unitName = "DARAMISPU")
     private EntityManager em;
 
@@ -25,7 +24,11 @@ public class DivisionFacade extends AbstractFacade<Division> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    public IarDetailsFacade() {
+        super(IarDetails.class);
+    }
+
     @Override
     public void closeEntityManager() {
         em.close();
@@ -34,10 +37,6 @@ public class DivisionFacade extends AbstractFacade<Division> {
     @Override
     public void setEntityManager() {
         em = EMFListener.createEntityManager();
-    }
-
-    public DivisionFacade() {
-        super(Division.class);
     }
     
 }

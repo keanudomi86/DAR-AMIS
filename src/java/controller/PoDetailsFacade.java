@@ -13,11 +13,10 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author BavarianHotdog
+ * @author Myles Mempin
  */
 @Stateless
 public class PoDetailsFacade extends AbstractFacade<PoDetails> {
-
     @PersistenceContext(unitName = "DARAMISPU")
     private EntityManager em;
 
@@ -39,5 +38,6 @@ public class PoDetailsFacade extends AbstractFacade<PoDetails> {
     public PoDetailsFacade() {
         super(PoDetails.class);
     }
+
     
 }
