@@ -54,13 +54,13 @@
                           <li><a href="/DAR-AMIS/PRPage">Purchase Request</a></li>
                           <li><a href="/DAR-AMIS/CreatePOSelectFormsPR">Purchase Order</a></li>
                           <li><a href="/DAR-AMIS/PARPage">Property Acknowledgment Receipt</a></li>
-                          <li><a href="rfi.jsp">Request For Inspection</a></li>
-                          <li><a href="aif.jsp">Assignment of Inspector Form</a></li>
-                          <li><a href="ics.jsp">Inventory Custodian Slip</a></li>
+                          <li><a href="/DAR-AMIS/RFIPage">Request For Inspection</a></li>
+                          <li><a href="/DAR-AMIS/AIFPage">Assignment of Inspector Form</a></li>
+                          <li><a href="/DAR-AMIS/ICSPage">Inventory Custodian Slip</a></li>
                           <li><a href="/DAR-AMIS/RISPage">Requisition and Issuance Slip</a></li>
-                          <li><a href="sc.jsp">Stock Card</a></li>
+                          <li><a href="/DAR-AMIS/SCPage">Stock Card</a></li>
 						    </ul>
-						    </ul>
+						    
 						  </div>
                 </section>
               
