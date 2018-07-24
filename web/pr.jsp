@@ -3,6 +3,7 @@
     Created on : 02 8, 18, 6:51:34 PM
     Author     : BavarianHotdog
 --%>
+<%@page import="dao.Pr"%>
 <%@page import="dao.Wfp"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.Office"%>
@@ -71,17 +72,20 @@
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     
-        
-                        <h3 class="text-right text-bold"><div name="idNum">Form ID: 00001</div></h3>
-                        
+                        <%if(session.getAttribute("formMode").equals("create")){%>
+                        <h3 class="text-right text-bold"><div name="idNum">Form ID: <%=request.getAttribute("newFormId") %></div></h3>
+                        <%}else if(session.getAttribute("formMode").equals("view") || session.getAttribute("formMode").equals("approve")){%>
+                        <h3 class="text-right text-bold"><div name="idNum">Form ID: <%=((Pr)request.getAttribute("prData")).getIdPr() %></div></h3>
+                        <%}%>
                <!-- ...................APPROVE FORM................................................................. -->
                 <!-- P1 -->
-                <a href="approve_forms.jsp" class="previous" align="left">&laquo; Previous</a>
+                
                 
                <div class="panel panel-default">
                 <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Purchase Request</STRONG></p></div> 
                     <div class="panel-body"> 
                     <%if(session.getAttribute("formMode").equals("approve")){%>
+                    <a href="approve_forms.jsp" class="previous" align="left">&laquo; Previous</a>
                 <form>
                     <!-- First Row -->
                     <div class = "row">
@@ -357,6 +361,7 @@
                 </div>
         <!-- .............CREATE FORM...............................................................................--> 
         <%}else if(session.getAttribute("formMode").equals("create")){%>
+        <a href="/DAR-AMIS/CreateForms" class="previous" align="left">&laquo; Previous</a>
         <script>
             function submitPR(){
                 if(confirm("Submit this form?")){
@@ -475,7 +480,7 @@
                                           <div class="col-sm-2">
                                               <select class="form-control" name="fundCluster">
 
-                                                    <option>hi</option>
+                                                    <option>N/A</option>
                                                 </select>
                                           </div>
                                   <div class="col-sm-2"><label align= "text-center"></label></div>
@@ -484,7 +489,7 @@
                                   <!-- Entity Name Dropdown -->
                                     <div class="col-sm-2">
                                         <select class="form-control" name="rcc">
-                                        <option>hi</option>
+                                        <option>N/A</option>
                                         </select>
                                     </div>
 
@@ -523,7 +528,7 @@
                                                             <div><input type="text"  name="quantity" align= "text-center" placeholder="Quantity"></div>
                                                         </td>
                                                         <td>
-                                                            <div><input type="text"  name="cost" align= "text-center" placeholder="Unit Cost"></div>
+                                                            <div><input type="text"  name="unitCost" align= "text-center" placeholder="Unit Cost"></div>
                                                         </td>
                                                         <td>
                                                             <div><input type="text"  name="totalCost" align= "text-center" placeholder="Total Cost"></div>
@@ -622,7 +627,7 @@
                             <div class="panel-body">
                                 <div class = "row">
                                   <div class="col-sm-2"><label align= "text-center">Name</label></div>
-                                  <div class="col-sm-2"><input name="requestedByName" type="text"  align= "text-center" placeholder="Name"></div>
+                                  <div class="col-sm-2"><input name="rq_name" type="text"  align= "text-center" placeholder="Name"></div>
                                 </div>
 
                                     <!-- Blank Row -->
@@ -631,7 +636,7 @@
                                 <div class = "row">
 
                                   <div class="col-sm-2"><label align= "text-center">Designation</label></div>
-                                  <div class="col-sm-2"><input name="designation" type="text"  align= "text-center" placeholder="Designation"></div>
+                                  <div class="col-sm-2"><input name="rq_desig" type="text"  align= "text-center" placeholder="Designation"></div>
                                 </div>
                             </div>
                     </form>
@@ -642,7 +647,8 @@
          </div>
         <!-- .............VIEW FORM...............................................................................-->
            <%}else if(session.getAttribute("formMode").equals("view")){%>
-
+           <%Pr prData = (Pr) request.getAttribute("prData");%>
+           <a href="view_forms.jsp" class="previous" align="left">&laquo; Previous</a>
           <div class="panel panel-default">
               
                     <form id="createPrForm">
@@ -655,8 +661,7 @@
                                           <div class="col-sm-2">
                                             <div class="btn-group">
                                                 <select class="form-control" name="entity">
-                                                <option>Entity</option>
-                                                <option>Department of Agrarian Reform</option>        
+                                                    <option><%=prData.getEntityName() %></option>        
                                                 </select>
                                             </div>
                                           </div> 
@@ -677,16 +682,10 @@
                                                                 });
                                                             });
                                           </script>                              
-                                    <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label>Choose Office</div>
+                                    <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label>Office</div>
                                         <!-- Entity Name Dropdown -->
                                         <div class="col-sm-2">
-                                            <select class="form-control" name="office" onclick="test()">
-                                                <%int ctr = 1;%>
-                                                <%for(Office o: offices){%>
-                                                <option><%=o.getIdOffice()%> - <%=o.getDepartment()%></option>
-                                                <%ctr++;%>
-                                                <%}%>
-                                            </select>
+                                            <%=prData.getIdOffice().getIdOffice() + " - " + prData.getIdOffice().getDepartment() %>
                                         </div>
                                     </div> 
                                 </div>
@@ -709,7 +708,7 @@
                                             <!--<div class="input-group-addon">
                                               <i class="fa fa-calendar"></i>
                                             </div> -->
-                                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
+                                            <%=prData.getIdOffice().getIdOffice() + " - " + prData.getIdOffice().getDepartment() %>
                                         </div>
                                     </div>
                                      <!--<div class="form-group">

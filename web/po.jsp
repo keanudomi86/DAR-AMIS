@@ -66,6 +66,20 @@
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
                   <div class="container-fluid">
+                      <a href="/DAR-AMIS/CreateForms" class="previous" align="left">&laquo; Previous</a>
+        <script>
+            function submitPO(){
+                if(confirm("Submit this form?")){
+
+                    $.post("<%=root%>/CreatePO", $("#createPoForm").serialize(), function(data){
+                        alert(data);
+                        
+                        //redirect to approve forms page
+                        window.location = "<%=root%>/CreateForms";
+                    });
+                }
+            }
+        </script>
                 <div class="panel panel-default">
                     
                         <!-- P1 -->
@@ -114,7 +128,7 @@
                                         $(document).ready(function(){
                                             var today = new Date();
                                             
-                                            $("[name='datePosted']").val(today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear());
+                                            $("[name='datePosted']").val(today.getMonth()+1 + "/" + today.getDate() + "/" + today.getFullYear());
                                         });
                                     </script>
                                    <input class="form-control" id="date" name="datePosted" placeholder="MM/DD/YYYY" type="text">
@@ -288,10 +302,10 @@
                                                             <div><input type="text"  name="quantity" align= "text-center" placeholder="Quantity" value="<%=details.getQuantity()%>"></div>
                                                         </td>
                                                         <td>
-                                                            <div><input type="text"  name="cost" align= "text-center" placeholder="Unit Cost" value="<%=details.getCost()%>"></div>
+                                                            <div><input type="text"  name="cost" align= "text-center" placeholder="Unit Cost" value="<%=details.getUnitCost()%>"></div>
                                                         </td>
                                                         <td>
-                                                            <div><input type="text"  name="total_cost" align= "text-center" placeholder="Amount" value="<%=details.getQuantity() * details.getCost()%>"></div>
+                                                            <div><input type="text"  name="total_cost" align= "text-center" placeholder="Amount" value="<%=details.getQuantity() * details.getTotalCost()%>"></div>
                                                         </td>
                                                     </tr>
                                                 <%}%>
@@ -460,17 +474,17 @@
                               <div class="col-sm-2"><label align= "text-center"></label></div>
 
                               <div class="col-sm-2"><label align= "text-center">Amount</label></div>
-                              <div class="col-sm-2"><input name="amount" type="text"  align= "text-center" placeholder="Amount"></div>
+                              <div class="col-sm-2"><input name="amount2" type="text"  align= "text-center" placeholder="Amount"></div>
                             </div>
+                            <br>
+                            <br>
+                            <p align="center">                         
+                                <button onclick="submitPO()">Submit</button>
+                            </p>
                         </div> 
-                          </div>         
+                          </div>
                         </div>
-                      </div>
-
-                    </div>
-        </form>
-        <button onclick="createPO()">Submit</button>
-                              
+        </form>       
         </section><! --/wrapper -->
       </section>
      </section>

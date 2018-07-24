@@ -3,7 +3,14 @@
     Created on : 03 19, 18, 5:08:31 PM
     Author     : BavarianHotdog
 --%>
-
+<%@page import="dao.Aif"%>
+<%@page import="dao.AifDetails"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.Pr"%>
+<%@page import="dao.Po"%>
+<%Pr pr = (Pr)request.getAttribute("pr");%>
+<%Aif aif = (Aif) request.getAttribute("aif");%>
+<%String root = request.getContextPath();%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +26,16 @@
       }
 
     </style>
+     <script>
+        function createAIF(){
+            if(confirm("Submit this form?")){
+                url = "<%=root%>/CreateAIF";
+                $.post(url, $("#aifForm").serialize(), function(data){
+                    alert(data);
+                });
+            }
+        }
+    </script>
   <body>
 
   <section id="container" >
@@ -39,6 +56,7 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
+      <form action="CreateAIF" method="POST">
          <section id="main-content">
           <section class="wrapper">
               <section class="content-header">
@@ -48,6 +66,20 @@
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
                   <div class="container-fluid">
+                       <a href="/DAR-AMIS/CreateForms" class="previous" align="left">&laquo; Previous</a>
+                                <script>
+                                    function submitAIF(){
+                                        if(confirm("Submit this form?")){
+
+                                            $.post("<%=root%>/CreateAIF", $("#createAifForm").serialize(), function(data){
+                                                alert(data);
+
+                                                //redirect to approve forms page
+                                                window.location = "<%=root%>/CreateForms";
+                                            });
+                                        }
+                                    }
+                                </script>
       <div class="panel panel-default">
 
         <!-- P1 -->
@@ -383,17 +415,19 @@
                   })
                 </script>
 
-          </div>         
-        </div>
-      </div>
-
-    </div>
+          </div>
+                        <p align="center">                         
+                            <button onclick="submitAIF()">Submit</button>
+                        </p>
+                        <br>
+                        <br>
+              
                  <!-- <tr><button type="button" class="btn btn-default">Create</button></tr><tr><button type="button" class="btn btn-default">Edit</button></tr><tr><button type="button" class="btn btn-default">View List</button></tr> -->
 		</section><! --/wrapper -->
       </section>
      </section>
-             <!-- /MAIN CONTENT -->
-
+      <!-- /MAIN CONTENT -->
+      </form>
       <!--main content end-->
       <!--footer start-->
       <jsp:include page="WEB-INF/copyright.jsp" />

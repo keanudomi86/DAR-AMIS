@@ -3,13 +3,30 @@
     Created on : 03 19, 18, 5:09:10 PM
     Author     : BavarianHotdog
 --%>
-
+<%@page import="dao.Sc"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.Pr"%>
+<%@page import="dao.Po"%>
+<%@page import="dao.Par"%>
+<%@page import="dao.Rfi"%>
+<%@page import="dao.Aif"%>
+<%@page import="dao.Ics"%>
+<%@page import="dao.Ris"%>
+<%Pr pr = (Pr)request.getAttribute("pr");%>
+<%Po po = (Po)request.getAttribute("po");%>
+<%Par par = (Par)request.getAttribute("par");%>
+<%Rfi rfi = (Rfi)request.getAttribute("rfi");%>
+<%Aif aif = (Aif)request.getAttribute("aif");%>
+<%Ics ics = (Ics)request.getAttribute("ics");%>
+<%Ris ris = (Ris)request.getAttribute("Ris");%>
+<%Sc sc = (Sc) request.getAttribute("sc");%>
+<%String root = request.getContextPath();%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <jsp:include page="WEB-INF/header.jsp" /> 
-    <title>DAR-AMIS | RPCI</title>
+    <title>DAR-AMIS | SC</title>
   </head>
     <style>
       .panel-default > .panel-heading-custom{
@@ -19,6 +36,16 @@
       }
 
     </style>
+     <script>
+        function createSC(){
+            if(confirm("Submit this form?")){
+                url = "<%=root%>/CreateSC";
+                $.post(url, $("#scForm").serialize(), function(data){
+                    alert(data);
+                });
+            }
+        }
+    </script>
   <body>
 
   <section id="container" >
@@ -48,6 +75,20 @@
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
                  <div class="container-fluid">
+                        <a href="/DAR-AMIS/CreateForms" class="previous" align="left">&laquo; Previous</a>
+                                <script>
+                                    function submitSC(){
+                                        if(confirm("Submit this form?")){
+
+                                            $.post("<%=root%>/CreateSC", $("#createScForm").serialize(), function(data){
+                                                alert(data);
+
+                                                //redirect to approve forms page
+                                                window.location = "<%=root%>/CreateForms";
+                                            });
+                                        }
+                                    }
+                                </script>
       <div class="panel panel-default">
 
         <!-- P1 -->
@@ -271,7 +312,11 @@
 		<!-- P3 -->
 	
 
-    
+                        <p align="center">                         
+                            <button onclick="submitSC()">Submit</button>
+                        </p>
+                        <br>
+                        <br>
 
           </div>         
         </div>

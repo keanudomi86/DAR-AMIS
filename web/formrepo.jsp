@@ -7,8 +7,8 @@
 <%@page import="dao.FormRepo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%ArrayList<FormRepo> prs = (ArrayList<FormRepo>) request.getAttribute("prs");%>
-<%String link = (String)request.getAttribute("link");%>
+<%ArrayList<FormRepo> forms = (ArrayList<FormRepo>) request.getAttribute("forms");%>
+<%String root = request.getContextPath();%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,13 +61,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%for(FormRepo pr: prs){%>
+                            <%for(FormRepo form: forms){%>
                             <tr>
-                                <%if(pr.getIdPr() != null){%>
-                                    <td><a href = "<%=link + pr.getIdPr().getIdPr()%>"><%=pr.getIdPr().getIdPr()%></a></td>
+                                <%if(form.getIdPr() != null){%>
+                                <%if(request.getAttribute("mode") == null){%>
+                                    <td><a href = "<%=root%>/PRPage?id=<%=form.getIdPr().getIdPr()%>"><%=form.getIdPr().getIdPr()%></a></td>
+                                <%} else if(request.getAttribute("mode").equals("create_po")){%>
+                                    <td><a href = "<%=request.getAttribute("link")%><%=form.getIdPr().getIdPr()%>"><%=form.getIdPr().getIdPr()%></a></td>
+                                <%}%>
                                     <td>PR</td>
-                                <%}else if(pr.getIdPo() != null){%>
-                                    <td><a href = "<%=link + pr.getIdPo().getIdPo()%>"><%=pr.getIdPo().getIdPo()%></a></td>
+                                <%}else if(form.getIdPo() != null){%>
+                                    <td><a href = "<%=request.getAttribute("link")%> <%=form.getIdPo().getIdPo()%>"><%=form.getIdPo().getIdPo()%></a></td>
                                     <td>PO</td>
                                 <%}%>
                             </tr>

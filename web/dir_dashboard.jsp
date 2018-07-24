@@ -24,7 +24,7 @@
       <!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
-      
+     
       
       <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
@@ -39,6 +39,16 @@
       <section id="main-content">
           <section class="wrapper">
               <section class="content-header">
+                  <!--<div class="pagination">
+                      <div class="left">
+                          <a href="#" class="previous" align="left">&laquo; Previous</a>
+                      </div>
+                      <div class="right">
+                          <a href="#" class="next" align="right">Next &raquo;</a>
+                      </div>
+                  </div> 
+                  <a href="#" class="previous" align="left">&laquo; Previous</a>
+                  <!--<a href="#" class="text-right text-bold" align="right">Next &raquo;</a> -->
                     <h1>
                         Welcome!
                         <small>Director</small>
@@ -104,10 +114,11 @@
                 </section>
           </section>
       <!--main content end-->
+      
+  </section>
       <!--footer start-->
       <jsp:include page="WEB-INF/copyright.jsp" /> 
       <!--footer end-->
-  </section>
       <jsp:include page="WEB-INF/footer.jsp" />
   </body>
 </html>

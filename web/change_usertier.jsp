@@ -70,9 +70,9 @@
       <section id="main-content">
           <section class="wrapper">
               <section class="content-header">
-                    <h1>
+                    <!--<h1>
                         Welcome!
-                        <small>Admin</small>
+                        <small>Admin</small> -->
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
@@ -82,7 +82,8 @@
                     <div class="box box-primary">
 
                         <div class="box-header">
-                            <i class="glyphicon glyphicon-file"></i>
+                            <!-- iffffff  -->
+                            <a href="dir_dashboard.jsp" class="previous" align="left">&laquo; Previous</a>
                             <h3 class="box-title">Change user level</h3>
                         </div>
 

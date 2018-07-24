@@ -3,7 +3,13 @@
     Created on : 02 8, 18, 6:54:15 PM
     Author     : BavarianHotdog
 --%>
-
+<%@page import="dao.Par"%>
+<%@page import="dao.Wfp"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.Office"%>
+<%Wfp wfp = (Wfp)request.getAttribute("wfp");%>
+<%ArrayList<Office> offices = (ArrayList<Office>)request.getAttribute("offices");%>
+<%String root = request.getContextPath();%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +24,16 @@
       }
 
     </style>
+    <script>
+        function createPAR(){
+            if(confirm("Submit this form?")){
+                url = "<%=root%>/CreatePAR";
+                $.post(url, $("#parForm").serialize(), function(data){
+                    alert(data);
+                });
+            }
+        }
+    </script>
   </head>
 
   <body>
@@ -38,16 +54,28 @@
          <section id="main-content">
           <section class="wrapper">
               <section class="content-header">
-                    <h1>
-                        Property Acknowledgement Receipt - Form
+                  <h1>Property Acknowledgment Receipt - Form </h1>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
-                    </h1>
 			<div class="container-fluid">
+                 <a href="/DAR-AMIS/CreateForms" class="previous" align="left">&laquo; Previous</a>
+                    <script>
+                        function submitPAR(){
+                            if(confirm("Submit this form?")){
+
+                                $.post("<%=root%>/CreatePAR", $("#createParForm").serialize(), function(data){
+                                    alert(data);
+
+                                    //redirect to approve forms page
+                                    window.location = "<%=root%>/CreateForms";
+                                });
+                            }
+                        }
+                    </script>
       <div class="panel panel-default">
 
         <!-- P1 -->
-        <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Property Acknowledgement Receipt</STRONG></p></div> 
+        <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Property Acknowledgment Receipt</STRONG></p></div> 
             <div class="panel-body"> 
             <!-- First Row -->
             <div class = "row">
@@ -57,7 +85,7 @@
               <!-- Entity Name Dropdown -->
               <div class="col-sm-2">
                <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> <span id="opt">Choose Entity</span> <span class="caret"></span>
+                <button class="btn btn-secondary dropdown-toggle" name="entity" type="button" data-toggle="dropdown" id="options"> <span id="opt">Choose Entity</span> <span class="caret"></span>
                 </button>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" id="1" href="#" >DARCO</a></li>
@@ -87,7 +115,7 @@
               <div class="col-sm-2"><label align= "text-center"></label></div>              
 
               <div class="col-sm-2"><label align= "text-center">PAR No.</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="RIS No."></div>
+              <div class="col-sm-2"><input type="text" name="ris_no" align= "text-center" placeholder="RIS No."></div>
 
             </div> 
 
@@ -98,7 +126,7 @@
             <div class = "row">
 
               <div class="col-sm-2"><label align= "text-center">Fund Cluster</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Fund Cluster"></div>
+              <div class="col-sm-2"><input type="text" name="fund_cluster" align= "text-center" placeholder="Fund Cluster"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 
               
@@ -129,42 +157,22 @@
 			    <tbody>
 			        <tr>
 			            <td>
-			                <div><input type="text"  name ="Quantity" align= "text-center" placeholder="Quantity"></div>
+			                <div><input type="text"  name ="quantity" align= "text-center" placeholder="Quantity"></div>
 			            </td>
 			            <td>
-			                <div><input type="text"  name="Unit" align= "text-center" placeholder="Unit"></div>
+			                <div><input type="text"  name="unit" align= "text-center" placeholder="Unit"></div>
 			            </td>
 			            <td>
-			                <div><input type="text"  size="40" name="Description" align= "text-center" placeholder="Description"></div>
+			                <div><input type="text"  size="40" name="description" align= "text-center" placeholder="Description"></div>
 			            </td>
 			            <td>
-			                <div><input type="text"  name="PropertyNum" align= "text-center" placeholder="Property No."></div>
+			                <div><input type="text"  name="property_no" align= "text-center" placeholder="Property No."></div>
 			            </td>
 			            <td>
-			             
-              
-                  <div class="input-group">
-                    <!-- This comment out adds an icon at the left side of the date text-->
-                    <!--<div class="input-group-addon">
-                      <i class="fa fa-calendar"></i>
-                    </div> -->
-                   <input  id="date" name="DateAcquired" placeholder="MM/DD/YYYY" type="date">
-                  </div>
-                 </div>
-                 <!--<div class="form-group">
-                  <div>
-                   <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
-                  </div>
-                 </div>
-                 </form> 
-              </div> -->
-            </div>
-
-            	<!-- Date script for JS -->
-                
-			            </td>
+                                        <div class="input-group"><input  id="date" name="acq_date" placeholder="MM/DD/YYYY" type="date"></div>
+                                    </td>
 			            <td>
-			                <div><input type="text"  name="Amount" align= "text-center" placeholder="Amount"></div>
+			                <div><input type="text"  name="amount" align= "text-center" placeholder="Amount"></div>
 			            </td>
 						
 			            <td><a class="deleteRow"></a>
@@ -194,14 +202,13 @@
 					        var cols = "";
 							
 
-					        cols += '<td><input type="text" placeholder="Quantity" name="Quantity' + counter + '"/></td>';
-					        cols += '<td><input type="text" placeholder="Unit" 	name="unit' 		   + counter + '"/></td>';
-					        cols += '<td><input type="text" size="40" placeholder="Description"  name="Description' + counter + '"/></td>';
-					        cols += '<td><input type="text" placeholder="Property No." 	name="PropertyNum' 	   + counter + '"/></td>';
-					        cols += '<td><input type="date" placeholder="MM/DD/YYYY" id="date" name="DateAcquired'  + counter + '"/></td>';
-					        cols += '<td><input type="text" placeholder="Amount" 	name="Amount' 	   + counter + '"/></td>';
+					        cols += '<td><div><input type="text"  name ="quantity" align= "text-center" placeholder="Quantity"></div></td>';
+					        cols += '<td><div><input type="text"  name="unit" align= "text-center" placeholder="Unit"></div></td>';
+					        cols += '<td><div><input type="text"  size="40" name="description" align= "text-center" placeholder="Description"></div></td>';
+					        cols += '<td><div><input type="text"  name="property_no" align= "text-center" placeholder="Property No."></div></td>';
+					        cols += '<td><div class="input-group"><input  id="date" name="acq_date" placeholder="MM/DD/YYYY" type="date"></div></td>';
+					        cols += '<td><div><input type="text"  name="amount" align= "text-center" placeholder="Amount"></div></td>';
 							
-  
 					        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
 					        newRow.append(cols);
 					        $("table.order-list").append(newRow);
@@ -255,7 +262,7 @@
 
 		<div class="panel-body">
 		    <div class= "row">
-			    <div class="col-sm-4"><textarea rows="3" cols="170" placeholder="Purpose"></textarea> </div>              
+			    <div class="col-sm-4"><textarea rows="3" name="purpose" cols="170" placeholder="Purpose"></textarea> </div>              
 			</div>     
 			</div>
 
@@ -271,7 +278,7 @@
         <div class="panel-body">
             <div class = "row">
               <div class="col-sm-2"><label align= "text-center">Name</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name"></div>
+              <div class="col-sm-2"><input type="text" name="name_rec" align= "text-center" placeholder="Name"></div>
             </div>
 
         	<!-- Blank Row -->
@@ -280,7 +287,7 @@
             <div class = "row">
 
               <div class="col-sm-2"><label align= "text-center">Position</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Position"></div>
+              <div class="col-sm-2"><input type="text" name="pos_rec" align= "text-center" placeholder="Position"></div>
             </div>
 			<!-- Blank Row -->
         	<div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
@@ -288,7 +295,7 @@
             <div class = "row">
 
               <div class="col-sm-2"><label align= "text-center">Office</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Office"></div>
+              <div class="col-sm-2"><input type="text" name="off_rec" align= "text-center" placeholder="Office"></div>
             </div>
 			
 			<!-- Blank Row -->
@@ -306,7 +313,7 @@
                     <!--<div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div> -->
-                   <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
+                   <input class="form-control" id="date" name="date_rec" placeholder="MM/DD/YYYY" type="text">
                   </div>
                  </div>
                  <!--<div class="form-group">
@@ -345,7 +352,7 @@
         <div class="panel-body">
             <div class = "row">
               <div class="col-sm-2"><label align= "text-center">Name</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name"></div>
+              <div class="col-sm-2"><input type="text" name="name_iss" align= "text-center" placeholder="Name"></div>
             </div>
 
              <!-- Blank Row -->
@@ -353,7 +360,7 @@
 
             <div class = "row">
               <div class="col-sm-2"><label align= "text-center">Position</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Position"></div>
+              <div class="col-sm-2"><input type="text" name="pos_iss" align= "text-center" placeholder="Position"></div>
             </div>            
 			
 			<!-- Blank Row -->
@@ -361,7 +368,7 @@
 
             <div class = "row">
               <div class="col-sm-2"><label align= "text-center">Office</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Office"></div>
+              <div class="col-sm-2"><input type="text" name="off_iss" align= "text-center" placeholder="Office"></div>
             </div>  
 			
 			 <!-- Blank Row -->
@@ -379,10 +386,9 @@
                     <!--<div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div> -->
-                   <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text">
+                   <input class="form-control" id="date" name="date_iss" placeholder="MM/DD/YYYY" type="text">
                   </div>
                  </div>
-              <button onclick="submitPTR()">Submit</button>
                  <!--<div class="form-group">
                   <div>
                    <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
@@ -405,13 +411,12 @@
                       })
                   })
                 </script>
-       </div>
-
+            </div>
+                        <p align="center">                         
+                            <button onclick="submitPAR()">Submit</button>
+                        </p>
           </div>         
         </div>
-      </div>
-
-    </div>
 		</section><! --/wrapper -->
       </section>
      </section>
