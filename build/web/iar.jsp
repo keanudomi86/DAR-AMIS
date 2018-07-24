@@ -44,7 +44,7 @@
           <section class="wrapper">
               <section class="content-header">
                     <h1>
-                        Assignment of Inspector Form
+                        Inspection and Acceptance Report
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
@@ -62,7 +62,7 @@
               <!-- Entity Name Dropdown -->
               <div class="col-sm-2">
                <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> <span id="opt">Choose Entity</span> <span class="caret"></span>
+                <button class="btn btn-secondary dropdown-toggle" name="entity_name" type="button" data-toggle="dropdown" id="options"> <span id="opt">Choose Entity</span> <span class="caret"></span>
                 </button>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" id="1" href="#" >DARCO</a></li>
@@ -92,7 +92,7 @@
               <div class="col-sm-2"><label align= "text-center"></label></div>              
 
               <div class="col-sm-2"><label align= "text-center">IAR No.</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="RIS No."></div>
+              <div class="col-sm-2"><input type="text" name="iar_no" align= "text-center" placeholder="RIS No."></div>
 
             </div> 
 
@@ -103,13 +103,13 @@
             <div class = "row">
 
               <div class="col-sm-2"><label align= "text-center">Fund Cluster</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Fund Cluster"></div>
+              <div class="col-sm-2"><input type="text" name="fund_cluster" align= "text-center" placeholder="Fund Cluster"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			  
 		  
 
               <div class="col-sm-2"><label align= "text-center">Date</label></div>
-              <div class="col-sm-2"><input type="Date"  align= "text-center" placeholder="Date"></div>
+              <div class="col-sm-2"><input type="Date" name="iar_date" align= "text-center" placeholder="Date"></div>
 
             </div> 
 			<!-- Blank Row -->
@@ -119,13 +119,13 @@
 			<div class = "row">
 			
               <div class="col-sm-2"><label align= "text-center">Supplier</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Supplier"></div>
+              <div class="col-sm-2"><input type="text" name="supplier" align= "text-center" placeholder="Supplier"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			  
 		  
 
               <div class="col-sm-2"><label align= "text-center">Invoice No.</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Invoice No."></div>
+              <div class="col-sm-2"><input type="text" name="invoice_no" align= "text-center" placeholder="Invoice No."></div>
 			
             </div> 
 			
@@ -136,13 +136,13 @@
 			<div class = "row">
 			
               <div class="col-sm-2"><label align= "text-center">PO No.</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="PO No."></div>
+              <div class="col-sm-2"><input type="text" name="po_no" align= "text-center" placeholder="PO No."></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			  
 		  
 
               <div class="col-sm-2"><label align= "text-center">Date</label></div>
-              <div class="col-sm-2"><input type="Date"  align= "text-center" placeholder="Date"></div>
+              <div class="col-sm-2"><input type="Date" name="invoice_date" align= "text-center" placeholder="Date"></div>
 			
             </div> 
 			<!-- Blank Row -->
@@ -151,7 +151,7 @@
 			<div class = "row">
 			
               <div class="col-sm-2"><label align= "text-center">Date</label></div>
-              <div class="col-sm-2"><input type="date"  align= "text-center" placeholder="Date"></div>
+              <div class="col-sm-2"><input type="date" name="iar_date2" align= "text-center" placeholder="Date"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 		
             </div> 
@@ -162,7 +162,7 @@
 			<div class = "row">
 			
               <div class="col-sm-2"><label align= "text-center">Requisitioning Office/Department</label></div>
-              <div class="col-sm-2"><input type="text" size="50" align= "text-center" placeholder="Requisitioning Office/Department"></div>
+              <div class="col-sm-2"><input type="text" name="requisitioning" size="50" align= "text-center" placeholder="Requisitioning Office/Department"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			 
             </div> 
@@ -172,7 +172,7 @@
 			<div class = "row">
 			
               <div class="col-sm-2"><label align= "text-center">Responsibility Center Code</label></div>
-              <div class="col-sm-2"><input type="text" size="50" align= "text-center" placeholder="Responsibility Center Code"></div>
+              <div class="col-sm-2"><input type="text" name="resposibility_code" size="50" align= "text-center" placeholder="Responsibility Center Code"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			
             </div> 
@@ -200,16 +200,16 @@
 			    <tbody>
 			        <tr>
 			            <td>
-			                <div><input type="text"  name ="SPNum" align= "text-center" placeholder="Stock/Property No."></div>
+			                <div><input type="text"  name="stock_no" align= "text-center" placeholder="Stock/Property No."></div>
 			            </td>
 			            <td>
-			                <div><input type="text"  name="Description" align= "text-center" placeholder="Description"></div>
+			                <div><input type="text"  name="description" align= "text-center" placeholder="Description"></div>
 			            </td>
 			            <td>
-			                <div><input type="text"  name="Unit" align= "text-center" placeholder="Unit"></div>
+			                <div><input type="text"  name="unit" align= "text-center" placeholder="Unit"></div>
 			            </td>
 			            <td>
-			                <div><input type="text"  name="Quantity" align= "text-center" placeholder="Quantity"></div>
+			                <div><input type="text"  name="quantity" align= "text-center" placeholder="Quantity"></div>
 			            </td>
 			          
 			            <td><a class="deleteRow"></a>
@@ -239,10 +239,10 @@
 					        var cols = "";
 							
 
-					        cols += '<td><input type="text" placeholder="Stock/Property No." name="SPNum' + counter + '"/></td>';
-					        cols += '<td><input type="text" placeholder="Description" 	name="Description' 		   + counter + '"/></td>';
-					        cols += '<td><input type="text" placeholder="Unit"  name="Unit' + counter + '"/></td>';
-					        cols += '<td><input type="text" placeholder="Quantity" 	name="Quantity' 	   + counter + '"/></td>';
+					        cols += '<td><div><input type="text" name="stock_no'+ counter +'" align="text-center" placeholder="Stock/Property No."></div></td>';
+					        cols += '<td><div><input type="text"  name="description'+ counter +'" align= "text-center" placeholder="Description"></div></td>';
+					        cols += '<td><div><input type="text"  name="unit'+ counter +'" align= "text-center" placeholder="Unit"></div></td>';
+					        cols += '<td><div><input type="text"  name="quantity'+ counter +'" align= "text-center" placeholder="Quantity"></div></td>';
 					       
   
 					        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
@@ -300,7 +300,7 @@
 		    <div class = "row">
 			
               <div class="col-sm-2"><label align= "text-center">Date Inspected:</label></div>
-              <div class="col-sm-2"><input type="date"  align= "text-center" placeholder="Date Inspected"></div>
+              <div class="col-sm-2"><input type="date" name="inspected_date" align= "text-center" placeholder="Date Inspected"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			  </div>			  
 			<!-- Blank Row -->
@@ -314,7 +314,7 @@
 			<!-- Blank Row -->
             <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
 		    <div class="col-sm-2"><label align= "text-center">Inspection Office/Committee:</label></div>
-              <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Inspection Office/Committee"></div>
+              <div class="col-sm-2"><input type="text" name="inspection_officer" align= "text-center" placeholder="Inspection Office/Committee"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			</div>
 			
@@ -330,7 +330,7 @@
 		    <div class = "row">
 			
               <div class="col-sm-2"><label align= "text-center">Date Received:</label></div>
-              <div class="col-sm-2"><input type="date"  align= "text-center" placeholder="Date Inspected"></div>
+              <div class="col-sm-2"><input type="date" name="acceptance_date" align= "text-center" placeholder="Date Inspected"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			  </div>			  
 			<!-- Blank Row -->
@@ -347,17 +347,18 @@
 			 <div class="col-sm-2"></div>
 			<div class="col-sm-1"><input type="checkbox" name="Complete" value="complete">Partial</div>
 			<div class="col-sm-2"><label align= "text-center">Specific Quantity:</label></div>
-              <div class="col-sm-1"><input type="text" size="30" align= "text-center" placeholder="Specific Quantity of Partial"></div>
+                        <div class="col-sm-1"><input type="text" name="partial_quantity" size="30" align= "text-center" placeholder="Specific Quantity of Partial"></div>
               <div class="col-sm-1"><label align= "text-center"></label></div>
 			</div>
 			<!-- Blank Row -->
             <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
 		    <div class="col-sm-2"><label align= "text-center">Supply Officer:</label></div>
-              <div class="col-sm-2"><input type="text" size="40" align= "text-center" placeholder="Supply Officer"></div>
+                    <div class="col-sm-2"><input type="text" name="supply_officer" size="40" align= "text-center" placeholder="Supply Officer"></div>
               <div class="col-sm-2"><label align= "text-center"></label></div>
 			</div>
       </div>
                      </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
                  <!-- <tr><button type="button" class="btn btn-default">Create</button></tr><tr><button type="button" class="btn btn-default">Edit</button></tr><tr><button type="button" class="btn btn-default">View List</button></tr> -->
 		</section><! --/wrapper -->
       </section>

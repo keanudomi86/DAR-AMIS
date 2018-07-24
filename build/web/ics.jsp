@@ -3,7 +3,14 @@
     Created on : 03 19, 18, 5:08:46 PM
     Author     : BavarianHotdog
 --%>
-
+<%@page import="dao.Ics"%>
+<%@page import="dao.IcsDetails"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.Pr"%>
+<%@page import="dao.Po"%>
+<%Pr pr = (Pr)request.getAttribute("pr");%>
+<%Ics ics = (Ics) request.getAttribute("ics");%>
+<%String root = request.getContextPath();%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +26,16 @@
       }
 
     </style>
+    <script>
+        function createAIF(){
+            if(confirm("Submit this form?")){
+                url = "<%=root%>/CreateICS";
+                $.post(url, $("#icsForm").serialize(), function(data){
+                    alert(data);
+                });
+            }
+        }
+    </script>
   <body>
 
   <section id="container" >
@@ -48,6 +65,20 @@
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
                   <div class="container-fluid">
+                      <a href="/DAR-AMIS/CreateForms" class="previous" align="left">&laquo; Previous</a>
+                                <script>
+                                    function submitICS(){
+                                        if(confirm("Submit this form?")){
+
+                                            $.post("<%=root%>/CreateICS", $("#createIcsForm").serialize(), function(data){
+                                                alert(data);
+
+                                                //redirect to approve forms page
+                                                window.location = "<%=root%>/CreateForms";
+                                            });
+                                        }
+                                    }
+                                </script>
       <div class="panel panel-default">
 
         <!-- P1 -->
@@ -389,12 +420,14 @@
                   })
                 </script>
        </div>
-
+                        <p align="center">                         
+                            <button onclick="submitICS()">Submit</button>
+                        </p>
+                        <br>
+                        <br>
           </div>         
         </div>
-      </div>
 
-    </div>
                  <!-- <tr><button type="button" class="btn btn-default">Create</button></tr><tr><button type="button" class="btn btn-default">Edit</button></tr><tr><button type="button" class="btn btn-default">View List</button></tr> -->
 		</section><! --/wrapper -->
       </section>

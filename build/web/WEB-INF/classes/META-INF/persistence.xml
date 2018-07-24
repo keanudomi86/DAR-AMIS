@@ -49,6 +49,12 @@
     <class>dao.WmrDetails</class>
     <class>dao.Division</class>
     <class>dao.FormRepo</class>
+    <class>dao.AppDetails</class>
+    <class>dao.Office_1</class>
+    <class>dao.PpmpDetails</class>
+    <class>dao.Iar</class>
+    <class>dao.IarDetails</class>
+    <class>dao.OfficeExtra</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/daramis?zeroDateTimeBehavior=convertToNull"/>

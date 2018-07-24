@@ -26,8 +26,9 @@
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     
-
+         <div><a href="index.jsp" class="previous" align="left">&laquo; Previous</a></div>
             <div class="register-box-body">
+                <br>
                 <p class="login-box-msg">Register</p>
                 <form action="Register" method="post">
                     <div class="form-group has-feedback">
@@ -61,14 +62,17 @@
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
                     </div> 
                     <div class="form-group has-feedback">
+                        <h6 align="left"> Present Address of Residence </h6>
                         <input type="text" class="form-control" name="address" placeholder="Address" required>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
+                        <h6 align="left"> Please input your Date of Birth in Year-Month-Day format </h6>
                         <input type="text" class="form-control" name="birthday" placeholder="Date of Birthday (yyyy-MM-dd)" required>
                         <span class="glyphicon glyphicon-circle-arrow-left form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
+                        <h6 align="left"> Admin Services | General Services | Financial Management | Management | Records | Procurement | Personnel </h6>
                         <select class="form-control" name="division" placeholder="Division" required>
                             <option disabled selected>Please select division</option>
                             <%for(Division d: divisions){%>

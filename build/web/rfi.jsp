@@ -3,21 +3,39 @@
     Created on : 03 19, 18, 5:08:17 PM
     Author     : BavarianHotdog
 --%>
-
+<%@page import="dao.RfiDeliveries"%>
+<%@page import="dao.RfiFk"%>
+<%@page import="dao.RfiRepairPost"%>
+<%@page import="dao.Rfi"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.Pr"%>
+<%@page import="dao.Po"%>
+<%Pr pr = (Pr)request.getAttribute("pr");%>
+<%Rfi rfi = (Rfi) request.getAttribute("rfi");%>
+<%String root = request.getContextPath();%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <jsp:include page="WEB-INF/header.jsp" /> 
-    <title>DAR-AMIS | PTR</title>
+    <title>DAR-AMIS | RFI</title>
     <style>
       .panel-default > .panel-heading-custom{
 
         background-color: #10572b;
         color: #ffffff ;     
       }
-
     </style>
+        <script>
+        function createRFI(){
+            if(confirm("Submit this form?")){
+                url = "<%=root%>/CreateRFI";
+                $.post(url, $("#rfiForm").serialize(), function(data){
+                    alert(data);
+                });
+            }
+        }
+    </script>
   </head>
 
   <body>
@@ -49,6 +67,20 @@
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
 			<div class="container-fluid">
+                            <a href="/DAR-AMIS/CreateForms" class="previous" align="left">&laquo; Previous</a>
+                                <script>
+                                    function submitRFI(){
+                                        if(confirm("Submit this form?")){
+
+                                            $.post("<%=root%>/CreateRFI", $("#createRfiForm").serialize(), function(data){
+                                                alert(data);
+
+                                                //redirect to approve forms page
+                                                window.location = "<%=root%>/CreateForms";
+                                            });
+                                        }
+                                    }
+                                </script>
       <div class="panel panel-default">
         <!-- P1 -->
         <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Request For Inspection</STRONG></p></div> 
@@ -59,7 +91,7 @@
 
                 <div class="col-sm-2">
                     <div class="btn-group">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> 
+                      <button class="btn btn-secondary dropdown-toggle" type="button" name="type_of_inspection" data-toggle="dropdown" id="options"> 
                         <span id="typeOfInspection">Choose Type of Inspection</span> <span class="caret"></span>
                       </button>
                         <ul class="dropdown-menu">
@@ -81,7 +113,7 @@
 
                 <div class="col-sm-2">
                     <div class="btn-group">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> 
+                      <button class="btn btn-secondary dropdown-toggle" type="button" name="type_of_repair" data-toggle="dropdown" id="options"> 
                         <span id="typeOfRepair">Choose Type</span> <span class="caret"></span>
                       </button>
                         <ul class="dropdown-menu">
@@ -103,7 +135,7 @@
 
                 <div class="col-sm-2">
                     <div class="btn-group">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> 
+                      <button class="btn btn-secondary dropdown-toggle" type="button" name="type_of_property" data-toggle="dropdown" id="options"> 
                         <span id="typeOfDeliveries">Choose Type</span> <span class="caret"></span>
                       </button>
                         <ul class="dropdown-menu">
@@ -132,7 +164,7 @@
                 </div>
 
                 
-                <div class=""><input type="text"  align= "text-center" placeholder="Others"></div>
+                <div class=""><input type="text" name="others_property" align= "text-center" placeholder="Others"></div>
 
             </div
 
@@ -151,11 +183,11 @@
                 <div class="col-sm-2"><label align= "text-center">Type of Property</label></div>
                 <div class="col-sm-2">
                   <div class="btn-group">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> 
+                      <button class="btn btn-secondary dropdown-toggle" type="button" name="type_of_property" data-toggle="dropdown" id="options"> 
                         <span id="typeOfProperty">Choose Type</span> <span class="caret"></span>
                       </button>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" id="top_vechicles" href="#" >Vechicles</a></li>
+                          <li><a class="dropdown-item" id="top_vechicles" href="#" >Vehicles</a></li>
                           <li><a class="dropdown-item" id="top_equip" href="#">Equipment</a></li>
                           <li><a class="dropdown-item" id="top_ffe" href="#">FFE</a></li>
                         </ul>
@@ -181,42 +213,42 @@
               <!--R3 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">Model/Brand</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Model/Brand"></div>              
+                  <div class="col-sm-2"><input type="text" name="model" align= "text-center" placeholder="Model/Brand"></div>              
               </div>
                <!-- 4 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R5 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">Engine No./Serial No.</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Engine No./Serial No."></div>                  
+                  <div class="col-sm-2"><input type="text" name="engine_no" align= "text-center" placeholder="Engine No./Serial No."></div>                  
               </div>
               <!-- 6 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R7 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">Plate No./Property No.</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Plate No./Property No."></div>                  
+                  <div class="col-sm-2"><input type="text" name="plate_no" align= "text-center" placeholder="Plate No./Property No."></div>                  
               </div>
               <!-- 8 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R9 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">Defects/Complaints/Scope of Work</label></div>
-                  <div class="col-sm-4"><textarea rows="3" cols="100" placeholder="Defects/Complaints/Scope of Work"></textarea></div>                  
+                  <div class="col-sm-4"><textarea rows="3" name="scope" cols="100" placeholder="Defects/Complaints/Scope of Work"></textarea></div>                  
               </div>
               <!-- 10 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R11 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">End-User/Office</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="End-User/Office"></div>                  
+                  <div class="col-sm-2"><input type="text" name="end_user" align= "text-center" placeholder="End-User/Office"></div>                  
               </div>
               <!-- 12 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R13 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">Amount</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Amount"></div>                  
+                  <div class="col-sm-2"><input type="text" name="amount" align= "text-center" placeholder="Amount"></div>                  
               </div>
               <!-- 14 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
@@ -234,7 +266,7 @@
               <div class="row">
                   <div class="col-sm-4">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" name="rsps" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Request for Spart Parts & Services (RSPS - for Vechicles)</label>
                     </div>
                   </div>                    
@@ -243,7 +275,7 @@
               <div class="row">
                   <div class="col-sm-4">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" name="rims" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Request for Infra Materials & Services (RIMS - for Infras)</label>
                     </div>
                   </div>                    
@@ -252,7 +284,7 @@
               <div class="row">
                   <div class="col-sm-6">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <input type="checkbox" name="rrdps" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Request for Replacement of Def. Parts & Services (RRDPS - for FFE)</label>
                     </div>
                   </div>                    
@@ -267,7 +299,7 @@
               <div class="row">
                   <div class="col-sm-4">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <input type="checkbox" name="pr_rsps" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Purchase Request/RSPS</label>
                     </div>
                   </div>                    
@@ -276,7 +308,7 @@
               <div class="row">
                   <div class="col-sm-4">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <input type="checkbox" name="jo_po_contract" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Job Order/Purchase Order/Contract</label>
                     </div>
                   </div>                    
@@ -285,7 +317,7 @@
               <div class="row">
                   <div class="col-sm-6">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" name="oc_dr_si_or" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Original Copy of DR/Sales Invoice/OR</label>
                     </div>
                   </div>                    
@@ -294,7 +326,7 @@
               <div class="row">
                   <div class="col-sm-6">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <input type="checkbox" name="bids" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Abstract of Bids/Bids Documents/Canvass</label>
                     </div>
                   </div>                    
@@ -303,7 +335,7 @@
               <div class="row">
                   <div class="col-sm-6">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" name="wmr" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Waste Material Report, in case of replacement of parts and accessories</label>
                     </div>
                   </div>                    
@@ -319,49 +351,49 @@
               <!--R1 of panel-description-Deliveries Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">Supplier/Dealer</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Supplier/Dealer"></div>              
+                  <div class="col-sm-2"><input type="text" name="supplier" align= "text-center" placeholder="Supplier/Dealer"></div>              
               </div>
                <!-- 2 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R3 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">Invoice No.</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Invoice No."></div>                  
+                  <div class="col-sm-2"><input type="text" name="invoice_no" align= "text-center" placeholder="Invoice No."></div>                  
               </div>
               <!-- 4 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R5 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">DR No</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="DR No"></div>                  
+                  <div class="col-sm-2"><input type="text" name="dr_no" align= "text-center" placeholder="DR No"></div>                  
               </div>
               <!-- 6 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R7 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">PR No</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="PR No"></div>                 
+                  <div class="col-sm-2"><input type="text" name="pr_no" align= "text-center" placeholder="PR No"></div>                 
               </div>
               <!-- 8 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R9 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">PO No</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="PO No"></div>                  
+                  <div class="col-sm-2"><input type="text" name="po_no" align= "text-center" placeholder="PO No"></div>                  
               </div>
               <!-- 10 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R11 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">End-User/Office</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="End-User/Office"></div>                  
+                  <div class="col-sm-2"><input type="text" name="end_user_office" align= "text-center" placeholder="End-User/Office"></div>                  
               </div>
               <!-- 12 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R13 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">Amount</label></div>
-                  <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Amount"></div>                  
+                  <div class="col-sm-2"><input type="text" name="amount_2" align= "text-center" placeholder="Amount"></div>                  
               </div>
               <!-- 14 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
@@ -379,7 +411,7 @@
               <div class="row">
                   <div class="col-sm-4">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" name="pr_2" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Purchase Request</label>
                     </div>
                   </div>                    
@@ -388,7 +420,7 @@
               <div class="row">
                   <div class="col-sm-4">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <input type="checkbox" name="po_contract_lease" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Purchase Order/Contract/Lease Agreement</label>
                     </div>
                   </div>                    
@@ -397,7 +429,7 @@
               <div class="row">
                   <div class="col-sm-6">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" name="oc_dr_si_or_2" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Orginal Copy of DR/Sales Invoice/OR</label>
                     </div>
                   </div>                    
@@ -406,7 +438,7 @@
               <div class="row">
                   <div class="col-sm-6">
                     <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" name="bids_2" class="form-check-input" id="exampleCheck1">
                       <label  class="form-check-label" for="exampleCheck1">Abstract of Bids/Bids Documents/Canvass</label>
                     </div>
                   </div>                    
@@ -424,14 +456,14 @@
               <!--R1 of Approval Panel-->
               <div class="row">                
                 <div class="col-sm-2"><label align= "text-center">Name</label></div>
-                <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Name"></div>                          
+                <div class="col-sm-2"><input type="text" name="name_approve"  align= "text-center" placeholder="Name"></div>                          
               </div>
               <!-- 2 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R3 of Approval Panel-->
               <div class="row">                
                 <div class="col-sm-2"><label align= "text-center">Designation</label></div>
-                <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Designation"></div>                          
+                <div class="col-sm-2"><input type="text" name="designation_approve" align= "text-center" placeholder="Designation"></div>                          
               </div>
               <!-- 4 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
@@ -479,40 +511,38 @@
               <!--R1 of Management-Use Panel-->
               <div class="row">                
                 <div class="col-sm-2"><label align= "text-center">Deliveries</label></div>
-                <div class="col-sm-4"><textarea rows="3" cols="100" placeholder="Deliveries"></textarea> </div>                          
+                <div class="col-sm-4"><textarea rows="3" name="deliveries" cols="100" placeholder="Deliveries"></textarea> </div>                          
               </div>
               <!-- 2 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R3 of Management-Use Panel-->
               <div class="row">                
                 <div class="col-sm-2"><label align= "text-center">Control No</label></div>
-                <div class="col-sm-2"><input type="text"  align= "text-center" placeholder="Control No"></div>                          
+                <div class="col-sm-2"><input type="text" name="control_no" align= "text-center" placeholder="Control No"></div>                          
               </div>
               <!-- 6 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R7 of Management-Use Panel-->
               <div class="row">                
                 <div class="col-sm-2"><label align= "text-center">Pre-Repair</label></div>
-                <div class="col-sm-4"><textarea rows="3" cols="100" placeholder="Deliveries"></textarea> </div>                          
+                <div class="col-sm-4"><textarea rows="3" name="deliveries_pre_repair" cols="100" placeholder="Deliveries"></textarea> </div>                          
               </div>
               <!-- 8 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R9 of Management-Use Panel-->
               <div class="row">                
                 <div class="col-sm-2"><label align= "text-center">Post-Repair</label></div>
-                <div class="col-sm-4"><textarea rows="3" cols="100" placeholder="Deliveries"></textarea> </div>                          
+                <div class="col-sm-4"><textarea rows="3" name="deliveries_post_repair" cols="100" placeholder="Deliveries"></textarea> </div>                          
               </div>              
                                          
               </div>
                      
-
+                        <p align="center">                         
+                            <button onclick="submitRFI()">Submit</button>
+                        </p>
             </div>
 
         </div>
-      </div>
-
-      </div>
-    </div>
 		</section><! --/wrapper -->
       </section>
      </section>

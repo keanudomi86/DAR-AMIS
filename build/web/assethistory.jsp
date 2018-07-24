@@ -95,7 +95,7 @@
                                           <div class="col-sm-2"><label align= "text-center">Date Acquired</label></div>
                                           <div class="col-sm-2"><label align= "text-center">Transfer Type</label></div>
                                           <div class="col-sm-2"><label align= "text-center">Number of Owners</label></div> 
-                                          <div class="col-sm-2"><label align= "text-center">Condition of Plant, Property, and Equipment</label></div>         
+                                          <div class="col-sm-4"><label align= "text-center">Condition of Plant, Property, and Equipment</label></div>         
                                     </div>
                                   </div>
 

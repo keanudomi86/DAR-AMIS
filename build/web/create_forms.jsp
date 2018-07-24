@@ -8,6 +8,7 @@
 <%@page import="dao.FormRepo"%>
 <%@page import="java.util.ArrayList"%>
 <%ArrayList<FormRepo> forms = (ArrayList<FormRepo>)request.getAttribute("forms");%>
+<%String root = request.getContextPath();%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +40,8 @@
           <section class="wrapper">
               <section class="content-header">
                     <h1>
-                        Department of Agrarian Reform 
-                        <small>- Create Forms</small>
+                        Create Forms
+                        <small>- Please select the form to create:</small>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
                     </h1>
@@ -52,7 +53,7 @@
 						    <ul class="dropdown-menu">
                           <li><a href="/DAR-AMIS/PRPage">Purchase Request</a></li>
                           <li><a href="/DAR-AMIS/CreatePOSelectFormsPR">Purchase Order</a></li>
-                          <li><a href="/DAR-AMIS/PARPage">Property Acknowledgement Receipt</a></li>
+                          <li><a href="/DAR-AMIS/PARPage">Property Acknowledgment Receipt</a></li>
                           <li><a href="rfi.jsp">Request For Inspection</a></li>
                           <li><a href="aif.jsp">Assignment of Inspector Form</a></li>
                           <li><a href="ics.jsp">Inventory Custodian Slip</a></li>
@@ -80,7 +81,7 @@
                                 <%if(form.getIdPr() != null){%>
                                 <%Pr pr = form.getIdPr();%>
                                     <tr>
-                                        <td><%=pr.getIdPr()%></td>
+                                        <td><a href="<%=root%>/ViewForm?id=<%=pr.getIdPr()%>"><%=pr.getIdPr()%></a></td>
                                         <td><%=pr.getEntityName()%></td>
                                         <td><%=pr.getIdOffice().getDepartment()%></td>
                                         <td>Purchase Request</td>
