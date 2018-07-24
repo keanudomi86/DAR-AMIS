@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package dao;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,50 +28,118 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "wfp_details", catalog = "daramis", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"id_details"})})
+    @UniqueConstraint(columnNames = {"id_wfp_details"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "WfpDetails.findAll", query = "SELECT w FROM WfpDetails w")
-    , @NamedQuery(name = "WfpDetails.findByIdDetails", query = "SELECT w FROM WfpDetails w WHERE w.idDetails = :idDetails")})
+    , @NamedQuery(name = "WfpDetails.findByIdWfpDetails", query = "SELECT w FROM WfpDetails w WHERE w.idWfpDetails = :idWfpDetails")
+    , @NamedQuery(name = "WfpDetails.findByObjectExp", query = "SELECT w FROM WfpDetails w WHERE w.objectExp = :objectExp")
+    , @NamedQuery(name = "WfpDetails.findByQ1", query = "SELECT w FROM WfpDetails w WHERE w.q1 = :q1")
+    , @NamedQuery(name = "WfpDetails.findByQ2", query = "SELECT w FROM WfpDetails w WHERE w.q2 = :q2")
+    , @NamedQuery(name = "WfpDetails.findByQ3", query = "SELECT w FROM WfpDetails w WHERE w.q3 = :q3")
+    , @NamedQuery(name = "WfpDetails.findByQ4", query = "SELECT w FROM WfpDetails w WHERE w.q4 = :q4")
+    , @NamedQuery(name = "WfpDetails.findByTotalQty", query = "SELECT w FROM WfpDetails w WHERE w.totalQty = :totalQty")})
 public class WfpDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_details", nullable = false)
-    private Integer idDetails;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDetails")
-    private List<Wfp> wfpList;
+    @Column(name = "id_wfp_details", nullable = false)
+    private Integer idWfpDetails;
+    @Size(max = 45)
+    @Column(name = "object_exp", length = 45)
+    private String objectExp;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(precision = 22)
+    private Double q1;
+    @Column(precision = 22)
+    private Double q2;
+    @Column(precision = 22)
+    private Double q3;
+    @Column(precision = 22)
+    private Double q4;
+    @Column(name = "total_qty", precision = 22)
+    private Double totalQty;
+    @JoinColumn(name = "id_wfp", referencedColumnName = "id_wfp", nullable = false)
+    @ManyToOne(optional = false)
+    private Wfp idWfp;
 
     public WfpDetails() {
     }
 
-    public WfpDetails(Integer idDetails) {
-        this.idDetails = idDetails;
+    public WfpDetails(Integer idWfpDetails) {
+        this.idWfpDetails = idWfpDetails;
     }
 
-    public Integer getIdDetails() {
-        return idDetails;
+    public Integer getIdWfpDetails() {
+        return idWfpDetails;
     }
 
-    public void setIdDetails(Integer idDetails) {
-        this.idDetails = idDetails;
+    public void setIdWfpDetails(Integer idWfpDetails) {
+        this.idWfpDetails = idWfpDetails;
     }
 
-    @XmlTransient
-    public List<Wfp> getWfpList() {
-        return wfpList;
+    public String getObjectExp() {
+        return objectExp;
     }
 
-    public void setWfpList(List<Wfp> wfpList) {
-        this.wfpList = wfpList;
+    public void setObjectExp(String objectExp) {
+        this.objectExp = objectExp;
+    }
+
+    public Double getQ1() {
+        return q1;
+    }
+
+    public void setQ1(Double q1) {
+        this.q1 = q1;
+    }
+
+    public Double getQ2() {
+        return q2;
+    }
+
+    public void setQ2(Double q2) {
+        this.q2 = q2;
+    }
+
+    public Double getQ3() {
+        return q3;
+    }
+
+    public void setQ3(Double q3) {
+        this.q3 = q3;
+    }
+
+    public Double getQ4() {
+        return q4;
+    }
+
+    public void setQ4(Double q4) {
+        this.q4 = q4;
+    }
+
+    public Double getTotalQty() {
+        return totalQty;
+    }
+
+    public void setTotalQty(Double totalQty) {
+        this.totalQty = totalQty;
+    }
+
+    public Wfp getIdWfp() {
+        return idWfp;
+    }
+
+    public void setIdWfp(Wfp idWfp) {
+        this.idWfp = idWfp;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idDetails != null ? idDetails.hashCode() : 0);
+        hash += (idWfpDetails != null ? idWfpDetails.hashCode() : 0);
         return hash;
     }
 
@@ -82,7 +150,7 @@ public class WfpDetails implements Serializable {
             return false;
         }
         WfpDetails other = (WfpDetails) object;
-        if ((this.idDetails == null && other.idDetails != null) || (this.idDetails != null && !this.idDetails.equals(other.idDetails))) {
+        if ((this.idWfpDetails == null && other.idWfpDetails != null) || (this.idWfpDetails != null && !this.idWfpDetails.equals(other.idWfpDetails))) {
             return false;
         }
         return true;
@@ -90,7 +158,7 @@ public class WfpDetails implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.WfpDetails[ idDetails=" + idDetails + " ]";
+        return "dao.WfpDetails[ idWfpDetails=" + idWfpDetails + " ]";
     }
-    
+
 }

@@ -8,6 +8,7 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,14 +43,13 @@ public class Wfp implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_wfp", nullable = false)
     private Integer idWfp;
-    @JoinColumn(name = "id_details", referencedColumnName = "id_details", nullable = false)
-    @ManyToOne(optional = false)
-    private WfpDetails idDetails;
     @JoinColumn(name = "id_office", referencedColumnName = "id_office", nullable = false)
     @ManyToOne(optional = false)
     private Office idOffice;
     @OneToMany(mappedBy = "idWfp")
     private List<Pr> prList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idWfp")
+    private List<WfpDetails> wfpDetailsList;
 
     public Wfp() {
     }
@@ -64,14 +64,6 @@ public class Wfp implements Serializable {
 
     public void setIdWfp(Integer idWfp) {
         this.idWfp = idWfp;
-    }
-
-    public WfpDetails getIdDetails() {
-        return idDetails;
-    }
-
-    public void setIdDetails(WfpDetails idDetails) {
-        this.idDetails = idDetails;
     }
 
     public Office getIdOffice() {
@@ -89,6 +81,15 @@ public class Wfp implements Serializable {
 
     public void setPrList(List<Pr> prList) {
         this.prList = prList;
+    }
+
+    @XmlTransient
+    public List<WfpDetails> getWfpDetailsList() {
+        return wfpDetailsList;
+    }
+
+    public void setWfpDetailsList(List<WfpDetails> wfpDetailsList) {
+        this.wfpDetailsList = wfpDetailsList;
     }
 
     @Override

@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -30,45 +31,34 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "par_details", catalog = "daramis", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"idpar_details"})})
+    @UniqueConstraint(columnNames = {"id_par"})
+    , @UniqueConstraint(columnNames = {"id_par_details"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ParDetails.findAll", query = "SELECT p FROM ParDetails p")
-    , @NamedQuery(name = "ParDetails.findByIdparDetails", query = "SELECT p FROM ParDetails p WHERE p.idparDetails = :idparDetails")
-    , @NamedQuery(name = "ParDetails.findByEntity", query = "SELECT p FROM ParDetails p WHERE p.entity = :entity")
-    , @NamedQuery(name = "ParDetails.findByParNo", query = "SELECT p FROM ParDetails p WHERE p.parNo = :parNo")
-    , @NamedQuery(name = "ParDetails.findByFundCluster", query = "SELECT p FROM ParDetails p WHERE p.fundCluster = :fundCluster")
+    , @NamedQuery(name = "ParDetails.findByIdParDetails", query = "SELECT p FROM ParDetails p WHERE p.idParDetails = :idParDetails")
+    , @NamedQuery(name = "ParDetails.findByIdPar", query = "SELECT p FROM ParDetails p WHERE p.idPar = :idPar")
+    , @NamedQuery(name = "ParDetails.findByParId", query = "SELECT p FROM ParDetails p WHERE p.parId = :parId")
     , @NamedQuery(name = "ParDetails.findByQuantity", query = "SELECT p FROM ParDetails p WHERE p.quantity = :quantity")
     , @NamedQuery(name = "ParDetails.findByUnit", query = "SELECT p FROM ParDetails p WHERE p.unit = :unit")
     , @NamedQuery(name = "ParDetails.findByDescription", query = "SELECT p FROM ParDetails p WHERE p.description = :description")
     , @NamedQuery(name = "ParDetails.findByPropertyNo", query = "SELECT p FROM ParDetails p WHERE p.propertyNo = :propertyNo")
     , @NamedQuery(name = "ParDetails.findByDateAcq", query = "SELECT p FROM ParDetails p WHERE p.dateAcq = :dateAcq")
-    , @NamedQuery(name = "ParDetails.findByAmount", query = "SELECT p FROM ParDetails p WHERE p.amount = :amount")
-    , @NamedQuery(name = "ParDetails.findByPurpose", query = "SELECT p FROM ParDetails p WHERE p.purpose = :purpose")
-    , @NamedQuery(name = "ParDetails.findByNameRec", query = "SELECT p FROM ParDetails p WHERE p.nameRec = :nameRec")
-    , @NamedQuery(name = "ParDetails.findByPosRec", query = "SELECT p FROM ParDetails p WHERE p.posRec = :posRec")
-    , @NamedQuery(name = "ParDetails.findByOffRec", query = "SELECT p FROM ParDetails p WHERE p.offRec = :offRec")
-    , @NamedQuery(name = "ParDetails.findByDateRec", query = "SELECT p FROM ParDetails p WHERE p.dateRec = :dateRec")
-    , @NamedQuery(name = "ParDetails.findByNameIss", query = "SELECT p FROM ParDetails p WHERE p.nameIss = :nameIss")
-    , @NamedQuery(name = "ParDetails.findByPosIss", query = "SELECT p FROM ParDetails p WHERE p.posIss = :posIss")
-    , @NamedQuery(name = "ParDetails.findByOffIss", query = "SELECT p FROM ParDetails p WHERE p.offIss = :offIss")
-    , @NamedQuery(name = "ParDetails.findByDateIss", query = "SELECT p FROM ParDetails p WHERE p.dateIss = :dateIss")})
+    , @NamedQuery(name = "ParDetails.findByAmount", query = "SELECT p FROM ParDetails p WHERE p.amount = :amount")})
 public class ParDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idpar_details", nullable = false)
-    private Integer idparDetails;
-    @Size(max = 45)
-    @Column(length = 45)
-    private String entity;
-    @Column(name = "par_no")
-    private Integer parNo;
-    @Size(max = 45)
-    @Column(name = "fund_cluster", length = 45)
-    private String fundCluster;
+    @Column(name = "id_par_details", nullable = false)
+    private Integer idParDetails;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_par", nullable = false)
+    private int idPar;
+    @Column(name = "par_id")
+    private Integer parId;
     private Integer quantity;
     @Size(max = 45)
     @Column(length = 45)
@@ -84,73 +74,43 @@ public class ParDetails implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(precision = 12)
     private Float amount;
-    @Size(max = 45)
-    @Column(length = 45)
-    private String purpose;
-    @Size(max = 45)
-    @Column(name = "name_rec", length = 45)
-    private String nameRec;
-    @Size(max = 45)
-    @Column(name = "pos_rec", length = 45)
-    private String posRec;
-    @Size(max = 45)
-    @Column(name = "off_rec", length = 45)
-    private String offRec;
-    @Column(name = "date_rec")
-    @Temporal(TemporalType.DATE)
-    private Date dateRec;
-    @Size(max = 45)
-    @Column(name = "name_iss", length = 45)
-    private String nameIss;
-    @Size(max = 45)
-    @Column(name = "pos_iss", length = 45)
-    private String posIss;
-    @Size(max = 45)
-    @Column(name = "off_iss", length = 45)
-    private String offIss;
-    @Column(name = "date_iss")
-    @Temporal(TemporalType.DATE)
-    private Date dateIss;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "parDetails")
     private Par par;
 
     public ParDetails() {
     }
 
-    public ParDetails(Integer idparDetails) {
-        this.idparDetails = idparDetails;
+    public ParDetails(Integer idParDetails) {
+        this.idParDetails = idParDetails;
     }
 
-    public Integer getIdparDetails() {
-        return idparDetails;
+    public ParDetails(Integer idParDetails, int idPar) {
+        this.idParDetails = idParDetails;
+        this.idPar = idPar;
     }
 
-    public void setIdparDetails(Integer idparDetails) {
-        this.idparDetails = idparDetails;
+    public Integer getIdParDetails() {
+        return idParDetails;
     }
 
-    public String getEntity() {
-        return entity;
+    public void setIdParDetails(Integer idParDetails) {
+        this.idParDetails = idParDetails;
     }
 
-    public void setEntity(String entity) {
-        this.entity = entity;
+    public int getIdPar() {
+        return idPar;
     }
 
-    public Integer getParNo() {
-        return parNo;
+    public void setIdPar(int idPar) {
+        this.idPar = idPar;
     }
 
-    public void setParNo(Integer parNo) {
-        this.parNo = parNo;
+    public Integer getParId() {
+        return parId;
     }
 
-    public String getFundCluster() {
-        return fundCluster;
-    }
-
-    public void setFundCluster(String fundCluster) {
-        this.fundCluster = fundCluster;
+    public void setParId(Integer parId) {
+        this.parId = parId;
     }
 
     public Integer getQuantity() {
@@ -201,78 +161,6 @@ public class ParDetails implements Serializable {
         this.amount = amount;
     }
 
-    public String getPurpose() {
-        return purpose;
-    }
-
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
-    }
-
-    public String getNameRec() {
-        return nameRec;
-    }
-
-    public void setNameRec(String nameRec) {
-        this.nameRec = nameRec;
-    }
-
-    public String getPosRec() {
-        return posRec;
-    }
-
-    public void setPosRec(String posRec) {
-        this.posRec = posRec;
-    }
-
-    public String getOffRec() {
-        return offRec;
-    }
-
-    public void setOffRec(String offRec) {
-        this.offRec = offRec;
-    }
-
-    public Date getDateRec() {
-        return dateRec;
-    }
-
-    public void setDateRec(Date dateRec) {
-        this.dateRec = dateRec;
-    }
-
-    public String getNameIss() {
-        return nameIss;
-    }
-
-    public void setNameIss(String nameIss) {
-        this.nameIss = nameIss;
-    }
-
-    public String getPosIss() {
-        return posIss;
-    }
-
-    public void setPosIss(String posIss) {
-        this.posIss = posIss;
-    }
-
-    public String getOffIss() {
-        return offIss;
-    }
-
-    public void setOffIss(String offIss) {
-        this.offIss = offIss;
-    }
-
-    public Date getDateIss() {
-        return dateIss;
-    }
-
-    public void setDateIss(Date dateIss) {
-        this.dateIss = dateIss;
-    }
-
     public Par getPar() {
         return par;
     }
@@ -284,7 +172,7 @@ public class ParDetails implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idparDetails != null ? idparDetails.hashCode() : 0);
+        hash += (idParDetails != null ? idParDetails.hashCode() : 0);
         return hash;
     }
 
@@ -295,7 +183,7 @@ public class ParDetails implements Serializable {
             return false;
         }
         ParDetails other = (ParDetails) object;
-        if ((this.idparDetails == null && other.idparDetails != null) || (this.idparDetails != null && !this.idparDetails.equals(other.idparDetails))) {
+        if ((this.idParDetails == null && other.idParDetails != null) || (this.idParDetails != null && !this.idParDetails.equals(other.idParDetails))) {
             return false;
         }
         return true;
@@ -303,7 +191,7 @@ public class ParDetails implements Serializable {
 
     @Override
     public String toString() {
-        return "dao.ParDetails[ idparDetails=" + idparDetails + " ]";
+        return "dao.ParDetails[ idParDetails=" + idParDetails + " ]";
     }
     
 }

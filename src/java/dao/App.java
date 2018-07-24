@@ -8,6 +8,7 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "App.findAll", query = "SELECT a FROM App a")
-    , @NamedQuery(name = "App.findByIdApp", query = "SELECT a FROM App a WHERE a.idApp = :idApp")})
+    , @NamedQuery(name = "App.findByIdApp", query = "SELECT a FROM App a WHERE a.idApp = :idApp")
+    , @NamedQuery(name = "App.findByItemSpecs", query = "SELECT a FROM App a WHERE a.itemSpecs = :itemSpecs")})
 public class App implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,8 +46,15 @@ public class App implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_app", nullable = false)
     private Integer idApp;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "item_specs", nullable = false, length = 45)
+    private String itemSpecs;
     @OneToMany(mappedBy = "idApp")
     private List<Pr> prList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idApp")
+    private List<AppDetails> appDetailsList;
     @JoinColumn(name = "id_office", referencedColumnName = "id_office", nullable = false)
     @ManyToOne(optional = false)
     private Office idOffice;
@@ -55,12 +66,25 @@ public class App implements Serializable {
         this.idApp = idApp;
     }
 
+    public App(Integer idApp, String itemSpecs) {
+        this.idApp = idApp;
+        this.itemSpecs = itemSpecs;
+    }
+
     public Integer getIdApp() {
         return idApp;
     }
 
     public void setIdApp(Integer idApp) {
         this.idApp = idApp;
+    }
+
+    public String getItemSpecs() {
+        return itemSpecs;
+    }
+
+    public void setItemSpecs(String itemSpecs) {
+        this.itemSpecs = itemSpecs;
     }
 
     @XmlTransient
@@ -70,6 +94,15 @@ public class App implements Serializable {
 
     public void setPrList(List<Pr> prList) {
         this.prList = prList;
+    }
+
+    @XmlTransient
+    public List<AppDetails> getAppDetailsList() {
+        return appDetailsList;
+    }
+
+    public void setAppDetailsList(List<AppDetails> appDetailsList) {
+        this.appDetailsList = appDetailsList;
     }
 
     public Office getIdOffice() {

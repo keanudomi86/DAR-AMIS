@@ -6,6 +6,7 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +18,13 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -48,6 +51,8 @@ public class Division implements Serializable {
     @Size(min = 1, max = 16777215)
     @Column(nullable = false, length = 16777215)
     private String division;
+    @OneToMany(mappedBy = "idDivision")
+    private List<Employee> employeeList;
     @JoinColumn(name = "id_office", referencedColumnName = "id_office", nullable = false)
     @ManyToOne(optional = false)
     private Office idOffice;
@@ -78,6 +83,15 @@ public class Division implements Serializable {
 
     public void setDivision(String division) {
         this.division = division;
+    }
+
+    @XmlTransient
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 
     public Office getIdOffice() {

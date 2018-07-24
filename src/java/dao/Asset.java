@@ -8,7 +8,6 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,7 +53,7 @@ public class Asset implements Serializable {
     @JoinColumn(name = "id_apc", referencedColumnName = "id_apc", nullable = false)
     @ManyToOne(optional = false)
     private Apc idApc;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAsset")
+    @OneToMany(mappedBy = "idAsset")
     private List<Po> poList;
 
     public Asset() {

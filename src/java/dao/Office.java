@@ -50,7 +50,15 @@ public class Office implements Serializable {
     @Column(nullable = false, length = 45)
     private String department;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
+    private List<Wfp> wfpList;
+    @OneToMany(mappedBy = "idOffice")
+    private List<Pr> prList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
     private List<Division> divisionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
+    private List<Ppmp> ppmpList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOffice")
+    private List<App> appList;
 
     public Office() {
     }
@@ -81,12 +89,48 @@ public class Office implements Serializable {
     }
 
     @XmlTransient
+    public List<Wfp> getWfpList() {
+        return wfpList;
+    }
+
+    public void setWfpList(List<Wfp> wfpList) {
+        this.wfpList = wfpList;
+    }
+
+    @XmlTransient
+    public List<Pr> getPrList() {
+        return prList;
+    }
+
+    public void setPrList(List<Pr> prList) {
+        this.prList = prList;
+    }
+
+    @XmlTransient
     public List<Division> getDivisionList() {
         return divisionList;
     }
 
     public void setDivisionList(List<Division> divisionList) {
         this.divisionList = divisionList;
+    }
+
+    @XmlTransient
+    public List<Ppmp> getPpmpList() {
+        return ppmpList;
+    }
+
+    public void setPpmpList(List<Ppmp> ppmpList) {
+        this.ppmpList = ppmpList;
+    }
+
+    @XmlTransient
+    public List<App> getAppList() {
+        return appList;
+    }
+
+    public void setAppList(List<App> appList) {
+        this.appList = appList;
     }
 
     @Override

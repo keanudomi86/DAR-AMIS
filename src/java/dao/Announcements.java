@@ -34,11 +34,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @UniqueConstraint(columnNames = {"id_announcements"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Announcements.findAll", query = "SELECT a FROM Announcements a ORDER by a.datePosted DESC")
-    , @NamedQuery(name = "Announcements.findByIdAnnouncements", query = "SELECT a FROM Announcements a WHERE a.idAnnouncements = :idAnnouncements ORDER by a.datePosted DESC")
-    , @NamedQuery(name = "Announcements.findByDatePosted", query = "SELECT a FROM Announcements a WHERE a.datePosted = :datePosted ORDER by a.datePosted DESC")
-    , @NamedQuery(name = "Announcements.findBySubject", query = "SELECT a FROM Announcements a WHERE a.subject = :subject ORDER by a.datePosted DESC")
-    , @NamedQuery(name = "Announcements.findByAnnouncement", query = "SELECT a FROM Announcements a WHERE a.announcement = :announcement ORDER by a.datePosted DESC")})
+    @NamedQuery(name = "Announcements.findAll", query = "SELECT a FROM Announcements a")
+    , @NamedQuery(name = "Announcements.findByIdAnnouncements", query = "SELECT a FROM Announcements a WHERE a.idAnnouncements = :idAnnouncements")
+    , @NamedQuery(name = "Announcements.findByDatePosted", query = "SELECT a FROM Announcements a WHERE a.datePosted = :datePosted")
+    , @NamedQuery(name = "Announcements.findBySubject", query = "SELECT a FROM Announcements a WHERE a.subject = :subject")
+    , @NamedQuery(name = "Announcements.findByAnnouncement", query = "SELECT a FROM Announcements a WHERE a.announcement = :announcement")})
 public class Announcements implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -8,6 +8,7 @@ package dao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,6 +43,8 @@ public class Ppmp implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_ppmp", nullable = false)
     private Integer idPpmp;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPpmp")
+    private List<PpmpDetails> ppmpDetailsList;
     @OneToMany(mappedBy = "idPpmp")
     private List<Pr> prList;
     @JoinColumn(name = "id_office", referencedColumnName = "id_office", nullable = false)
@@ -61,6 +64,15 @@ public class Ppmp implements Serializable {
 
     public void setIdPpmp(Integer idPpmp) {
         this.idPpmp = idPpmp;
+    }
+
+    @XmlTransient
+    public List<PpmpDetails> getPpmpDetailsList() {
+        return ppmpDetailsList;
+    }
+
+    public void setPpmpDetailsList(List<PpmpDetails> ppmpDetailsList) {
+        this.ppmpDetailsList = ppmpDetailsList;
     }
 
     @XmlTransient

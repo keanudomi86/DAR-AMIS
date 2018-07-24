@@ -6,6 +6,7 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,8 +21,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,7 +40,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Par.findAll", query = "SELECT p FROM Par p")
     , @NamedQuery(name = "Par.findByIdPar", query = "SELECT p FROM Par p WHERE p.idPar = :idPar")
-    , @NamedQuery(name = "Par.findByIdPc", query = "SELECT p FROM Par p WHERE p.idPc = :idPc")})
+    , @NamedQuery(name = "Par.findByIdPc", query = "SELECT p FROM Par p WHERE p.idPc = :idPc")
+    , @NamedQuery(name = "Par.findByEntityName", query = "SELECT p FROM Par p WHERE p.entityName = :entityName")
+    , @NamedQuery(name = "Par.findByRisNo", query = "SELECT p FROM Par p WHERE p.risNo = :risNo")
+    , @NamedQuery(name = "Par.findByFundCluster", query = "SELECT p FROM Par p WHERE p.fundCluster = :fundCluster")
+    , @NamedQuery(name = "Par.findByPurpose", query = "SELECT p FROM Par p WHERE p.purpose = :purpose")
+    , @NamedQuery(name = "Par.findByReceivedName", query = "SELECT p FROM Par p WHERE p.receivedName = :receivedName")
+    , @NamedQuery(name = "Par.findByReceivedPosition", query = "SELECT p FROM Par p WHERE p.receivedPosition = :receivedPosition")
+    , @NamedQuery(name = "Par.findByReceivedOffice", query = "SELECT p FROM Par p WHERE p.receivedOffice = :receivedOffice")
+    , @NamedQuery(name = "Par.findByReceivedDate", query = "SELECT p FROM Par p WHERE p.receivedDate = :receivedDate")
+    , @NamedQuery(name = "Par.findByIssuedName", query = "SELECT p FROM Par p WHERE p.issuedName = :issuedName")
+    , @NamedQuery(name = "Par.findByIssuedPosition", query = "SELECT p FROM Par p WHERE p.issuedPosition = :issuedPosition")
+    , @NamedQuery(name = "Par.findByIssuedOffice", query = "SELECT p FROM Par p WHERE p.issuedOffice = :issuedOffice")
+    , @NamedQuery(name = "Par.findByIssuedDate", query = "SELECT p FROM Par p WHERE p.issuedDate = :issuedDate")})
 public class Par implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,9 +65,44 @@ public class Par implements Serializable {
     @NotNull
     @Column(name = "id_pc", nullable = false)
     private int idPc;
+    @Size(max = 45)
+    @Column(name = "entity_name", length = 45)
+    private String entityName;
+    @Column(name = "ris_no")
+    private Integer risNo;
+    @Size(max = 45)
+    @Column(name = "fund_cluster", length = 45)
+    private String fundCluster;
+    @Size(max = 45)
+    @Column(length = 45)
+    private String purpose;
+    @Size(max = 45)
+    @Column(name = "received_name", length = 45)
+    private String receivedName;
+    @Size(max = 45)
+    @Column(name = "received_position", length = 45)
+    private String receivedPosition;
+    @Size(max = 45)
+    @Column(name = "received_office", length = 45)
+    private String receivedOffice;
+    @Column(name = "received_date")
+    @Temporal(TemporalType.DATE)
+    private Date receivedDate;
+    @Size(max = 45)
+    @Column(name = "issued_name", length = 45)
+    private String issuedName;
+    @Size(max = 45)
+    @Column(name = "issued_position", length = 45)
+    private String issuedPosition;
+    @Size(max = 45)
+    @Column(name = "issued_office", length = 45)
+    private String issuedOffice;
+    @Column(name = "issued_date")
+    @Temporal(TemporalType.DATE)
+    private Date issuedDate;
     @OneToMany(mappedBy = "idPar")
     private List<FormRepo> formRepoList;
-    @JoinColumn(name = "id_par", referencedColumnName = "idpar_details", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "id_par", referencedColumnName = "id_par_details", nullable = false, insertable = false, updatable = false)
     @OneToOne(optional = false)
     private ParDetails parDetails;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPar")
@@ -85,6 +136,102 @@ public class Par implements Serializable {
 
     public void setIdPc(int idPc) {
         this.idPc = idPc;
+    }
+
+    public String getEntityName() {
+        return entityName;
+    }
+
+    public void setEntityName(String entityName) {
+        this.entityName = entityName;
+    }
+
+    public Integer getRisNo() {
+        return risNo;
+    }
+
+    public void setRisNo(Integer risNo) {
+        this.risNo = risNo;
+    }
+
+    public String getFundCluster() {
+        return fundCluster;
+    }
+
+    public void setFundCluster(String fundCluster) {
+        this.fundCluster = fundCluster;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getReceivedName() {
+        return receivedName;
+    }
+
+    public void setReceivedName(String receivedName) {
+        this.receivedName = receivedName;
+    }
+
+    public String getReceivedPosition() {
+        return receivedPosition;
+    }
+
+    public void setReceivedPosition(String receivedPosition) {
+        this.receivedPosition = receivedPosition;
+    }
+
+    public String getReceivedOffice() {
+        return receivedOffice;
+    }
+
+    public void setReceivedOffice(String receivedOffice) {
+        this.receivedOffice = receivedOffice;
+    }
+
+    public Date getReceivedDate() {
+        return receivedDate;
+    }
+
+    public void setReceivedDate(Date receivedDate) {
+        this.receivedDate = receivedDate;
+    }
+
+    public String getIssuedName() {
+        return issuedName;
+    }
+
+    public void setIssuedName(String issuedName) {
+        this.issuedName = issuedName;
+    }
+
+    public String getIssuedPosition() {
+        return issuedPosition;
+    }
+
+    public void setIssuedPosition(String issuedPosition) {
+        this.issuedPosition = issuedPosition;
+    }
+
+    public String getIssuedOffice() {
+        return issuedOffice;
+    }
+
+    public void setIssuedOffice(String issuedOffice) {
+        this.issuedOffice = issuedOffice;
+    }
+
+    public Date getIssuedDate() {
+        return issuedDate;
+    }
+
+    public void setIssuedDate(Date issuedDate) {
+        this.issuedDate = issuedDate;
     }
 
     @XmlTransient

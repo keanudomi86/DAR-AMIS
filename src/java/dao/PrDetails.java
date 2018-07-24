@@ -33,10 +33,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "PrDetails.findAll", query = "SELECT p FROM PrDetails p")
     , @NamedQuery(name = "PrDetails.findByIdPrDetails", query = "SELECT p FROM PrDetails p WHERE p.idPrDetails = :idPrDetails")
+    , @NamedQuery(name = "PrDetails.findByStockNum", query = "SELECT p FROM PrDetails p WHERE p.stockNum = :stockNum")
     , @NamedQuery(name = "PrDetails.findByUnit", query = "SELECT p FROM PrDetails p WHERE p.unit = :unit")
     , @NamedQuery(name = "PrDetails.findByDescription", query = "SELECT p FROM PrDetails p WHERE p.description = :description")
     , @NamedQuery(name = "PrDetails.findByQuantity", query = "SELECT p FROM PrDetails p WHERE p.quantity = :quantity")
-    , @NamedQuery(name = "PrDetails.findByCost", query = "SELECT p FROM PrDetails p WHERE p.cost = :cost")})
+    , @NamedQuery(name = "PrDetails.findByUnitCost", query = "SELECT p FROM PrDetails p WHERE p.unitCost = :unitCost")
+    , @NamedQuery(name = "PrDetails.findByTotalCost", query = "SELECT p FROM PrDetails p WHERE p.totalCost = :totalCost")
+    , @NamedQuery(name = "PrDetails.findByPurpose", query = "SELECT p FROM PrDetails p WHERE p.purpose = :purpose")
+    , @NamedQuery(name = "PrDetails.findByRqName", query = "SELECT p FROM PrDetails p WHERE p.rqName = :rqName")
+    , @NamedQuery(name = "PrDetails.findByRqDesig", query = "SELECT p FROM PrDetails p WHERE p.rqDesig = :rqDesig")})
 public class PrDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,6 +50,10 @@ public class PrDetails implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_pr_details", nullable = false)
     private Integer idPrDetails;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "stock_num", nullable = false)
+    private int stockNum;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -61,8 +70,27 @@ public class PrDetails implements Serializable {
     private int quantity;
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
-    private float cost;
+    @Column(name = "unit_cost", nullable = false)
+    private float unitCost;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "total_cost", nullable = false)
+    private double totalCost;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(nullable = false, length = 45)
+    private String purpose;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "rq_name", nullable = false, length = 45)
+    private String rqName;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "rq_desig", nullable = false, length = 45)
+    private String rqDesig;
     @JoinColumn(name = "id_pr", referencedColumnName = "id_pr", nullable = false)
     @ManyToOne(optional = false)
     private Pr idPr;
@@ -74,12 +102,17 @@ public class PrDetails implements Serializable {
         this.idPrDetails = idPrDetails;
     }
 
-    public PrDetails(Integer idPrDetails, String unit, String description, int quantity, float cost) {
+    public PrDetails(Integer idPrDetails, int stockNum, String unit, String description, int quantity, float unitCost, double totalCost, String purpose, String rqName, String rqDesig) {
         this.idPrDetails = idPrDetails;
+        this.stockNum = stockNum;
         this.unit = unit;
         this.description = description;
         this.quantity = quantity;
-        this.cost = cost;
+        this.unitCost = unitCost;
+        this.totalCost = totalCost;
+        this.purpose = purpose;
+        this.rqName = rqName;
+        this.rqDesig = rqDesig;
     }
 
     public Integer getIdPrDetails() {
@@ -88,6 +121,14 @@ public class PrDetails implements Serializable {
 
     public void setIdPrDetails(Integer idPrDetails) {
         this.idPrDetails = idPrDetails;
+    }
+
+    public int getStockNum() {
+        return stockNum;
+    }
+
+    public void setStockNum(int stockNum) {
+        this.stockNum = stockNum;
     }
 
     public String getUnit() {
@@ -114,12 +155,44 @@ public class PrDetails implements Serializable {
         this.quantity = quantity;
     }
 
-    public float getCost() {
-        return cost;
+    public float getUnitCost() {
+        return unitCost;
     }
 
-    public void setCost(float cost) {
-        this.cost = cost;
+    public void setUnitCost(float unitCost) {
+        this.unitCost = unitCost;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getRqName() {
+        return rqName;
+    }
+
+    public void setRqName(String rqName) {
+        this.rqName = rqName;
+    }
+
+    public String getRqDesig() {
+        return rqDesig;
+    }
+
+    public void setRqDesig(String rqDesig) {
+        this.rqDesig = rqDesig;
     }
 
     public Pr getIdPr() {
