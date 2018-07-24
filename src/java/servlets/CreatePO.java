@@ -62,77 +62,104 @@ public class CreatePO extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         PoDetails newPoDetails = new PoDetails();
-        Po po = new Po();
+        Po newPo = new Po();
+        
         Pr pr = prFacade.find(Integer.parseInt(request.getParameter("prID")));
         
-        po.setIdPr(pr);
-        
-        poFacade.create(po);
-        
-        ArrayList<Po> pos = new ArrayList<Po>(poFacade.findAll());
-        
-        for(Po curPo: pos){
-            if(curPo.getIdPr().equals(po.getIdPr())){
-                po = curPo;
-            }
-        }
-        
-        newPoDetails.setIdPo(po);
-        newPoDetails.setSupplier("supplier");
-        newPoDetails.setDate(Date.from(Instant.now()));
-        newPoDetails.setAddress(request.getParameter("address"));
-        newPoDetails.setModeOfProc(request.getParameter("mode"));
-        newPoDetails.setTin((request.getParameter("tin")));
-        newPoDetails.setGentlemen(request.getParameter("gentlemen"));
-        newPoDetails.setPlaceDelivery(request.getParameter("place_delivery"));
-        newPoDetails.setModeOfProc2(request.getParameter("mode2"));
+        newPo.setIdPr(pr);
+        newPo.setSupplier("supplier");
+        newPo.setDate(Date.from(Instant.now()));
+        newPo.setAddress(request.getParameter("address"));
+        newPo.setModeOfProc(request.getParameter("mode"));
+        newPo.setTin((request.getParameter("tin")));
+        newPo.setGentlemen(request.getParameter("gentlemen"));
+        newPo.setPlaceOfDelivery(request.getParameter("place_delivery"));
+        newPo.setModeOfProc2(request.getParameter("mode2"));
         
         String date_delivery = request.getParameter("date_delivery");
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
         Date startDate;
         try {
             startDate = df.parse(date_delivery);
-            newPoDetails.setDateDelivery(startDate);
+            newPo.setDateDelivery(startDate);
         } catch (ParseException ex) {
-            newPoDetails.setDateDelivery(Date.from(Instant.now()));
+            newPo.setDateDelivery(Date.from(Instant.now()));
         }
         
         
-        newPoDetails.setPayTerm(request.getParameter("pay_term"));
-        newPoDetails.setAmountWords(request.getParameter("amount_words"));
-        newPoDetails.setNameConforme(request.getParameter("name_conforme"));
-        newPoDetails.setNameTruly(request.getParameter("name_truly"));
+        newPo.setPayTerm(request.getParameter("pay_term"));
+        newPo.setAmountWords(request.getParameter("amount_words"));
+        newPo.setNameConforme(request.getParameter("name_conforme"));
+        newPo.setNameTruly(request.getParameter("name_truly"));
         
         String date_delivery2 = request.getParameter("date_delivery");
         Date newDate;
         try {
             newDate = df.parse(date_delivery2);
-            newPoDetails.setDateDelivery2(newDate);
+            newPo.setDateDelivery2(newDate);
         } catch (ParseException ex) {
             Logger.getLogger(CreatePO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        newPoDetails.setPayTerm2(request.getParameter("payment_term"));
+        newPo.setPayTerm2(request.getParameter("payment_term"));
         
         
         String date_orsbus = request.getParameter("date_ors/burs");
         Date newDate2;
         try {
             newDate2 = df.parse(date_orsbus);
-            newPoDetails.setDateOrsburs(newDate2);
+            newPo.setDateOrsburs(newDate2);
         } catch (ParseException ex) {
-            newPoDetails.setDateDelivery(Date.from(Instant.now()));
+            newPo.setDateDelivery(Date.from(Instant.now()));
         }
         
         
-        newPoDetails.setNameReq(request.getParameter("name_req"));
-        newPoDetails.setAmount(Float.parseFloat(request.getParameter("total_cost")));
+        newPo.setNameReq(request.getParameter("name_req"));
+        newPo.setAmount2(Float.parseFloat(request.getParameter("amount2")));
         
-        poDetailsFacade.create(newPoDetails);
+        poFacade.create(newPo);
         
-        FormRepo newRepoEntry = new FormRepo();
+        Po idPo = poFacade.find(newPo.getIdPo());
+        newPoDetails.setIdPo(idPo);
         
-        newRepoEntry.setIdPo(po);
+        //newPoDetails.setIdPo(newPo);
+        
+        String[] stockno = request.getParameterValues("stock_no");
+        
+        String[] units = request.getParameterValues("unit");
+
+        String[] descs = request.getParameterValues("description");
+
+        String[] quantities = request.getParameterValues("quantity");
+
+        String[] costs = request.getParameterValues("cost");
+        
+        String[] total = request.getParameterValues("total_cost");
+
+        //since the above 4 are of same length, use any of them for loop count
+        for(int ctr = 0; ctr < units.length; ctr++){
+                newPoDetails.setStockNo(Integer.parseInt(stockno[ctr]));
+                newPoDetails.setUnit(units[ctr]);
+                newPoDetails.setDescription(descs[ctr]);
+
+                if(quantities[ctr] != null)
+                    newPoDetails.setQuantity(Integer.parseInt(quantities[ctr]));
+                else
+                    newPoDetails.setQuantity(0);
+
+                if(costs[ctr] != null)
+                    newPoDetails.setCost(Float.parseFloat(costs[ctr]));
+                else
+                    newPoDetails.setCost(0.0f);
+                newPoDetails.setAmount(Float.parseFloat(total[ctr]));
+                
+                poDetailsFacade.create(newPoDetails);
+        }
+        ArrayList<FormRepo> forms = new ArrayList<FormRepo>(repoFacade.findAll());
+        
+        FormRepo newRepoEntry = forms.get(forms.size()-1);
+        
+        //newRepoEntry.setIdPo(newPo);
         
         Employee emp = (Employee)session.getAttribute("userData");
         
@@ -146,7 +173,7 @@ public class CreatePO extends BaseServlet {
         
         newRepoEntry.setCreatedBy(emp);
         
-        repoFacade.create(newRepoEntry);
+        repoFacade.edit(newRepoEntry);
         
         
         ServletContext context = getServletContext();

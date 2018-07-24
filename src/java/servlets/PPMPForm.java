@@ -5,8 +5,13 @@
  */
 package servlets;
 
+import controller.OfficeFacade;
+import dao.Office;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,19 +24,32 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author BavarianHotdog
  */
-@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
-public class Logout extends BaseServlet {
+@WebServlet(name = "PPMPForm", urlPatterns = {"/PPMPForm"})
+public class PPMPForm extends BaseServlet {
 
+   @EJB
+    private OfficeFacade officeFacade = new OfficeFacade();
+    
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<String> offices = new ArrayList<>();
+        
+        List<Office> officesList = officeFacade.findAll();
+        
+        for(Office o: officesList){
+            offices.add(o.getIdOffice() + " - " + o.getDepartment());
+        }
+        
+        request.setAttribute("offices", offices);
+        
         ServletContext context = getServletContext();
         
-        request.getSession().invalidate();
-        request.logout();
+        RequestDispatcher rd = context.getRequestDispatcher("/ppmp.jsp");
         
-        RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
         
     }
+
+    
 
 }

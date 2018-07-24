@@ -39,13 +39,16 @@ public class CreatePR extends BaseServlet {
     @EJB
     private OfficeFacade officeFacade = new OfficeFacade();
     
+    @EJB
+    private FormRepoFacade formRepoFacade = new FormRepoFacade();
+    
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String msg = "Error creating PR Form. Try again.";
         
         try{
             Pr newPr = new Pr();
-
+            
             Office off = officeFacade.find(Integer.parseInt(new StringTokenizer(request.getParameter("office"), " -").nextToken()));
 
             newPr.setIdOffice(off);
@@ -69,19 +72,30 @@ public class CreatePR extends BaseServlet {
                     newPr = pr;
                 }
             }
-
+            
+            String[] entityName = request.getParameterValues("entity_name");
+            String[] office = request.getParameterValues("office");
+            String[] department = request.getParameterValues("department");
+            String[] fundCluster = request.getParameterValues("fund_cluster");
+            String[] rcc = request.getParameterValues("rcc");
+            
+            
+            String[] stockNum = request.getParameterValues("stock_num");
             String[] units = request.getParameterValues("unit");
 
             String[] descs = request.getParameterValues("description");
 
             String[] quantities = request.getParameterValues("quantity");
 
-            String[] costs = request.getParameterValues("cost");
-
+            //String[] costs = request.getParameterValues("cost");
+            String[] unitCost = request.getParameterValues("unitCost");
+            String[] totalCost = request.getParameterValues("totalCost");
+            String purpose = request.getParameter("purpose");
+            String rqName = request.getParameter("rq_name");
+            String rqDesig = request.getParameter("rq_desig"); //remember to rename parameter names accordingly
             //since the above 4 are of same length, use any of them for loop count
             for(int ctr = 0; ctr < units.length; ctr++){
                 PrDetails details = new PrDetails();
-
                 details.setIdPr(newPr);
                 details.setUnit(units[ctr]);
                 details.setDescription(descs[ctr]);
@@ -91,18 +105,30 @@ public class CreatePR extends BaseServlet {
                 else
                     details.setQuantity(0);
 
-                if(costs[ctr] != null)
-                    details.setCost(Float.parseFloat(costs[ctr]));
+                if(unitCost[ctr] != null)
+                    details.setUnitCost(Float.parseFloat(unitCost[ctr]));
                 else
-                    details.setCost(0.0f);
-
+                    details.setUnitCost(0.0f);
+                
+                if(totalCost[ctr] != null)
+                    details.setTotalCost(Float.parseFloat(totalCost[ctr]));
+                else
+                    details.setTotalCost(0.0f);
+                
+                details.setPurpose(purpose);
+                details.setRqDesig(rqDesig);
+                details.setRqName(rqName);
+                
                 prDetailsFacade.create(details);
             }
-
-            msg = "From submission successful.";
-        }catch(InputMismatchException | NullPointerException 
-                | NumberFormatException a){
+            FormRepo newFormRepo = new FormRepo();
             
+            newFormRepo.setIdPr(prFacade.find(newPr.getIdPr()));
+            formRepoFacade.create(newFormRepo);
+            msg = "From submission successful.";
+            
+        }catch(Exception a){
+            generateTextResponse(response, a.getMessage());
         }
         
         generateTextResponse(response, msg);

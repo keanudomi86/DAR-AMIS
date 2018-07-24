@@ -35,8 +35,7 @@ public class CreatePOSelectFormsPR extends BaseServlet {
     
     @EJB
     private FormRepoFacade formrepoFacade = new FormRepoFacade();
-
-
+    
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<FormRepo> forms = new ArrayList<FormRepo>(formrepoFacade.findAll());
@@ -49,8 +48,11 @@ public class CreatePOSelectFormsPR extends BaseServlet {
             }
         }
         
-        request.setAttribute("prs", forms);
+        System.out.println(forms.size());
+        
+        request.setAttribute("forms", forms);
         request.setAttribute("link", request.getContextPath() + "/POPage?pr_id=");
+        request.setAttribute("mode", "create_po");
         
         ServletContext context = getServletContext();
         RequestDispatcher rd;
