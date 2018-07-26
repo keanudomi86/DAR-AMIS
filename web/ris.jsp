@@ -57,16 +57,13 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-      <form action="CreateRIS" method="POST">
+      
          <section id="main-content">
           <section class="wrapper">
               <section class="content-header">
-                    <h1>
-                        Requisition and Issuance Slip
+                  <h1> Requisition and Issuance Slip </h1>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
-                    </h1>
-                  
     
     <!-- .............CREATE FORM...............................................................................--> 
     
@@ -88,6 +85,7 @@
       <div class="panel panel-default">
 
         <!-- P1 -->
+        <form id="createRisForm">
         <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Requisition and Issuance Slip</STRONG></p></div> 
             <div class="panel-body"> 
             <!-- First Row -->
@@ -529,6 +527,7 @@
                    <input class="form-control" id="date" name="date_rec" placeholder="MM/DD/YYYY" type="text">
                   </div>
                  </div>
+              
                  <!--<div class="form-group">
                   <div>
                    <button class="btn btn-primary " name="submit" type="submit">Submit</button>  
@@ -551,19 +550,22 @@
                       })
                   })
                 </script>
-            </div>   
+        
+            </div>
+        </form>
+      </div>
+      
                          <p align="center">                         
                             <button onclick="submitRIS()">Submit</button>
                         </p>
                         <br>
                         <br>
           </div>         
-        </div>
 		</section><! --/wrapper -->
       </section>
      </section>
              <!-- /MAIN CONTENT -->
-      </form>
+      
       <!--main content end-->
       <!--footer start-->
       <jsp:include page="WEB-INF/copyright.jsp" />

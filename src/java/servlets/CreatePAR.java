@@ -5,8 +5,11 @@
  */
 package servlets;
 
+import controller.FormRepoFacade;
 import controller.ParDetailsFacade;
 import controller.ParFacade;
+import dao.Employee;
+import dao.FormRepo;
 import dao.Par;
 import dao.ParDetails;
 import java.io.IOException;
@@ -24,6 +27,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,20 +40,29 @@ public class CreatePAR extends BaseServlet {
 
     @EJB
     private ParDetailsFacade parDetailsFacade = new ParDetailsFacade();
+    
+    @EJB
+    private FormRepoFacade formRepoFacade = new FormRepoFacade();
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String msg = "Error creating PR Form. Try again.";
+        HttpSession session = request.getSession();
+        
+        String msg = "Error creating PAR Form. Try again.";
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
         Par newPar = new Par();
         ParDetails newParDetails = new ParDetails();
+        Employee emp = (Employee)session.getAttribute("userData");
         
         newPar.setEntityName(request.getParameter("entity"));
         newPar.setFundCluster(request.getParameter("fund_cluster"));
         newPar.setPurpose(request.getParameter("purpose"));
         newPar.setReceivedName(request.getParameter("name_rec"));
         newPar.setReceivedPosition(request.getParameter("pos_rec"));
-        newPar.setReceivedOffice(request.getParameter("off_rec"));
+        
+        //temporaroly use current logged in employee's 
+        //office because logic has not been defined properly yet
+        newPar.setReceivedOffice(emp.getIdDivision().getIdOffice());
         
         String date_rec = request.getParameter("date_rec");
         Date newDate;
@@ -73,7 +86,7 @@ public class CreatePAR extends BaseServlet {
             newPar.setIssuedDate(Date.from(Instant.now()));
         }
         
-        parFacade.create(newPar);
+        //parFacade.create(newPar);
         
         String[] quantity = request.getParameterValues("quantity");
         String[] unit = request.getParameterValues("unit");
@@ -99,12 +112,21 @@ public class CreatePAR extends BaseServlet {
             
             newParDetails.setAmount(Float.parseFloat(amount[ctr]));
             
-            parDetailsFacade.create(newParDetails);
+            newParDetails.setIdPar(newPar);
+            
+            //parFacade.create(newPar);
+            
+            //create formrepo entry
+            FormRepo newEntry = new FormRepo();
+            
+            newEntry.setIdPar(newPar);
+            
+            parFacade.create(newPar);
+            
+            msg = "Success.";
         }
         
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/CreateForms");
-        rd.forward(request, response);
+        generateTextResponse(response, msg);
         
     }
 

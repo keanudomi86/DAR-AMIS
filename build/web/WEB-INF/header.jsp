@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="lineicons/style.css">    
+    <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css">    
     
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
@@ -21,6 +22,7 @@
 
     <script src="js/chart-master/Chart.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="datatables/datatables.min.js"></script>
     <script>
                 $(document).ready(function () {
                     var cur = new Date();

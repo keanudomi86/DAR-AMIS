@@ -8,12 +8,12 @@ package dao;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -21,7 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -37,8 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ParDetails.findAll", query = "SELECT p FROM ParDetails p")
     , @NamedQuery(name = "ParDetails.findByIdParDetails", query = "SELECT p FROM ParDetails p WHERE p.idParDetails = :idParDetails")
-    , @NamedQuery(name = "ParDetails.findByIdPar", query = "SELECT p FROM ParDetails p WHERE p.idPar = :idPar")
-    , @NamedQuery(name = "ParDetails.findByParId", query = "SELECT p FROM ParDetails p WHERE p.parId = :parId")
     , @NamedQuery(name = "ParDetails.findByQuantity", query = "SELECT p FROM ParDetails p WHERE p.quantity = :quantity")
     , @NamedQuery(name = "ParDetails.findByUnit", query = "SELECT p FROM ParDetails p WHERE p.unit = :unit")
     , @NamedQuery(name = "ParDetails.findByDescription", query = "SELECT p FROM ParDetails p WHERE p.description = :description")
@@ -53,12 +50,6 @@ public class ParDetails implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_par_details", nullable = false)
     private Integer idParDetails;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_par", nullable = false)
-    private int idPar;
-    @Column(name = "par_id")
-    private Integer parId;
     private Integer quantity;
     @Size(max = 45)
     @Column(length = 45)
@@ -74,8 +65,9 @@ public class ParDetails implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(precision = 12)
     private Float amount;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "parDetails")
-    private Par par;
+    @JoinColumn(name = "id_par", referencedColumnName = "id_par", nullable = false)
+    @OneToOne(optional = false)
+    private Par idPar;
 
     public ParDetails() {
     }
@@ -84,33 +76,12 @@ public class ParDetails implements Serializable {
         this.idParDetails = idParDetails;
     }
 
-    public ParDetails(Integer idParDetails, int idPar) {
-        this.idParDetails = idParDetails;
-        this.idPar = idPar;
-    }
-
     public Integer getIdParDetails() {
         return idParDetails;
     }
 
     public void setIdParDetails(Integer idParDetails) {
         this.idParDetails = idParDetails;
-    }
-
-    public int getIdPar() {
-        return idPar;
-    }
-
-    public void setIdPar(int idPar) {
-        this.idPar = idPar;
-    }
-
-    public Integer getParId() {
-        return parId;
-    }
-
-    public void setParId(Integer parId) {
-        this.parId = parId;
     }
 
     public Integer getQuantity() {
@@ -161,12 +132,12 @@ public class ParDetails implements Serializable {
         this.amount = amount;
     }
 
-    public Par getPar() {
-        return par;
+    public Par getIdPar() {
+        return idPar;
     }
 
-    public void setPar(Par par) {
-        this.par = par;
+    public void setIdPar(Par idPar) {
+        this.idPar = idPar;
     }
 
     @Override

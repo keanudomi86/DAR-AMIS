@@ -67,39 +67,39 @@
                       <!-- P1 -->
                       <div class = "panel-heading panel-heading-custom"><p class="text-center"><strong>Reports Template Selection</strong></p></div> 
                                           
-                      <div class="btn-group">
-			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			Reports
-                        <span class="caret"></span>
-                        </button>
-                            <ul class="dropdown-menu">
-                          <li><a  href="iar.jsp">IAR</a></li>
-                          <li><a  href="rpci.jsp">RPCI</a></li>
-                          <li><a  href="rpcppe.jsp">RPCPPE</a></li>
-                          <li><a  href="iirup.jsp">IIRUP</a></li>
-                          <li><a  href="sc.jsp">SC</a></li>
-                          <li><a href="pc.jsp">PC</a></li>
-                          <li><a  href="wmr.jsp">WMR</a></li>
-                          <li><a  href="ptr.jsp">PTR</a></li>
-                          <li><a  href="rsmi.jsp">RSMI</a></li>
-                            </ul>
-			</div>
-                    </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    Reports
+                                    <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li><a  href="iar.jsp">Inspection and Acceptance Report</a></li>
+                                      <li><a  href="rpci.jsp">Report on Physical Count of Inventories</a></li>
+                                      <li><a  href="rpcppe.jsp">Report on the Physical Count of Plant Property Equipment</a></li>
+                                      <li><a  href="iirup.jsp">Inventory and Inspection Report of Unserviceable Property</a></li>
+                                      <li><a  href="sc.jsp">Stock Card</a></li>
+                                      <li><a href="pc.jsp">Property Card</a></li>
+                                      <li><a  href="wmr.jsp">Waste Materials Report</a></li>
+                                      <li><a  href="ptr.jsp">Property Transfer Report</a></li>
+                                      <li><a  href="rsmi.jsp">Report of Supplies and Materials Issued</a></li>
+                                    </ul>
+                                </div>
+                        </div>
                       
                                           <br>
                     </div>
                      
-                    </section>
-                          </section>
+                </section>
+            </section>
                     <!--</form>-->
-                    </section>
+        </section>
                               <!-- P3 -->
           </section>
       <!--main content end-->
       <!--footer start-->
       
       <!--footer end-->
-      <jsp:include page="WEB-INF/copyright.jsp" />
-      <jsp:include page="WEB-INF/footer.jsp" />
+        <jsp:include page="WEB-INF/copyright.jsp" />
+        <jsp:include page="WEB-INF/footer.jsp" />
   </body>
 </html>

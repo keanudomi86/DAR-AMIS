@@ -15,6 +15,11 @@
   <head>
       <jsp:include page="WEB-INF/header.jsp" />       
             <title>DAR-AMIS | Create Forms</title>
+            <script>
+                $(document).ready(function(){
+                    $("#formsTable").DataTable();
+                });
+            </script>
   </head>
 
   <body>
@@ -65,7 +70,7 @@
                 </section>
               
                 <section class="content-panel">
-                    <table class="table table-striped table-responsive">
+                    <table class="table table-striped table-responsive" id="formsTable">
                         <thead>
                             <tr>
                                 <td>ID</td>

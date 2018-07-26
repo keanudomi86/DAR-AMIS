@@ -62,7 +62,6 @@
                     <script>
                         function submitPAR(){
                             if(confirm("Submit this form?")){
-
                                 $.post("<%=root%>/CreatePAR", $("#createParForm").serialize(), function(data){
                                     alert(data);
 
@@ -75,7 +74,8 @@
       <div class="panel panel-default">
 
         <!-- P1 -->
-        <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Property Acknowledgment Receipt</STRONG></p></div> 
+        <form id="createParForm">
+        <div class = "panel-heading panel-heading-custom"><p class="text-center"><strong>Property Acknowledgment Receipt</strong></p></div> 
             <div class="panel-body"> 
             <!-- First Row -->
             <div class = "row">
@@ -115,7 +115,7 @@
               <div class="col-sm-2"><label align= "text-center"></label></div>              
 
               <div class="col-sm-2"><label align= "text-center">PAR No.</label></div>
-              <div class="col-sm-2"><input type="text" name="ris_no" align= "text-center" placeholder="RIS No."></div>
+              <div class="col-sm-2"><input type="text" name="ris_no" align= "text-center" placeholder="PAR No."></div>
 
             </div> 
 
@@ -412,6 +412,8 @@
                   })
                 </script>
             </div>
+        
+        </form>
                         <p align="center">                         
                             <button onclick="submitPAR()">Submit</button>
                         </p>

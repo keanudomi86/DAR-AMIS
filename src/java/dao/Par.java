@@ -7,7 +7,6 @@ package dao;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,9 +15,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,7 +26,6 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -47,7 +45,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Par.findByPurpose", query = "SELECT p FROM Par p WHERE p.purpose = :purpose")
     , @NamedQuery(name = "Par.findByReceivedName", query = "SELECT p FROM Par p WHERE p.receivedName = :receivedName")
     , @NamedQuery(name = "Par.findByReceivedPosition", query = "SELECT p FROM Par p WHERE p.receivedPosition = :receivedPosition")
-    , @NamedQuery(name = "Par.findByReceivedOffice", query = "SELECT p FROM Par p WHERE p.receivedOffice = :receivedOffice")
     , @NamedQuery(name = "Par.findByReceivedDate", query = "SELECT p FROM Par p WHERE p.receivedDate = :receivedDate")
     , @NamedQuery(name = "Par.findByIssuedName", query = "SELECT p FROM Par p WHERE p.issuedName = :issuedName")
     , @NamedQuery(name = "Par.findByIssuedPosition", query = "SELECT p FROM Par p WHERE p.issuedPosition = :issuedPosition")
@@ -82,9 +79,6 @@ public class Par implements Serializable {
     @Size(max = 45)
     @Column(name = "received_position", length = 45)
     private String receivedPosition;
-    @Size(max = 45)
-    @Column(name = "received_office", length = 45)
-    private String receivedOffice;
     @Column(name = "received_date")
     @Temporal(TemporalType.DATE)
     private Date receivedDate;
@@ -100,15 +94,11 @@ public class Par implements Serializable {
     @Column(name = "issued_date")
     @Temporal(TemporalType.DATE)
     private Date issuedDate;
-    @OneToMany(mappedBy = "idPar")
-    private List<FormRepo> formRepoList;
-    @JoinColumn(name = "id_par", referencedColumnName = "id_par_details", nullable = false, insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @JoinColumn(name = "received_office", referencedColumnName = "id_office")
+    @ManyToOne
+    private Office receivedOffice;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idPar")
     private ParDetails parDetails;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPar")
-    private List<Ptr> ptrList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPar")
-    private List<Pc> pcList;
 
     public Par() {
     }
@@ -186,14 +176,6 @@ public class Par implements Serializable {
         this.receivedPosition = receivedPosition;
     }
 
-    public String getReceivedOffice() {
-        return receivedOffice;
-    }
-
-    public void setReceivedOffice(String receivedOffice) {
-        this.receivedOffice = receivedOffice;
-    }
-
     public Date getReceivedDate() {
         return receivedDate;
     }
@@ -234,13 +216,12 @@ public class Par implements Serializable {
         this.issuedDate = issuedDate;
     }
 
-    @XmlTransient
-    public List<FormRepo> getFormRepoList() {
-        return formRepoList;
+    public Office getReceivedOffice() {
+        return receivedOffice;
     }
 
-    public void setFormRepoList(List<FormRepo> formRepoList) {
-        this.formRepoList = formRepoList;
+    public void setReceivedOffice(Office receivedOffice) {
+        this.receivedOffice = receivedOffice;
     }
 
     public ParDetails getParDetails() {
@@ -249,24 +230,6 @@ public class Par implements Serializable {
 
     public void setParDetails(ParDetails parDetails) {
         this.parDetails = parDetails;
-    }
-
-    @XmlTransient
-    public List<Ptr> getPtrList() {
-        return ptrList;
-    }
-
-    public void setPtrList(List<Ptr> ptrList) {
-        this.ptrList = ptrList;
-    }
-
-    @XmlTransient
-    public List<Pc> getPcList() {
-        return pcList;
-    }
-
-    public void setPcList(List<Pc> pcList) {
-        this.pcList = pcList;
     }
 
     @Override

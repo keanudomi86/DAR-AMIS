@@ -83,6 +83,7 @@
                                 </script>
       <div class="panel panel-default">
         <!-- P1 -->
+        <form id="createRfiForm">
         <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Request For Inspection</STRONG></p></div> 
 
           <div class="panel-body">
@@ -536,6 +537,7 @@
               </div>              
                                          
               </div>
+      </form>
                      
                         <p align="center">                         
                             <button onclick="submitRFI()">Submit</button>

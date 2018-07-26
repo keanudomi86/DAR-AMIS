@@ -9,7 +9,7 @@
 <html lang="en">
   <head>
     <jsp:include page="WEB-INF/header.jsp" /> 
-    <title>DAR-AMIS | RPCI</title>
+    <title>DAR-AMIS | RPCPPE</title>
   </head>
     <style>
       .panel-default > .panel-heading-custom{
@@ -111,7 +111,7 @@
 
              
 
-</div>
+       </div>
 
 
         <!-- P2 --> 
@@ -134,7 +134,7 @@
 		<div class = "col-sm-1"><label align="text-left">Unit of measure</label></div>
 		<div class = "col-sm-1"><label align="text-left">Unit Value</label></div>
 		<div class = "col-sm-1"><label align="text-left">Quantity per Property Card</label></div>
-		<div class = "col-sm-1"><label align="text-left">Quantity per Physsical Count</label></div>
+		<div class = "col-sm-1"><label align="text-left">Quantity per Physical Count</label></div>
 		<div class = "col-sm-1"><label align="text-left">Quantity</label></div>
 		<div class = "col-sm-1"><label align="text-left">Value</label></div>
 		<div class = "col-sm-2"><label align="text-left">Remarks</label></div>
@@ -210,15 +210,15 @@
 							
 
 					        cols += '<td><input type="text" size="5" placeholder="Article" name="Article' + counter + '"/></td>';
-					        cols += '<td><textarea type="text" size="25" placeholder="Description" 	name="Description' 		   + counter + '"/></td>';
+					        cols += '<td><textarea type="text" size="25" placeholder="Description" 	name="Description' + counter + '"/></td>';
 					        cols += '<td><input type="text" size="10" placeholder="Property No."  name="PropertyNum' + counter + '"/></td>';
-					        cols += '<td><input type="text"size="10"  placeholder="Unit of Measure" 	name="UnitMeasure' 	   + counter + '"/></td>';
-							cols += '<td><input type="text" size="10" placeholder="Unit Value" 	name="UnitValue' 		   + counter + '"/></td>';
+					        cols += '<td><input type="text"size="10"  placeholder="Unit of Measure" name="UnitMeasure' + counter + '"/></td>';
+						cols += '<td><input type="text" size="10" placeholder="Unit Value" name="UnitValue' + counter + '"/></td>';
 					        cols += '<td><input type="text" size="10" placeholder="Quantity"  name="PropCardQuantity' + counter + '"/></td>';
-					        cols += '<td><input type="text" size="10" placeholder="Quantity" 	name="PhysicalCountQuantity' 	   + counter + '"/></td>';
-					        cols += '<td><input type="text" size="7" placeholder="Quantity" 	name="SAQuantity' 		   + counter + '"/></td>';
-					        cols += '<td><input type="text" size="7"placeholder="Value"  name="Value' + counter + '"/></td>';
-					        cols += '<td><textarea type="text" placeholder="Remarks"  name="Remarks' + counter + '"/></td>';
+					        cols += '<td><input type="text" size="10" placeholder="Quantity" name="PhysicalCountQuantity' + counter + '"/></td>';
+					        cols += '<td><input type="text" size="7" placeholder="Quantity" name="SAQuantity' + counter + '"/></td>';
+					        cols += '<td><input type="text" size="7"placeholder="Value" name="Value' + counter + '"/></td>';
+					        cols += '<td><textarea type="text" placeholder="Remarks" name="Remarks' + counter + '"/></td>';
 							
 					        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
 					        newRow.append(cols);

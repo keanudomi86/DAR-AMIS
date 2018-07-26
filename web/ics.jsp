@@ -82,6 +82,7 @@
       <div class="panel panel-default">
 
         <!-- P1 -->
+        <form id="createIcsForm">
         <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Inventory Custodian Slip</STRONG></p></div> 
             <div class="panel-body"> 
             <!-- First Row -->
@@ -420,6 +421,7 @@
                   })
                 </script>
        </div>
+        </form>
                         <p align="center">                         
                             <button onclick="submitICS()">Submit</button>
                         </p>

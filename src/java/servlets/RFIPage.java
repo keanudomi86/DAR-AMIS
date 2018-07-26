@@ -5,8 +5,13 @@
  */
 package servlets;
 
+import controller.RfiFacade;
+import controller.OfficeFacade;
+import dao.Office;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,9 +26,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RFIPage", urlPatterns = {"/RFIPage"})
 public class RFIPage extends BaseServlet {
+    
+        @EJB
+    private OfficeFacade officeFacade = new OfficeFacade();
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ArrayList<Office> offices = new ArrayList<Office>(officeFacade.findAll());
+        request.setAttribute("offices", offices);
+        
+        
         ServletContext context = getServletContext();
         RequestDispatcher rd;
         
