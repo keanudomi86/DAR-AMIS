@@ -59,7 +59,7 @@ public class CreateRFI extends BaseServlet {
         RfiRepairPost newRfiRepairPost = new RfiRepairPost();
         Employee emp = (Employee)session.getAttribute("userData");
         
-        
+        System.out.println(Short.MAX_VALUE);
         
         newRfi.setTypeInspection(request.getParameter("type_of_inspection"));
         newRfi.setTypeRepair(request.getParameter("type_of_repair"));
@@ -69,15 +69,15 @@ public class CreateRFI extends BaseServlet {
         newRfi.setDescPlateNo(request.getParameter("plate_no"));
         newRfi.setDescDefectsComplaintsScope(request.getParameter("scope"));
         newRfi.setDescEndUser(request.getParameter("end_user"));
-        newRfi.setDescAmout(Float.parseFloat("amount"));
-        newRfi.setDescAttachmentsPreRepair(Short.MAX_VALUE);
-        newRfi.setDescAttachmentsPostRepair(Short.MAX_VALUE);
+        newRfi.setDescAmout(Float.parseFloat(request.getParameter("amount")));
+        newRfi.setDescAttachmentsPreRepair(new Short("1"));
+        newRfi.setDescAttachmentsPostRepair(new Short("1"));
         newRfi.setDeliveriesSupplier(request.getParameter("supplier"));
-        newRfi.setDeliveriesInvoiceNo(Integer.parseInt("invoice_no"));
-        newRfi.setDeliveriesDrNo(Integer.parseInt("dr_no"));
-        newRfi.setDeliveriesPrNo(Integer.parseInt("pr_no"));
+        newRfi.setDeliveriesInvoiceNo(Integer.parseInt(request.getParameter("invoice_no")));
+        newRfi.setDeliveriesDrNo(Integer.parseInt(request.getParameter("dr_no")));
+        newRfi.setDeliveriesPrNo(Integer.parseInt(request.getParameter("pr_no")));
         newRfi.setDeliveriesEndUser(request.getParameter("end_user_office"));
-        newRfi.setDeliveriesAmount(Float.parseFloat("amount_2"));
+        newRfi.setDeliveriesAmount(Float.parseFloat(request.getParameter("amount_2")));
         
         
         

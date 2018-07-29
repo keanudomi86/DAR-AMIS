@@ -64,6 +64,10 @@ public class CreatePO extends BaseServlet {
         PoDetails newPoDetails = new PoDetails();
         Po newPo = new Po();
         
+        String msg = "Error. Try again.";
+        
+        System.out.println(request.getParameter("prID"));
+        
         Pr pr = prFacade.find(Integer.parseInt(request.getParameter("prID")));
         
         newPo.setIdPr(pr);
@@ -153,13 +157,18 @@ public class CreatePO extends BaseServlet {
                     newPoDetails.setCost(0.0f);
                 newPoDetails.setAmount(Float.parseFloat(total[ctr]));
                 
-                poDetailsFacade.create(newPoDetails);
+                //poDetailsFacade.create(newPoDetails);
         }
         ArrayList<FormRepo> forms = new ArrayList<FormRepo>(repoFacade.findAll());
         
-        FormRepo newRepoEntry = forms.get(forms.size()-1);
+        FormRepo repoEntry = null;
         
-        //newRepoEntry.setIdPo(newPo);
+        //find matching repo entry with prd
+        for(FormRepo r: forms){
+            if(r.getIdPr().getIdPr().equals(pr.getIdPr())){
+                repoEntry = r;
+            }
+        }
         
         Employee emp = (Employee)session.getAttribute("userData");
         
@@ -171,14 +180,13 @@ public class CreatePO extends BaseServlet {
             }
         }
         
-        newRepoEntry.setCreatedBy(emp);
+        repoEntry.setIdPo(idPo);
         
-        repoFacade.edit(newRepoEntry);
+        repoFacade.edit(repoEntry);
         
+        msg = "Success";
         
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/CreateForms");
-        rd.forward(request, response);
+        generateTextResponse(response, msg);
 
     }
 

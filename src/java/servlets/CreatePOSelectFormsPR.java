@@ -43,7 +43,9 @@ public class CreatePOSelectFormsPR extends BaseServlet {
         Iterator<FormRepo> formIter = forms.iterator();
         
         while(formIter.hasNext()){
-            if(formIter.next().getIdPr() == null){
+            FormRepo curItem = formIter.next();
+            
+            if(curItem.getIdPr() == null || curItem.getIdPo() != null){
                 formIter.remove();
             }
         }

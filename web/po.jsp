@@ -28,6 +28,7 @@
                 url = "<%=root%>/CreatePO";
                 $.post(url, $("#poForm").serialize(), function(data){
                     alert(data);
+                    window.location = "<%=root%>/CreateForms";
                 });
             }
         }
@@ -58,32 +59,22 @@
          <section id="main-content">
           <section class="wrapper">
               <section class="content-header">
-                  <form id="poForm">
-                    <h1>
+                  
+                        <h1>
                         Purchase Order - Form
+                        </h1>
                         <small>Choices</small>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
-                    </h1>
+                    
                   <div class="container-fluid">
                       <a href="/DAR-AMIS/CreateForms" class="previous" align="left">&laquo; Previous</a>
-        <script>
-            function submitPO(){
-                if(confirm("Submit this form?")){
 
-                    $.post("<%=root%>/CreatePO", $("#createPoForm").serialize(), function(data){
-                        alert(data);
-                        
-                        //redirect to approve forms page
-                        window.location = "<%=root%>/CreateForms";
-                    });
-                }
-            }
-        </script>
-                <div class="panel panel-default">
+                        <div class="panel panel-default">
                     
                         <!-- P1 -->
-                        <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Purchase Order</STRONG></p></div> 
+                        <form id="poForm">
+                        <div class = "panel-heading panel-heading-custom"><p class="text-center"><strong>Purchase Order</strong></p></div> 
                             <div class="panel-body"> 
                             <!-- First Row -->
                             <div class = "row">
@@ -478,16 +469,18 @@
                             </div>
                             <br>
                             <br>
-                            <p align="center">                         
-                                <button onclick="submitPO()">Submit</button>
-                            </p>
                         </div> 
+                        </form>                     
+                            <p align="center">                         
+                                <button onclick="createPO()">Submit</button>
+                            </p>
+                        
                           </div>
                         </div>
-        </form>       
-        </section><! --/wrapper -->
-      </section>
-     </section>
+          
+                </section><! --/wrapper -->
+            </section>
+           </section>
              <!-- /MAIN CONTENT -->
 
       <!--main content end-->

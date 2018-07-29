@@ -10,8 +10,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.Pr"%>
 <%@page import="dao.Po"%>
-<%Pr pr = (Pr)request.getAttribute("pr");%>
-<%Rfi rfi = (Rfi) request.getAttribute("rfi");%>
+<%Po po = (Po)request.getAttribute("po");%>
 <%String root = request.getContextPath();%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,12 +25,15 @@
         color: #ffffff ;     
       }
     </style>
-        <script>
-        function createRFI(){
+    <script>
+        function submitRFI(){
             if(confirm("Submit this form?")){
-                url = "<%=root%>/CreateRFI";
-                $.post(url, $("#rfiForm").serialize(), function(data){
+
+                $.post("<%=root%>/CreateRFI", $("#createRfiForm").serialize(), function(data){
                     alert(data);
+
+                    //redirect to approve forms page
+                    window.location = "<%=root%>/CreateForms";
                 });
             }
         }
@@ -61,26 +63,13 @@
          <section id="main-content">
           <section class="wrapper">
               <section class="content-header">
-                    <h1>
-                        Request for Inspection
+                    <h1>Request for Inspection</h1>
                         <h4 class="text-right text-bold"><div name="curDate">00:00:00</div></h4> 
                         <h4 class="text-right text-bold"><div name="curTime">00:00:00</div></h4>             
-                    </h1>
+                    
 			<div class="container-fluid">
                             <a href="/DAR-AMIS/CreateForms" class="previous" align="left">&laquo; Previous</a>
-                                <script>
-                                    function submitRFI(){
-                                        if(confirm("Submit this form?")){
-
-                                            $.post("<%=root%>/CreateRFI", $("#createRfiForm").serialize(), function(data){
-                                                alert(data);
-
-                                                //redirect to approve forms page
-                                                window.location = "<%=root%>/CreateForms";
-                                            });
-                                        }
-                                    }
-                                </script>
+                               
       <div class="panel panel-default">
         <!-- P1 -->
         <form id="createRfiForm">
@@ -99,7 +88,7 @@
                           <li><a class="dropdown-item" id="repair" href="#" >Repair</a></li>
                           <li><a class="dropdown-item" id="deliveries" href="#">Deliveries</a></li>
                         </ul>
-                              <Script>
+                              <script>
                                 $(function(){
                                   $("#repair").click(function () {
                                   $("#typeOfInspection").text($(this).text());
@@ -108,7 +97,7 @@
                                   $("#typeOfInspection").text($(this).text());
                                   });
                                 });
-                              </Script> 
+                              </script> 
                     </div>
                 </div>
 
@@ -373,14 +362,14 @@
               <!--R7 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">PR No</label></div>
-                  <div class="col-sm-2"><input type="text" name="pr_no" align= "text-center" placeholder="PR No"></div>                 
+                  <div class="col-sm-2"><input type="text" name="pr_no" align= "text-center" value="<%=po.getIdPr().getIdPr()%>" /></div>                 
               </div>
               <!-- 8 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>
               <!--R9 of panel-description-Repair Panel-->
               <div class="row">
                   <div class="col-sm-2"><label align= "text-center">PO No</label></div>
-                  <div class="col-sm-2"><input type="text" name="po_no" align= "text-center" placeholder="PO No"></div>                  
+                  <div class="col-sm-2"><input type="text" name="po_no" align= "text-center" value="<%=po.getIdPo()%>"></div>                  
               </div>
               <!-- 10 Blank Row -->
               <div class = "row"><div class="col-sm-2"><label align= "text-center"> </label></div></div>

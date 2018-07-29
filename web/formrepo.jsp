@@ -9,6 +9,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%ArrayList<FormRepo> forms = (ArrayList<FormRepo>) request.getAttribute("forms");%>
 <%String root = request.getContextPath();%>
+<%boolean hasPrColumn = false;%>
+<%boolean hasPoColumn = false;%>
+<%boolean hasRfiColumn = false;%>
+<!-- set which columns to display in the for loop below -->
+<%for(FormRepo f: forms){
+    if(f.getIdPr() != null){
+        hasPrColumn = true;
+    }
+    if(f.getIdPo() != null){
+        hasPoColumn = true;
+    }
+    if(f.getIdRfi() != null){
+        hasRfiColumn = true;
+    }
+    
+}%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -56,23 +72,42 @@
                     <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
-                                <th>Form ID</th>
-                                <th>Form Type</th>
+                                <th>Entry ID</th>
+                                 <%if(hasPrColumn){%>
+                                    <th>PR No.</th>
+                                <%}%>
+                                <%if(hasPoColumn){%>
+                                    <th>Po No.</th>
+                                <%}%>
+                                <%if(hasRfiColumn){%>
+                                    <th>RFI No.</th>
+                                <%}%>
                             </tr>
                         </thead>
                         <tbody>
                             <%for(FormRepo form: forms){%>
                             <tr>
+                                <td><%=form.getIdFormRepo()%></td>
                                 <%if(form.getIdPr() != null){%>
-                                <%if(request.getAttribute("mode") == null){%>
-                                    <td><a href = "<%=root%>/PRPage?id=<%=form.getIdPr().getIdPr()%>"><%=form.getIdPr().getIdPr()%></a></td>
-                                <%} else if(request.getAttribute("mode").equals("create_po")){%>
-                                    <td><a href = "<%=request.getAttribute("link")%><%=form.getIdPr().getIdPr()%>"><%=form.getIdPr().getIdPr()%></a></td>
+                                    <%if(request.getAttribute("mode") == "view"){%>
+                                        <td><a href = "<%=root%>/PRPage?id=<%=form.getIdPr().getIdPr()%>"><%=form.getIdPr().getIdPr()%></a></td>
+                                    <%} else if(request.getAttribute("mode").equals("create_po")){%>
+                                        <td><a href = "<%=request.getAttribute("link")%><%=form.getIdPr().getIdPr()%>"><%=form.getIdPr().getIdPr()%></a></td>
+                                    <%}else{%>
+                                        <td><%=form.getIdPr().getIdPr()%></td>
+                                    <%}%>
+                                <%}else{%>
+                                        <td>N/A</td>
                                 <%}%>
-                                    <td>PR</td>
-                                <%}else if(form.getIdPo() != null){%>
-                                    <td><a href = "<%=request.getAttribute("link")%> <%=form.getIdPo().getIdPo()%>"><%=form.getIdPo().getIdPo()%></a></td>
-                                    <td>PO</td>
+                                
+                                <%if(form.getIdPo() != null){%>
+                                    <%if(request.getAttribute("mode") == "view"){%>
+                                        <td><a href = "<%=root%>/POPage?id=<%=form.getIdPo().getIdPo()%>"><%=form.getIdPo().getIdPo()%></a></td>
+                                    <%} else if(request.getAttribute("mode").equals("create_rfi")){%>
+                                        <td><a href = "<%=request.getAttribute("link")%><%=form.getIdPo().getIdPo()%>"><%=form.getIdPo().getIdPo()%></a></td>
+                                    <%}%>
+                                <%}else{%>
+                                        <td>N/A</td>
                                 <%}%>
                             </tr>
                             <%}%>
