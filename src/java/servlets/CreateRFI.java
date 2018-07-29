@@ -5,12 +5,14 @@
  */
 package servlets;
 
+import controller.PoFacade;
 import controller.RfiDeliveriesFacade;
 import controller.RfiFacade;
 import controller.RfiFkFacade;
 import controller.RfiRepairPostFacade;
 import dao.Employee;
 import dao.FormRepo;
+import dao.Po;
 import dao.Rfi;
 import dao.RfiDeliveries;
 import dao.RfiFk;
@@ -42,6 +44,9 @@ public class CreateRFI extends BaseServlet {
     
     @EJB
     private RfiFkFacade rfiFkFacade =  new RfiFkFacade();
+    
+    @EJB
+    private PoFacade poFacade =  new PoFacade();
 
     @EJB
     private RfiRepairPostFacade rfiRepairPostFacade = new  RfiRepairPostFacade();
@@ -50,6 +55,7 @@ public class CreateRFI extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         
+        Po po = poFacade.find(Integer.parseInt(request.getParameter("po_no")));
         
         String msg = "Error creating RFI Form. Try again.";
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
@@ -61,6 +67,7 @@ public class CreateRFI extends BaseServlet {
         
         System.out.println(Short.MAX_VALUE);
         
+        newRfi.setIdPo(po);
         newRfi.setTypeInspection(request.getParameter("type_of_inspection"));
         newRfi.setTypeRepair(request.getParameter("type_of_repair"));
         newRfi.setTypeProperty(request.getParameter("type_of_property"));
