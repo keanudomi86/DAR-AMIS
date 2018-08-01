@@ -23,14 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 public class PRRundown extends BaseServlet {
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        RequestDispatcher rd;
-        
-        rd = context.getRequestDispatcher("/pr_rundown.jsp");
-        rd.forward(request, response);
-        
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        return "/pr_rundown.jsp";
+
     }
 
 }
-

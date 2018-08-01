@@ -23,13 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 public class WMRPage extends BaseServlet {
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        RequestDispatcher rd;
-        
-        rd = context.getRequestDispatcher("/wmr.jsp");
-        rd.forward(request, response);
-        
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        return "/wmr.jsp";
+
     }
 
 }

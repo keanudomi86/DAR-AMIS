@@ -28,32 +28,31 @@ public class DeactivateUser extends BaseServlet {
 
     @EJB
     private final EmployeeFacade employeeFacade = new EmployeeFacade();
-    
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String msg = "Error deactivating user. Try again later.";
-        
-        int empID = 0; 
-        
-        if(request.getParameter("id")!= null)
+
+        int empID = 0;
+
+        if (request.getParameter("id") != null) {
             empID = Integer.parseInt(request.getParameter("id"));
-        
-        
-        if(empID != 0){
+        }
+
+        if (empID != 0) {
             Employee emp = employeeFacade.find(empID);
-            
-            if(emp != null){
+
+            if (emp != null) {
                 emp.setUserActivated(0);
-                
+
                 employeeFacade.edit(emp);
-                
+
                 msg = "Deactivation successful.";
             }
-            
+
         }
-        
-        generateTextResponse(response, msg);
+
+        return msg;
     }
 
 }

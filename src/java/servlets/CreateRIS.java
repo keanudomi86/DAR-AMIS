@@ -37,7 +37,7 @@ public class CreateRIS extends BaseServlet {
     private RisDetailsFacade risDetailsFacade = new RisDetailsFacade();
     
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String msg = "Error creating RIS Form. Try again.";
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
         Ris newRis = new Ris();
@@ -122,9 +122,7 @@ public class CreateRIS extends BaseServlet {
             risDetailsFacade.create(newRisDetails);
         }
         
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/CreateForms");
-        rd.forward(request, response);
+        return "/CreateForms";
     }
 
 }

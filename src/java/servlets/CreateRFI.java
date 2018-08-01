@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import controller.FormRepoFacade;
 import controller.PoFacade;
 import controller.RfiDeliveriesFacade;
 import controller.RfiFacade;
@@ -38,35 +39,43 @@ public class CreateRFI extends BaseServlet {
 
     @EJB
     private RfiFacade rfiFacade = new RfiFacade();
-    
-    @EJB
-    private RfiDeliveriesFacade rfiDeliveriesFacade = new RfiDeliveriesFacade();
-    
-    @EJB
-    private RfiFkFacade rfiFkFacade =  new RfiFkFacade();
-    
-    @EJB
-    private PoFacade poFacade =  new PoFacade();
 
     @EJB
-    private RfiRepairPostFacade rfiRepairPostFacade = new  RfiRepairPostFacade();
-    
+    private RfiDeliveriesFacade rfiDeliveriesFacade = new RfiDeliveriesFacade();
+
+    @EJB
+    private RfiFkFacade rfiFkFacade = new RfiFkFacade();
+
+    @EJB
+    private PoFacade poFacade = new PoFacade();
+
+    @EJB
+    private RfiRepairPostFacade rfiRepairPostFacade = new RfiRepairPostFacade();
+
+    @EJB
+    private FormRepoFacade formRepoFacade = new FormRepoFacade();
+
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
+
         Po po = poFacade.find(Integer.parseInt(request.getParameter("po_no")));
-        
+
         String msg = "Error creating RFI Form. Try again.";
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         Rfi newRfi = new Rfi();
         RfiDeliveries newRfiDeliveries = new RfiDeliveries();
+
+        //this is what should be rfi_details
+        //but the programmer did a booboo
+        //so now it's this
         RfiFk newRfiFk = new RfiFk();
+
         RfiRepairPost newRfiRepairPost = new RfiRepairPost();
-        Employee emp = (Employee)session.getAttribute("userData");
-        
+        Employee emp = (Employee) session.getAttribute("userData");
+
         System.out.println(Short.MAX_VALUE);
-        
+
         newRfi.setIdPo(po);
         newRfi.setTypeInspection(request.getParameter("type_of_inspection"));
         newRfi.setTypeRepair(request.getParameter("type_of_repair"));
@@ -85,17 +94,29 @@ public class CreateRFI extends BaseServlet {
         newRfi.setDeliveriesPrNo(Integer.parseInt(request.getParameter("pr_no")));
         newRfi.setDeliveriesEndUser(request.getParameter("end_user_office"));
         newRfi.setDeliveriesAmount(Float.parseFloat(request.getParameter("amount_2")));
-        
-        
-        
-            FormRepo newEntry = new FormRepo();
+
+        //set rfiFk data here
+        //set link between rfi and rfiFk
+        newRfi.setRfiFk(newRfiFk);
+
+        //check if type is either repair or delivery
+        String inspectionType = request.getParameter("type_of_inspection");
+        if (inspectionType.equalsIgnoreCase("repair")) {
+            //newRfiRepairPost.set
+        } else {
             
-            newEntry.setIdRfi(newRfi);
-            
-            rfiFacade.create(newRfi);
-            
-            msg = "Success.";
-        
+        }
+                
+        FormRepo newEntry = new FormRepo();
+
+        newEntry.setIdRfi(newRfi);
+
+        newEntry.setCreatedBy(emp);
+        //rfiFacade.create(newRfi);
+        formRepoFacade.create(newEntry);
+
+        return "Success.";
+
     }
 
 }

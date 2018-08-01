@@ -17,35 +17,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-
-}
-
+ *
+ * }
+ *
  *
  * @author BavarianHotdog
  */
 @WebServlet(name = "DeleteUser", urlPatterns = {"/DeleteUser"})
 public class DeleteUser extends BaseServlet {
-    
+
     @EJB
     private final EmployeeFacade employeeFacade = new EmployeeFacade();
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String msg = "Error activating user. Try again later.";
-        
+
         int empID = 0;
-        
-        if(request.getParameter("id")!= null)
+
+        if (request.getParameter("id") != null) {
             empID = Integer.parseInt(request.getParameter("id"));
-        
-        if(empID != 0){
+        }
+
+        if (empID != 0) {
             Employee emp = employeeFacade.find(empID);
-            
+
             employeeFacade.remove(emp);
             msg = "Deletion successful.";
         }
-        
-        generateTextResponse(response, msg);
+
+        return msg;
     }
 
 }

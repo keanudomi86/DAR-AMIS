@@ -31,7 +31,7 @@ public class PPMPForm extends BaseServlet {
     private OfficeFacade officeFacade = new OfficeFacade();
     
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> offices = new ArrayList<>();
         
         List<Office> officesList = officeFacade.findAll();
@@ -42,11 +42,7 @@ public class PPMPForm extends BaseServlet {
         
         request.setAttribute("offices", offices);
         
-        ServletContext context = getServletContext();
-        
-        RequestDispatcher rd = context.getRequestDispatcher("/ppmp.jsp");
-        
-        rd.forward(request, response);
+        return "/ppmp.jsp";
         
     }
 

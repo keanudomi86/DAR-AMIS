@@ -33,7 +33,7 @@ public class CreateForms extends BaseServlet {
     //end block
     
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("formMode", "create");
         
@@ -45,9 +45,7 @@ public class CreateForms extends BaseServlet {
         request.setAttribute("forms", forms);
         //end block
         
-        ServletContext context = getServletContext();
-        RequestDispatcher  rd = context.getRequestDispatcher("/create_forms.jsp");
-        rd.forward(request, response);
+        return "/create_forms.jsp";
     }
 
 }

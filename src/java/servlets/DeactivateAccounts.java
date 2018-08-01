@@ -31,17 +31,17 @@ import javax.servlet.http.HttpSession;
 public class DeactivateAccounts extends BaseServlet {
 
     @EJB
-    private final EmployeeFacade employeeFacade = new EmployeeFacade(); 
+    private final EmployeeFacade employeeFacade = new EmployeeFacade();
 
     @EJB
     private final TierFacade tierFacade = new TierFacade();
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Employee> employees = new ArrayList<Employee>(employeeFacade.findAll());
         ArrayList<Tier> tiers = new ArrayList<Tier>(tierFacade.findAll());
 
-        for(Employee e: employees){
+        for (Employee e : employees) {
             e.setPassword("");
         }
 
@@ -51,15 +51,15 @@ public class DeactivateAccounts extends BaseServlet {
 
         Employee curUser = (Employee) session.getAttribute("userData");
 
-        while(empIter.hasNext()){
-            if(curUser != null && (empIter.next().getIdTier().getIdTier() < curUser.getIdTier().getIdTier())){
+        while (empIter.hasNext()) {
+            if (curUser != null && (empIter.next().getIdTier().getIdTier() < curUser.getIdTier().getIdTier())) {
                 empIter.remove();
             }
         }
 
         empIter = employees.iterator();
-        while(empIter.hasNext()){
-            if(empIter.next().getUserActivated() == 0){
+        while (empIter.hasNext()) {
+            if (empIter.next().getUserActivated() == 0) {
                 empIter.remove();
             }
         }
@@ -67,10 +67,7 @@ public class DeactivateAccounts extends BaseServlet {
         request.setAttribute("employees", employees);
         request.setAttribute("tiers", tiers);
 
-        ServletContext context = getServletContext();
-        RequestDispatcher rd;
-        rd = context.getRequestDispatcher("/deactivate_accounts.jsp");
-        rd.forward(request, response);
+        return "/deactivate_accounts.jsp";
 
     }
 }

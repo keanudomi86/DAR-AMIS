@@ -26,7 +26,7 @@ public class EmployeeFacade extends AbstractFacade<Employee> {
         return em;
     }
 
-@Override
+    @Override
     public void closeEntityManager() {
         em.close();
     }
@@ -39,5 +39,5 @@ public class EmployeeFacade extends AbstractFacade<Employee> {
     public EmployeeFacade() {
         super(Employee.class);
     }
-    
+
 }

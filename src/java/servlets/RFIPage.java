@@ -38,7 +38,7 @@ public class RFIPage extends BaseServlet {
     private PoFacade poFacade = new PoFacade();
     
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         int poID = Integer.parseInt(request.getParameter("po_id"));
         
@@ -47,12 +47,7 @@ public class RFIPage extends BaseServlet {
         request.setAttribute("po", po);
         
         
-        ServletContext context = getServletContext();
-        RequestDispatcher rd;
-        
-        rd = context.getRequestDispatcher("/rfi.jsp");
-        rd.forward(request, response);
-        
+        return "/rfi.jsp";
     }
 
 }

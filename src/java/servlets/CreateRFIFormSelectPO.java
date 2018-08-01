@@ -31,7 +31,7 @@ public class CreateRFIFormSelectPO extends BaseServlet {
     private FormRepoFacade formrepoFacade = new FormRepoFacade();
     
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<FormRepo> forms = new ArrayList<FormRepo>(formrepoFacade.findAll());
         
         Iterator<FormRepo> formIter = forms.iterator();
@@ -49,11 +49,7 @@ public class CreateRFIFormSelectPO extends BaseServlet {
         request.setAttribute("link", request.getContextPath() + "/RFIPage?po_id=");
         request.setAttribute("mode", "create_rfi");
         
-        ServletContext context = getServletContext();
-        RequestDispatcher rd;
-        
-        rd = context.getRequestDispatcher("/formrepo.jsp");
-        rd.forward(request, response);
+        return "/formrepo.jsp";
     }
   
 }

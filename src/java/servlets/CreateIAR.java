@@ -24,19 +24,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CreateIAR", urlPatterns = {"/CreateIAR"})
 public class CreateIAR extends BaseServlet {
-    
+
     @EJB
-    private IarFacade iarFacade =  new IarFacade();
-    
-    @EJB 
+    private IarFacade iarFacade = new IarFacade();
+
+    @EJB
     private IarDetailsFacade iarDetailsFacade = new IarDetailsFacade();
-    
+
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Iar newIar = new Iar();
         IarDetails newIarDetails = new IarDetails();
-        
+
         newIar.setEntityName("");
         newIar.setRisNo(Integer.SIZE);
         newIar.setFundCluster("");
@@ -56,31 +56,33 @@ public class CreateIAR extends BaseServlet {
         newIar.setPartial(Short.MIN_VALUE);
         newIar.setSpecificQuantity(Integer.MIN_VALUE);
         newIar.setSupplyOfficer("");
-        
+
         iarFacade.create(newIar);
-        
+
         String[] stockno = request.getParameterValues("stock_no");
-        
+
         String[] descs = request.getParameterValues("description");
 
         String[] unit = request.getParameterValues("unit");
 
         String[] quantity = request.getParameterValues("quantity");
-        
-        for(int ctr = 0; ctr < stockno.length; ctr++){
-                newIarDetails.setStockNo(Integer.parseInt(stockno[ctr]));
-                newIarDetails.setUnit(unit[ctr]);
-                newIarDetails.setDescription(descs[ctr]);
 
-                if(quantity[ctr] != null)
-                    newIarDetails.setQuantity(Integer.parseInt(quantity[ctr]));
-                else
-                    newIarDetails.setQuantity(0);
+        for (int ctr = 0; ctr < stockno.length; ctr++) {
+            newIarDetails.setStockNo(Integer.parseInt(stockno[ctr]));
+            newIarDetails.setUnit(unit[ctr]);
+            newIarDetails.setDescription(descs[ctr]);
 
-                
-                iarDetailsFacade.create(newIarDetails);
+            if (quantity[ctr] != null) {
+                newIarDetails.setQuantity(Integer.parseInt(quantity[ctr]));
+            } else {
+                newIarDetails.setQuantity(0);
+            }
+
+            iarDetailsFacade.create(newIarDetails);
         }
-        
+
+        //url or msg
+        return "";
     }
 
 }

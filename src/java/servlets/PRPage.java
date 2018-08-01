@@ -36,7 +36,7 @@ public class PRPage extends BaseServlet {
     private PrFacade prFacade = new PrFacade();
     
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         ArrayList<Office> offices = new ArrayList<Office>(officeFacade.findAll());
         request.setAttribute("offices", offices);
@@ -66,11 +66,7 @@ public class PRPage extends BaseServlet {
             request.setAttribute("newFormId", latestId);
         }
         
-        ServletContext context = getServletContext();
-        RequestDispatcher rd;
-        
-        rd = context.getRequestDispatcher("/pr.jsp");
-        rd.forward(request, response);
+        return "/pr.jsp";
         
     }
 

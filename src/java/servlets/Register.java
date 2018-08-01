@@ -38,7 +38,7 @@ public class Register extends BaseServlet {
     private final DivisionFacade divFacade = new DivisionFacade();
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int registerSuccessful = 0, usernameExists = 0;
         Employee e = new Employee();
         
@@ -131,7 +131,7 @@ public class Register extends BaseServlet {
                 }
             }
         }
-        
+        return "?";
     }
     
 

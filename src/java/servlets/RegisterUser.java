@@ -30,14 +30,12 @@ public class RegisterUser extends BaseServlet {
     private final DivisionFacade divFacade = new DivisionFacade();
     
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Division> divisions = new ArrayList<Division>(divFacade.findAll());
         
         request.setAttribute("divisions", divisions);
         
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher("/register.jsp");
-        rd.forward(request, response);
+        return "/register.jsp";
     }
 
     

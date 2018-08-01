@@ -4,7 +4,17 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/create_forms.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/CreateRFIFormSelectPO.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/RFIPage.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/dao/FormRepo.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/CreatePO.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/POPage.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/po.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/dao/Rfi.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/rfi.jsp</file>
             <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/pr.jsp</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/src/java/servlets/CreateRFI.java</file>
+            <file>file:/C:/Users/BavarianHotdog/Documents/GitHub/DAR-AMIS/web/formrepo.jsp</file>
         </group>
     </open-files>
 </project-private>

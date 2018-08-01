@@ -30,15 +30,11 @@ public class RISPage extends BaseServlet {
     private OfficeFacade officeFacade = new OfficeFacade();
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Office> offices = new ArrayList<Office>(officeFacade.findAll());
         request.setAttribute("offices", offices);
         
-        ServletContext context = getServletContext();
-        RequestDispatcher rd;
-        
-        rd = context.getRequestDispatcher("/ris.jsp");
-        rd.forward(request, response);
+        return "/ris.jsp";
         
     }
 

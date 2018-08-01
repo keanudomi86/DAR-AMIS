@@ -26,30 +26,23 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "WFPForm", urlPatterns = {"/WFPForm"})
 public class WFPForm extends BaseServlet {
-    
+
     @EJB
     private OfficeFacade officeFacade = new OfficeFacade();
-    
+
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> offices = new ArrayList<>();
-        
+
         List<Office> officesList = officeFacade.findAll();
-        
-        for(Office o: officesList){
+
+        for (Office o : officesList) {
             offices.add(o.getIdOffice() + " - " + o.getDepartment());
         }
-        
-        request.setAttribute("offices", offices);
-        
-        ServletContext context = getServletContext();
-        
-        RequestDispatcher rd = context.getRequestDispatcher("/wfp.jsp");
-        
-        rd.forward(request, response);
-        
-    }
 
-    
+        request.setAttribute("offices", offices);
+
+        return "/wfp.jsp";
+    }
 
 }

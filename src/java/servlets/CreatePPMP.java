@@ -32,27 +32,24 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CreatePPMP", urlPatterns = {"/CreatePPMP"})
 public class CreatePPMP extends BaseServlet {
-    
+
     @EJB
     private FormRepoFacade formRepoFacade = new FormRepoFacade();
-    
+
     @EJB
     private PpmpFacade ppmpFacade = new PpmpFacade();
-    
+
     @EJB
     private PpmpDetailsFacade ppmpDetailsFacade = new PpmpDetailsFacade();
-    
+
     @EJB
-    private OfficeFacade officeFacade =  new OfficeFacade();
+    private OfficeFacade officeFacade = new OfficeFacade();
 
-        @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        String msg = "Error";
-        
-        try{
+    @Override
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
 
-            Employee user = (Employee)request.getSession().getAttribute("userData");
+            Employee user = (Employee) request.getSession().getAttribute("userData");
             Ppmp newPpmp = new Ppmp();
             List<PpmpDetails> ppmpDetails;
 
@@ -72,55 +69,46 @@ public class CreatePPMP extends BaseServlet {
 
             String[] offices = request.getParameterValues("office");
 
+            for (int ctr = 0; ctr < itemSpecs.length; ctr++) {
+                ppmpDetails = new ArrayList<>();
 
-            for(int ctr = 0; ctr < itemSpecs.length; ctr++){
-                    ppmpDetails = new ArrayList<>();
+                int officeId = 0;
 
-                    int officeId = 0;
+                StringTokenizer stok = new StringTokenizer(offices[ctr], "- ");
 
-                    StringTokenizer stok = new StringTokenizer(offices[ctr], "- ");
+                officeId = Integer.parseInt(stok.nextToken());
 
-                    officeId = Integer.parseInt(stok.nextToken());
+                Office off = officeFacade.find(officeId);
+                newPpmp.setIdOffice(off);
 
-                    Office off = officeFacade.find(officeId);
-                    newPpmp.setIdOffice(off);
+                PpmpDetails newPpmpDetails = new PpmpDetails();
 
-                    PpmpDetails newPpmpDetails = new PpmpDetails();
-                    
-                    
-                    newPpmpDetails.setItemSpec(itemSpecs[ctr]);
-                    
-                    newPpmpDetails.setIdPpmp(newPpmp);
-                    newPpmpDetails.setIdOffice(officeId);
-                    newPpmpDetails.setItemSpec(itemSpecs[ctr]);
-                    newPpmpDetails.setQ1(Double.parseDouble(q1[ctr]));
-                    newPpmpDetails.setQ2(Double.parseDouble(q2[ctr]));
-                    newPpmpDetails.setQ3(Double.parseDouble(q3[ctr]));
-                    newPpmpDetails.setQ4(Double.parseDouble(q4[ctr]));
-                    newPpmpDetails.setTotalQty(Integer.parseInt(totalqty[ctr]));
-                    newPpmpDetails.setTotalPriceAfn(Double.parseDouble(price[ctr]));
+                newPpmpDetails.setItemSpec(itemSpecs[ctr]);
 
-                    ppmpDetails.add(newPpmpDetails);
+                newPpmpDetails.setIdPpmp(newPpmp);
+                newPpmpDetails.setIdOffice(officeId);
+                newPpmpDetails.setItemSpec(itemSpecs[ctr]);
+                newPpmpDetails.setQ1(Double.parseDouble(q1[ctr]));
+                newPpmpDetails.setQ2(Double.parseDouble(q2[ctr]));
+                newPpmpDetails.setQ3(Double.parseDouble(q3[ctr]));
+                newPpmpDetails.setQ4(Double.parseDouble(q4[ctr]));
+                newPpmpDetails.setTotalQty(Integer.parseInt(totalqty[ctr]));
+                newPpmpDetails.setTotalPriceAfn(Double.parseDouble(price[ctr]));
 
-                    newPpmp.setPpmpDetailsList(ppmpDetails);
+                ppmpDetails.add(newPpmpDetails);
 
-                    ppmpFacade.create(newPpmp);
-                    
-                    
-                    
-                    msg = "Success";
-                }
-        
-        }catch(Exception e){
+                newPpmp.setPpmpDetailsList(ppmpDetails);
+
+                ppmpFacade.create(newPpmp);
+
+            }
+            return "Success";
+
+        } catch (Exception e) {
             e.printStackTrace();
-            msg = "Error";
+            return "Error";
         }
-        
-        generateTextResponse(response, msg);
-        
-    }
 
-    
-    
+    }
 
 }

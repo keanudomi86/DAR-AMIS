@@ -33,27 +33,27 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CreateAPP", urlPatterns = {"/CreateAPP"})
 public class CreateAPP extends BaseServlet {
-    
+
     @EJB
     private FormRepoFacade formRepoFacade = new FormRepoFacade();
 
     @EJB
-    private AppFacade appFacade=  new AppFacade();
-    
+    private AppFacade appFacade = new AppFacade();
+
     @EJB
     private AppDetailsFacade appDetailsFacade = new AppDetailsFacade();
-    
+
     @EJB
-    private OfficeFacade officeFacade =  new OfficeFacade();
+    private OfficeFacade officeFacade = new OfficeFacade();
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        String msg = "Error";
-        
-        try{
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            Employee user = (Employee)request.getSession().getAttribute("userData");
+        String msg = "Error";
+
+        try {
+
+            Employee user = (Employee) request.getSession().getAttribute("userData");
             App newApp = new App();
             List<AppDetails> appDetails;
 
@@ -73,51 +73,47 @@ public class CreateAPP extends BaseServlet {
 
             String[] offices = request.getParameterValues("office");
 
+            for (int ctr = 0; ctr < itemSpecs.length; ctr++) {
+                appDetails = new ArrayList<>();
 
-            for(int ctr = 0; ctr < itemSpecs.length; ctr++){
-                    appDetails = new ArrayList<>();
+                int officeId = 0;
 
-                    int officeId = 0;
+                StringTokenizer stok = new StringTokenizer(offices[ctr], "- ");
 
-                    StringTokenizer stok = new StringTokenizer(offices[ctr], "- ");
+                officeId = Integer.parseInt(stok.nextToken());
 
-                    officeId = Integer.parseInt(stok.nextToken());
+                Office off = officeFacade.find(officeId);
+                newApp.setIdOffice(off);
 
-                    Office off = officeFacade.find(officeId);
-                    newApp.setIdOffice(off);
+                AppDetails newAppDetails = new AppDetails();
 
-                    AppDetails newAppDetails = new AppDetails();
+                newApp.setItemSpecs(itemSpecs[ctr]);
 
-                    newApp.setItemSpecs(itemSpecs[ctr]);
-                    
-                    newAppDetails.setIdApp(newApp);
-                    newAppDetails.setIdOffice(officeId);
-                    newAppDetails.setItemSpec(itemSpecs[ctr]);
-                    newAppDetails.setQ1(Double.parseDouble(q1[ctr]));
-                    newAppDetails.setQ2(Double.parseDouble(q2[ctr]));
-                    newAppDetails.setQ3(Double.parseDouble(q3[ctr]));
-                    newAppDetails.setQ4(Double.parseDouble(q4[ctr]));
-                    newAppDetails.setTotalQty(Integer.parseInt(totalqty[ctr]));
-                    newAppDetails.setTotalPriceAfn(Double.parseDouble(price[ctr]));
+                newAppDetails.setIdApp(newApp);
+                newAppDetails.setIdOffice(officeId);
+                newAppDetails.setItemSpec(itemSpecs[ctr]);
+                newAppDetails.setQ1(Double.parseDouble(q1[ctr]));
+                newAppDetails.setQ2(Double.parseDouble(q2[ctr]));
+                newAppDetails.setQ3(Double.parseDouble(q3[ctr]));
+                newAppDetails.setQ4(Double.parseDouble(q4[ctr]));
+                newAppDetails.setTotalQty(Integer.parseInt(totalqty[ctr]));
+                newAppDetails.setTotalPriceAfn(Double.parseDouble(price[ctr]));
 
-                    appDetails.add(newAppDetails);
+                appDetails.add(newAppDetails);
 
-                    newApp.setAppDetailsList(appDetails);
+                newApp.setAppDetailsList(appDetails);
 
-                    appFacade.create(newApp);
-                    
-                    
-                    
-                    msg = "Success";
-                }
-        
-        }catch(Exception e){
+                appFacade.create(newApp);
+
+                msg = "Success";
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
-            msg = "Error";
+            return "Error";
         }
-        
-        generateTextResponse(response, msg);
-        
+        return msg;
+
     }
 
 }

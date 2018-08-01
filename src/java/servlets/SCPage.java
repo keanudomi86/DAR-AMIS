@@ -23,12 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 public class SCPage extends BaseServlet {
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        RequestDispatcher rd;
-        
-        rd = context.getRequestDispatcher("/sc.jsp");
-        rd.forward(request, response);
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        return "/sc.jsp";
         
     }
 

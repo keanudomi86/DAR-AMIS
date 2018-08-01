@@ -25,26 +25,21 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "POPage", urlPatterns = {"/POPage"})
 public class POPage extends BaseServlet {
-    
+
     @EJB
     private PrFacade prFacade = new PrFacade();
-    
+
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         int prID = Integer.parseInt(request.getParameter("pr_id"));
-        
+
         Pr pr = prFacade.find(prID);
-        
+
         request.setAttribute("pr", pr);
-        
-        
-        ServletContext context = getServletContext();
-        RequestDispatcher rd;
-        
-        rd = context.getRequestDispatcher("/po.jsp");
-        rd.forward(request, response);
-        
+
+        return "/po.jsp";
+
     }
 
 }

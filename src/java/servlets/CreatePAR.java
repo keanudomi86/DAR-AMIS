@@ -35,99 +35,100 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "CreatePAR", urlPatterns = {"/CreatePAR"})
 public class CreatePAR extends BaseServlet {
+
     @EJB
     private ParFacade parFacade = new ParFacade();
 
     @EJB
     private ParDetailsFacade parDetailsFacade = new ParDetailsFacade();
-    
+
     @EJB
     private FormRepoFacade formRepoFacade = new FormRepoFacade();
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        
-        String msg = "Error creating PAR Form. Try again.";
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); 
-        Par newPar = new Par();
-        ParDetails newParDetails = new ParDetails();
-        Employee emp = (Employee)session.getAttribute("userData");
-        
-        newPar.setEntityName(request.getParameter("entity"));
-        newPar.setFundCluster(request.getParameter("fund_cluster"));
-        newPar.setPurpose(request.getParameter("purpose"));
-        newPar.setReceivedName(request.getParameter("name_rec"));
-        newPar.setReceivedPosition(request.getParameter("pos_rec"));
-        
-        //temporaroly use current logged in employee's 
-        //office because logic has not been defined properly yet
-        newPar.setReceivedOffice(emp.getIdDivision().getIdOffice());
-        
-        String date_rec = request.getParameter("date_rec");
-        Date newDate;
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            newDate = df.parse(date_rec);
-            newPar.setReceivedDate(newDate);
-        } catch (ParseException ex) {
-            newPar.setReceivedDate(Date.from(Instant.now()));
-        }
-        
-        newPar.setIssuedName(request.getParameter("name_iss"));
-        newPar.setIssuedPosition(request.getParameter("pos_iss"));
-        newPar.setIssuedOffice(request.getParameter("off_iss"));
-        
-        String date_iss = request.getParameter("date_iss");
-        Date newDate2;
-        try {
-            newDate2 = df.parse(date_iss);
-            newPar.setIssuedDate(newDate2);
-        } catch (ParseException ex) {
-            newPar.setIssuedDate(Date.from(Instant.now()));
-        }
-        
-        //parFacade.create(newPar);
-        
-        String[] quantity = request.getParameterValues("quantity");
-        String[] unit = request.getParameterValues("unit");
-        String[] description = request.getParameterValues("description");
-        String[] property_no = request.getParameterValues("property_no");
-        String[] date_acq = request.getParameterValues("acq_date");
-        String[] amount = request.getParameterValues("amount");
-        
-        for(int ctr = 0; ctr < quantity.length; ctr++){
-            
-            newParDetails.setQuantity(Integer.parseInt(quantity[ctr]));
-            newParDetails.setUnit(unit[ctr]);
-            newParDetails.setDescription(description[ctr]);
-            newParDetails.setPropertyNo(Integer.parseInt(property_no[ctr]));
-            
-            Date newDate3;
+            HttpSession session = request.getSession();
+
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            Par newPar = new Par();
+            ParDetails newParDetails = new ParDetails();
+            Employee emp = (Employee) session.getAttribute("userData");
+
+            newPar.setEntityName(request.getParameter("entity"));
+            newPar.setFundCluster(request.getParameter("fund_cluster"));
+            newPar.setPurpose(request.getParameter("purpose"));
+            newPar.setReceivedName(request.getParameter("name_rec"));
+            newPar.setReceivedPosition(request.getParameter("pos_rec"));
+
+            //temporaroly use current logged in employee's 
+            //office because logic has not been defined properly yet
+            newPar.setReceivedOffice(emp.getIdDivision().getIdOffice());
+
+            String date_rec = request.getParameter("date_rec");
+            Date newDate;
             try {
-                newDate3 = df.parse(date_acq[ctr]);
-                newParDetails.setDateAcq(newDate3);
+                newDate = df.parse(date_rec);
+                newPar.setReceivedDate(newDate);
             } catch (ParseException ex) {
-                newParDetails.setDateAcq(Date.from(Instant.now()));
+                newPar.setReceivedDate(Date.from(Instant.now()));
             }
-            
-            newParDetails.setAmount(Float.parseFloat(amount[ctr]));
-            
-            newParDetails.setIdPar(newPar);
-            
+
+            newPar.setIssuedName(request.getParameter("name_iss"));
+            newPar.setIssuedPosition(request.getParameter("pos_iss"));
+            newPar.setIssuedOffice(request.getParameter("off_iss"));
+
+            String date_iss = request.getParameter("date_iss");
+            Date newDate2;
+            try {
+                newDate2 = df.parse(date_iss);
+                newPar.setIssuedDate(newDate2);
+            } catch (ParseException ex) {
+                newPar.setIssuedDate(Date.from(Instant.now()));
+            }
+
             //parFacade.create(newPar);
-            
-            //create formrepo entry
-            FormRepo newEntry = new FormRepo();
-            
-            newEntry.setIdPar(newPar);
-            
-            parFacade.create(newPar);
-            
-            msg = "Success.";
+            String[] quantity = request.getParameterValues("quantity");
+            String[] unit = request.getParameterValues("unit");
+            String[] description = request.getParameterValues("description");
+            String[] property_no = request.getParameterValues("property_no");
+            String[] date_acq = request.getParameterValues("acq_date");
+            String[] amount = request.getParameterValues("amount");
+
+            for (int ctr = 0; ctr < quantity.length; ctr++) {
+
+                newParDetails.setQuantity(Integer.parseInt(quantity[ctr]));
+                newParDetails.setUnit(unit[ctr]);
+                newParDetails.setDescription(description[ctr]);
+                newParDetails.setPropertyNo(Integer.parseInt(property_no[ctr]));
+
+                Date newDate3;
+                try {
+                    newDate3 = df.parse(date_acq[ctr]);
+                    newParDetails.setDateAcq(newDate3);
+                } catch (ParseException ex) {
+                    newParDetails.setDateAcq(Date.from(Instant.now()));
+                }
+
+                newParDetails.setAmount(Float.parseFloat(amount[ctr]));
+
+                newParDetails.setIdPar(newPar);
+
+                //parFacade.create(newPar);
+                //create formrepo entry
+                FormRepo newEntry = new FormRepo();
+
+                newEntry.setIdPar(newPar);
+
+                parFacade.create(newPar);
+
+            }
+            return "Success";
+        } catch (Exception x) {
+            System.err.println(x);
+            return "Error creating PAR Form. Try again.";
         }
-        
-        generateTextResponse(response, msg);
-        
+
     }
 
 }

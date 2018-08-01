@@ -28,48 +28,45 @@ public class Login extends BaseServlet {
 
     @EJB
     private final EmployeeFacade employeeFacade = new EmployeeFacade();
-    
+
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Employee e = null;
         ServletContext context;
         RequestDispatcher rd;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
+
         ArrayList<Employee> employees = new ArrayList<Employee>(employeeFacade.findAll());
-        
+
         //find the user
-        for(Employee emp: employees){
-            if(emp.getUsername().equals(username) && emp.getPassword().equals(password))
-            e = emp;
+        for (Employee emp : employees) {
+            if (emp.getUsername().equals(username) && emp.getPassword().equals(password)) {
+                e = emp;
+            }
         }
-        
-        
+
         HttpSession session = request.getSession();
-        
-        if(e != null && e.getUserActivated() == 1){
-            
+
+        if (e != null && e.getUserActivated() == 1) {
+
             e.setPassword("");
-            
+
             session.setAttribute("userData", e);
-            
-            context = getServletContext();
-            rd = context.getRequestDispatcher("/HomePage");
-            rd.forward(request, response);
-            
-                
-        }else{
-            try(PrintWriter out = response.getWriter()){
+
+            return "/HomePage";
+
+        } else {
+            try (PrintWriter out = response.getWriter()) {
                 out.println("<script type=\"text/javascript\">");
                 out.println("alert('Incorrect email or password. Try again!');");
                 out.println("location='index.jsp';");
                 out.println("</script>");
             }
         }
-        
-        
+
+        return "?";
     }
 
 }

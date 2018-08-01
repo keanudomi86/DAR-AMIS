@@ -33,7 +33,7 @@ public class ViewForms extends BaseServlet {
     //end block
     
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("formMode", "view");
         
@@ -45,9 +45,7 @@ public class ViewForms extends BaseServlet {
         request.setAttribute("forms", forms);
         //end block
         
-        ServletContext context = getServletContext();
-        RequestDispatcher  rd = context.getRequestDispatcher("/formrepo.jsp");
-        rd.forward(request, response);
+        return "/formrepo.jsp";
     }
 
 }

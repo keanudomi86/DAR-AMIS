@@ -7,6 +7,8 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,13 +30,39 @@ public abstract class BaseServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    public abstract void servletAction(HttpServletRequest request, HttpServletResponse response)
+    public abstract String servletAction(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        servletAction(request, response);
+        String servletResponse = new String();
+        try {
+            servletResponse = servletAction(request, response);
+            if (servletResponse.contains("/")) {
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher(servletResponse);
+                rd.forward(request, response);
+            } else {
+                response.setContentType("text/plain");
+                try (PrintWriter out = response.getWriter()) {
+                    if (servletResponse != null) {
+                        out.println(servletResponse);
+                    } else {
+                        out.println("Error");
+                    }
+                }
+            }
+        } catch (Exception x) {
+            response.setContentType("text/plain");
+            try (PrintWriter out = response.getWriter()) {
+                if (servletResponse != null) {
+                    out.println(servletResponse);
+                } else {
+                    out.println("Error");
+                }
+            }
+            System.err.println(x);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,11 +103,11 @@ public abstract class BaseServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
     public void generateTextResponse(HttpServletResponse response, String msg)
             throws IOException {
         response.setContentType("text/plain");
-        try(PrintWriter out = response.getWriter()){
+        try (PrintWriter out = response.getWriter()) {
             out.println(msg);
         }
     }

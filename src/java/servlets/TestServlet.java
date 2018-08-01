@@ -42,7 +42,7 @@ public class TestServlet extends BaseServlet {
     private final EmployeeFacade employeeFacade = new EmployeeFacade();
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //create new user
         Employee e = new Employee();
         
@@ -146,7 +146,7 @@ public class TestServlet extends BaseServlet {
         }
         
         
-        
+        return "?";
         
     }
 }

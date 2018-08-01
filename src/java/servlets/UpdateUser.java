@@ -33,7 +33,7 @@ public class UpdateUser extends BaseServlet {
     private final TierFacade tierFacade = new TierFacade();
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String msg = "Error updating user. Try again later.";
         
         int empID = 0, posID = 0; 
@@ -57,7 +57,7 @@ public class UpdateUser extends BaseServlet {
             
         }
         
-        generateTextResponse(response, msg);
+        return msg;
     }
 
 }

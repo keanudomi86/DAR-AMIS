@@ -23,15 +23,12 @@ import javax.servlet.http.HttpServletResponse;
 public class Logout extends BaseServlet {
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate();
         request.logout();
-        
-        RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
-        rd.forward(request, response);
-        
+
+        return "/index.jsp";
+
     }
 
 }

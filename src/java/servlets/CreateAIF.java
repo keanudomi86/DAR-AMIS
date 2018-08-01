@@ -45,7 +45,7 @@ public class CreateAIF extends BaseServlet {
     private EmployeeFacade employeeFacade = new EmployeeFacade();
 
     @Override
-    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         Aif newAiF = new Aif();
         AifDetails newAifDetails = new AifDetails();
@@ -97,6 +97,9 @@ public class CreateAIF extends BaseServlet {
         }
         
         aifDetailsFacade.create(newAifDetails);
+        
+        //url
+        return "";
     }
 
 }
