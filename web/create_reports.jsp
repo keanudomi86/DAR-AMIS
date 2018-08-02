@@ -67,7 +67,7 @@
                       <!-- P1 -->
                       <div class = "panel-heading panel-heading-custom"><p class="text-center"><STRONG>Reports Generation</STRONG></p></div> 
                                           
-                      <div class="btn-group">
+                      <!--<div class="btn-group">
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 			Reports
                         <span class="caret"></span>
@@ -83,7 +83,7 @@
                           <li><a  href="ptr.jsp">Property Transfer Report</a></li>
                           <li><a  href="rsmi.jsp">Report of Supplies and Materials Issued</a></li>
 						    </ul>
-						  </div>
+						  </div> -->
                       
                                           <br>
                             <div class="panel-body">
@@ -104,7 +104,7 @@
                                         </select>
                                 </div>
                                 
-                                <div class="row">
+                                <!--<div class="row">
                                    <label class="col-md-3">Choose what Forms to import</label>
                                     <select class="col-md-3" name="formImport" placeholder="" required>
                                         <option disabled selected>Input Form Type</option>
@@ -137,14 +137,14 @@
                                       </label> -->
                                 </div>
                                 
-                                 <div class="row">  
+                                 <!--<div class="row">  
                                     <label class="col-md-3">Choose Form ID:</label>
                                         <select class="col-md-3" name="formImport" placeholder="" required>
                                             <option disabled selected>Select Form IDs:</option>
                                             <option>00001</option>
                                             <option>00002</option>
                                         </select>
-                                </div>
+                                </div -->
                             </div>
                         
                         <div class="panel-footer">
